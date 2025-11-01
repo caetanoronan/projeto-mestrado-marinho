@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_ef9318cb7e827113a1ad52b4c83286c6 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_ef9318cb7e827113a1ad52b4c83286c6" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_ef9318cb7e827113a1ad52b4c83286c6 = L.map(
+                "map_ef9318cb7e827113a1ad52b4c83286c6",
+                {
+                    center: [-27.510879384397423, -48.40549755218907],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 10,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_0b8852529dc12fcb7330a984daec6438 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_0b8852529dc12fcb7330a984daec6438.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var tile_layer_b7905d092730cb38bf3ebc7754a22f30 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_b7905d092730cb38bf3ebc7754a22f30.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var tile_layer_5edbf6e96262747d2c46c694d6bfcbee = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_5edbf6e96262747d2c46c694d6bfcbee.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+        function geo_json_41bd1c4dc94f9710896eacfca61b335a_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "darkblue", "fillColor": "red", "fillOpacity": 0.4, "weight": 2};
+            }
+        }
+
+        function geo_json_41bd1c4dc94f9710896eacfca61b335a_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_41bd1c4dc94f9710896eacfca61b335a = L.geoJson(null, {
+                onEachFeature: geo_json_41bd1c4dc94f9710896eacfca61b335a_onEachFeature,
+            
+                style: geo_json_41bd1c4dc94f9710896eacfca61b335a_styler,
+            ...{
+}
+        });
+
+        function geo_json_41bd1c4dc94f9710896eacfca61b335a_add (data) {
+            geo_json_41bd1c4dc94f9710896eacfca61b335a
+                .addData(data);
+        }
+            geo_json_41bd1c4dc94f9710896eacfca61b335a_add({"bbox": [-48.42542336918571, -27.299900827608575, -48.30881611607297, -27.158830956223404], "features": [{"bbox": [-48.42542336918571, -27.299900827608575, -48.30881611607297, -27.158830956223404], "geometry": {"coordinates": [[[-48.425379469720625, -27.158855154093832], [-48.30881611607297, -27.158830956223404], [-48.30882102767353, -27.299665180451807], [-48.357105048912686, -27.299900827608575], [-48.357913064312605, -27.299198915790697], [-48.35871481501884, -27.297615065715654], [-48.359084023727696, -27.297466354117788], [-48.359350954994476, -27.297172780850087], [-48.35974173839502, -27.297078073077348], [-48.359968245400076, -27.297707662642583], [-48.36079957741974, -27.29752811552875], [-48.360168757124285, -27.2959653669147], [-48.36051770361398, -27.295767136812852], [-48.36103309630254, -27.295778784295443], [-48.36148522106906, -27.296094872025332], [-48.36189342913559, -27.296138948610817], [-48.362279385907456, -27.296097102316523], [-48.362689286224246, -27.296130042256905], [-48.363093517942396, -27.29610066194964], [-48.36341476787938, -27.29631856333663], [-48.36381982421292, -27.296435634254944], [-48.36431781234577, -27.296519043717527], [-48.36471189063579, -27.296526475521524], [-48.36518704893209, -27.296366983539087], [-48.36565074687229, -27.29632978394876], [-48.36595297475073, -27.296113431138377], [-48.36649877314511, -27.295865935574977], [-48.36663008246772, -27.295628494158017], [-48.36694655953982, -27.29529244956616], [-48.367126447335416, -27.294933412599967], [-48.36701361784411, -27.294630115983157], [-48.36733323928628, -27.29367647368393], [-48.36750230259611, -27.293291709093033], [-48.367649483404975, -27.292865695314372], [-48.36802366184131, -27.292505211380103], [-48.36814181583156, -27.291614131961456], [-48.368362458460666, -27.290980211884055], [-48.368405149408325, -27.29062369382837], [-48.36847116529025, -27.290247196487957], [-48.3686868689009, -27.28982247114278], [-48.368893129718124, -27.28955581020366], [-48.3690199177699, -27.28926723460147], [-48.36973466775052, -27.288152569423243], [-48.36978937555548, -27.28777075365315], [-48.370033171052576, -27.287486930791104], [-48.37022906989003, -27.287114151911123], [-48.37052683085088, -27.28629791201482], [-48.37134028063846, -27.285236139078812], [-48.37163432110841, -27.28500175144489], [-48.372059754233796, -27.284949770761173], [-48.37245669557987, -27.285015935424582], [-48.372877034739126, -27.28499831261245], [-48.373052587862894, -27.284700439609402], [-48.3738047071263, -27.28430109765691], [-48.374678375074836, -27.284077591059834], [-48.37518089604031, -27.284330773050627], [-48.37593763563655, -27.285192346824758], [-48.37601556996874, -27.285765527102292], [-48.42542336918571, -27.285826646556718], [-48.425379469720625, -27.158855154093832]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_41bd1c4dc94f9710896eacfca61b335a.bindTooltip(
+                `<div>
+                     REBIO Marinha do Arvoredo: 17131.72 ha
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            geo_json_41bd1c4dc94f9710896eacfca61b335a.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var marker_8084caeceb208594547a9ebb077a1f96 = L.marker(
+                [-27.22590286866185, -48.365594920293965],
+                {
+}
+            ).addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var icon_947a6ad18f66c74774df88b51737b30d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_e6498247ee1f15d38c83e4eb16de2c35 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_b46b08994b686684a3c2a1c71d97bfe5 = $(`<div id="html_b46b08994b686684a3c2a1c71d97bfe5" style="width: 100.0%; height: 100.0%;"><b>REBIO Marinha do Arvoredo</b><br>Área: 17131.72 ha<br>Lat: 27.2259°S<br>Lon: 48.3656°W</div>`)[0];
+                popup_e6498247ee1f15d38c83e4eb16de2c35.setContent(html_b46b08994b686684a3c2a1c71d97bfe5);
+            
+        
+
+        marker_8084caeceb208594547a9ebb077a1f96.bindPopup(popup_e6498247ee1f15d38c83e4eb16de2c35)
+        ;
+
+        
+    
+    
+                marker_8084caeceb208594547a9ebb077a1f96.setIcon(icon_947a6ad18f66c74774df88b51737b30d);
+            
+    
+        function geo_json_21c532e29d0fef21c10a4ccc00fd66cb_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "darkblue", "fillColor": "blue", "fillOpacity": 0.4, "weight": 2};
+            }
+        }
+
+        function geo_json_21c532e29d0fef21c10a4ccc00fd66cb_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_21c532e29d0fef21c10a4ccc00fd66cb = L.geoJson(null, {
+                onEachFeature: geo_json_21c532e29d0fef21c10a4ccc00fd66cb_onEachFeature,
+            
+                style: geo_json_21c532e29d0fef21c10a4ccc00fd66cb_styler,
+            ...{
+}
+        });
+
+        function geo_json_21c532e29d0fef21c10a4ccc00fd66cb_add (data) {
+            geo_json_21c532e29d0fef21c10a4ccc00fd66cb
+                .addData(data);
+        }
+            geo_json_21c532e29d0fef21c10a4ccc00fd66cb_add({"bbox": [-48.469145536182864, -27.705218005570583, -48.46022432788988, -27.690279942383565], "features": [{"bbox": [-48.469145536182864, -27.705218005570583, -48.46022432788988, -27.690279942383565], "geometry": {"coordinates": [[[-48.464930771132245, -27.69087584593164], [-48.46394141832982, -27.690279942383565], [-48.46214459259485, -27.690579672175947], [-48.4616729520246, -27.691411431651616], [-48.46022432788988, -27.69196263882835], [-48.46042946090588, -27.69329704679825], [-48.461455710463746, -27.6939987033019], [-48.46213738062498, -27.694291339760863], [-48.46206727485126, -27.695620699070492], [-48.462572151269356, -27.698028618423713], [-48.463325501136715, -27.698200005029545], [-48.4636430721905, -27.69935263144733], [-48.46317128669867, -27.6997641876837], [-48.46453072748157, -27.70222278099279], [-48.4657139037762, -27.70337375226611], [-48.46611416723321, -27.703503641633123], [-48.46676929266462, -27.704522375106972], [-48.4673136755938, -27.704374763481997], [-48.46842532363016, -27.705218005570583], [-48.469145536182864, -27.70469717037355], [-48.46873200385358, -27.703437747352304], [-48.46806003145251, -27.70229615464663], [-48.467935172145744, -27.7002497507807], [-48.46798353141968, -27.699007530647563], [-48.46888766679467, -27.69861261909795], [-48.468375104422535, -27.6969574423381], [-48.467114689136956, -27.693616516069262], [-48.46733973740286, -27.691537119170516], [-48.464930771132245, -27.69087584593164]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_21c532e29d0fef21c10a4ccc00fd66cb.bindTooltip(
+                `<div>
+                     Ilha do Campeche: 76.19 ha
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            geo_json_21c532e29d0fef21c10a4ccc00fd66cb.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var marker_8c5988a66a92e00dd10fa9c1b27d5eae = L.marker(
+                [-27.696809553378475, -48.46518599708289],
+                {
+}
+            ).addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var icon_9348689d429e5ea6bd87405f701d4585 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_445ec0caf39328405b8103f2d41db707 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_11f67be7c48716016080e9cfa778f797 = $(`<div id="html_11f67be7c48716016080e9cfa778f797" style="width: 100.0%; height: 100.0%;"><b>Ilha do Campeche</b><br>Área: 76.19 ha<br>Lat: 27.6968°S<br>Lon: 48.4652°W</div>`)[0];
+                popup_445ec0caf39328405b8103f2d41db707.setContent(html_11f67be7c48716016080e9cfa778f797);
+            
+        
+
+        marker_8c5988a66a92e00dd10fa9c1b27d5eae.bindPopup(popup_445ec0caf39328405b8103f2d41db707)
+        ;
+
+        
+    
+    
+                marker_8c5988a66a92e00dd10fa9c1b27d5eae.setIcon(icon_9348689d429e5ea6bd87405f701d4585);
+            
+    
+        function geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_styler(feature) {
+            switch(feature.id) {
+                default:
+                    return {"color": "darkblue", "fillColor": "green", "fillOpacity": 0.4, "weight": 2};
+            }
+        }
+
+        function geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_onEachFeature(feature, layer) {
+
+            layer.on({
+            });
+        };
+        var geo_json_ec8fb23076293aa0d10cc607d4b1f1b3 = L.geoJson(null, {
+                onEachFeature: geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_onEachFeature,
+            
+                style: geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_styler,
+            ...{
+}
+        });
+
+        function geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_add (data) {
+            geo_json_ec8fb23076293aa0d10cc607d4b1f1b3
+                .addData(data);
+        }
+            geo_json_ec8fb23076293aa0d10cc607d4b1f1b3_add({"bbox": [-48.392466196972535, -27.612539918557545, -48.383253523621924, -27.607237383521895], "features": [{"bbox": [-48.388129586548374, -27.612539918557545, -48.383253523621924, -27.607237383521895], "geometry": {"coordinates": [[[-48.384814182228844, -27.607237383521895], [-48.384194046764854, -27.607292046830853], [-48.38370372780982, -27.607670736630485], [-48.383253523621924, -27.608290090491344], [-48.3834621220864, -27.60915667803759], [-48.38375776865994, -27.609254135630867], [-48.38423078184536, -27.609844965314654], [-48.38453360612043, -27.610846044567914], [-48.385088680947305, -27.61123934578991], [-48.38587560933094, -27.6121244909253], [-48.38634564110297, -27.612118037057012], [-48.38706336233916, -27.612539918557545], [-48.388047242468545, -27.61212967888328], [-48.388129586548374, -27.61107460684963], [-48.38789186187017, -27.610467803310225], [-48.38760948836702, -27.610354014755703], [-48.385626665871094, -27.607950097391566], [-48.38534414176062, -27.607541519541297], [-48.384814182228844, -27.607237383521895]]], "type": "Polygon"}, "id": "0", "properties": {}, "type": "Feature"}, {"bbox": [-48.390354610492665, -27.61110618544826, -48.38911067415775, -27.609987548885208], "geometry": {"coordinates": [[[-48.390354610492665, -27.610821073464656], [-48.39004414974192, -27.61110618544826], [-48.38953620659687, -27.611020058173374], [-48.38924563298866, -27.610708320564136], [-48.38911067415775, -27.6103586764552], [-48.38946695542493, -27.61007442907], [-48.38973260194809, -27.609987548885208], [-48.38995940553706, -27.61008880231535], [-48.39024388924326, -27.61041573725928], [-48.390354610492665, -27.610821073464656]]], "type": "Polygon"}, "id": "1", "properties": {}, "type": "Feature"}, {"bbox": [-48.392466196972535, -27.610938665427497, -48.39120825905086, -27.609863395208315], "geometry": {"coordinates": [[[-48.39120825905086, -27.61010209117358], [-48.391223592674365, -27.61066387093472], [-48.391721334127034, -27.610938665427497], [-48.39220475194568, -27.610850771639292], [-48.392466196972535, -27.61045753903345], [-48.392193644942274, -27.61011041481096], [-48.39181558006634, -27.609863395208315], [-48.39120825905086, -27.61010209117358]]], "type": "Polygon"}, "id": "2", "properties": {}, "type": "Feature"}], "type": "FeatureCollection"});
+
+        
+    
+            geo_json_ec8fb23076293aa0d10cc607d4b1f1b3.bindTooltip(
+                `<div>
+                     Ilha Xavier: 16.98 ha
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            geo_json_ec8fb23076293aa0d10cc607d4b1f1b3.addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var marker_078b7bc5bb059af99ea86938e4507b9d = L.marker(
+                [-27.609925731151936, -48.385711739190356],
+                {
+}
+            ).addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+        
+    
+            var icon_dc977dd46b462ec5f925c4c6ede2f8a8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2f16dc92d5ddb98fbdcf819b03a4fa43 = L.popup({
+  "maxWidth": 200,
+});
+
+        
+            
+                var html_217214f0d2c773378182004b8dd4749c = $(`<div id="html_217214f0d2c773378182004b8dd4749c" style="width: 100.0%; height: 100.0%;"><b>Ilha Xavier</b><br>Área: 16.98 ha<br>Lat: 27.6099°S<br>Lon: 48.3857°W</div>`)[0];
+                popup_2f16dc92d5ddb98fbdcf819b03a4fa43.setContent(html_217214f0d2c773378182004b8dd4749c);
+            
+        
+
+        marker_078b7bc5bb059af99ea86938e4507b9d.bindPopup(popup_2f16dc92d5ddb98fbdcf819b03a4fa43)
+        ;
+
+        
+    
+    
+                marker_078b7bc5bb059af99ea86938e4507b9d.setIcon(icon_dc977dd46b462ec5f925c4c6ede2f8a8);
+            
+    
+            var layer_control_54288f9d919e92abe17454e7726280d0_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_0b8852529dc12fcb7330a984daec6438,
+                    "Claro" : tile_layer_b7905d092730cb38bf3ebc7754a22f30,
+                    "Escuro" : tile_layer_5edbf6e96262747d2c46c694d6bfcbee,
+                },
+                overlays :  {
+                    "REBIO Marinha do Arvoredo" : geo_json_41bd1c4dc94f9710896eacfca61b335a,
+                    "Ilha do Campeche" : geo_json_21c532e29d0fef21c10a4ccc00fd66cb,
+                    "Ilha Xavier" : geo_json_ec8fb23076293aa0d10cc607d4b1f1b3,
+                },
+            };
+            let layer_control_54288f9d919e92abe17454e7726280d0 = L.control.layers(
+                layer_control_54288f9d919e92abe17454e7726280d0_layers.base_layers,
+                layer_control_54288f9d919e92abe17454e7726280d0_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_ef9318cb7e827113a1ad52b4c83286c6);
+
+        
+</script>
+</html>

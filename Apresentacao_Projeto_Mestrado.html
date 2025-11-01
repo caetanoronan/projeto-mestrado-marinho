@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Mestrado - Biodiversidade e Invasões Marinhas</title>
+    <style>
+        /* Paleta ColorBrewer BuGn */
+        :root {
+            --cor-primaria: #006d2c;    /* Verde escuro */
+            --cor-secundaria: #31a354;  /* Verde médio */
+            --cor-terciaria: #74c476;   /* Verde claro */
+            --cor-fundo: #e5f5e0;       /* Verde muito claro */
+            --cor-texto: #1a1a1a;
+            --cor-destaque: #00441b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--cor-fundo) 0%, #ffffff 100%);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            margin-top: 10px;
+            font-weight: 300;
+        }
+
+        /* Sistema de Abas */
+        .tabs {
+            display: flex;
+            background-color: white;
+            border-radius: 10px 10px 0 0;
+            overflow-x: auto;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 25px;
+            background: white;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            background-color: var(--cor-fundo);
+        }
+
+        .tab-button.active {
+            background-color: var(--cor-fundo);
+            border-bottom-color: var(--cor-primaria);
+            color: var(--cor-destaque);
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            min-height: 600px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Tipografia */
+        h2 {
+            color: var(--cor-primaria);
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--cor-secundaria);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--cor-secundaria);
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+        }
+
+        h4 {
+            color: var(--cor-primaria);
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        /* Cards de Informação */
+        .info-card {
+            background: var(--cor-fundo);
+            border-left: 5px solid var(--cor-primaria);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .info-card strong {
+            color: var(--cor-destaque);
+        }
+
+        /* Grid de Áreas */
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .area-card {
+            background: linear-gradient(135deg, var(--cor-fundo) 0%, white 100%);
+            border: 2px solid var(--cor-terciaria);
+            border-radius: 10px;
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,109,44,0.2);
+        }
+
+        .area-card h3 {
+            color: var(--cor-primaria);
+            margin-top: 0;
+        }
+
+        /* Tabelas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: var(--cor-primaria);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--cor-fundo);
+        }
+
+        tr:hover {
+            background-color: var(--cor-fundo);
+        }
+
+        /* Listas */
+        ul, ol {
+            margin: 15px 0 15px 30px;
+        }
+
+        li {
+            margin: 10px 0;
+            line-height: 1.8;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            background: var(--cor-secundaria);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 5px;
+        }
+
+        .badge.destaque {
+            background: var(--cor-primaria);
+        }
+
+        /* Imagens de Mapas */
+        .mapa-container {
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .mapa-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .mapa-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .mapa-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: var(--cor-secundaria);
+        }
+
+        /* Destaque */
+        .destaque-box {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            box-shadow: 0 6px 12px rgba(0,109,44,0.3);
+        }
+
+        .destaque-box h3 {
+            color: white;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+        }
+
+        /* Botões */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--cor-primaria);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+
+        .btn:hover {
+            background: var(--cor-destaque);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .btn-secundario {
+            background: var(--cor-secundaria);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            background: var(--cor-fundo);
+            border-top: 3px solid var(--cor-primaria);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid var(--cor-fundo);
+                border-left: 3px solid transparent;
+            }
+
+            .tab-button.active {
+                border-left-color: var(--cor-primaria);
+                border-bottom-color: var(--cor-fundo);
+            }
+
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animações */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌊 Perda de Biodiversidade e Invasões Marinhas</h1>
+    <p>Ilhas Costeiras de Santa Catarina</p>
+    <p class="subtitle">Projeto de Mestrado - PPGECO/UFSC | 2026</p>
+    <p class="subtitle"><strong>Candidato:</strong> Caetano Ronan | <strong>Orientador Proposto:</strong> Prof. Dr. Paulo Antunes Horta</p>
+</header>
+
+<div class="container">
+    
+    <!-- Sistema de Abas -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'visao-geral')">📋 Visão Geral</button>
+        <button class="tab-button" onclick="openTab(event, 'areas')">🗺️ Áreas de Estudo</button>
+        <button class="tab-button" onclick="openTab(event, 'objetivos')">🎯 Objetivos</button>
+        <button class="tab-button" onclick="openTab(event, 'metodologia')">🔬 Metodologia</button>
+        <button class="tab-button" onclick="openTab(event, 'mapas')">📍 Mapas</button>
+        <button class="tab-button" onclick="openTab(event, 'orientador')">👨‍🏫 Orientação</button>
+        <button class="tab-button" onclick="openTab(event, 'cronograma')">📅 Cronograma</button>
+    </div>
+
+    <!-- ABA 1: VISÃO GERAL -->
+    <div id="visao-geral" class="tab-content active">
+        <h2>📋 Visão Geral do Projeto</h2>
+        
+        <div class="destaque-box">
+            <h3>🎯 Tema Principal</h3>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Avaliar a <strong>perda de biodiversidade marinha bentônica</strong> e o <strong>impacto de espécies invasoras</strong> 
+                em três ilhas costeiras de Santa Catarina: REBIO Marinha do Arvoredo, Ilha do Campeche e Ilha Xavier.
+            </p>
+        </div>
+
+        <h3>🌊 Contexto e Relevância</h3>
+        <div class="info-card">
+            <p>
+                As ilhas costeiras de Santa Catarina abrigam alta biodiversidade marinha, mas enfrentam pressões crescentes:
+            </p>
+            <ul>
+                <li>📉 <strong>Perda de biodiversidade</strong> devido a mudanças climáticas e atividades humanas</li>
+                <li>🦠 <strong>Invasões biológicas</strong>, especialmente pelo coral-sol (<em>Tubastraea</em> spp.)</li>
+                <li>🏖️ <strong>Pressão turística</strong> desordenada</li>
+                <li>🌡️ <strong>Aquecimento oceânico</strong> e alterações ambientais</li>
+            </ul>
+        </div>
+
+        <h3>🔬 Justificativa Científica</h3>
+        <p>
+            Este projeto é relevante porque:
+        </p>
+        <ol>
+            <li><strong>Biogeografia de Ilhas:</strong> As três áreas formam um gradiente natural perfeito para testar teorias ecológicas</li>
+            <li><strong>Conservação:</strong> REBIO Arvoredo é uma das principais áreas marinhas protegidas do Sul do Brasil</li>
+            <li><strong>Lacuna de Conhecimento:</strong> Estudos integrados sobre biodiversidade + invasões são escassos na região</li>
+            <li><strong>Aplicação Prática:</strong> Resultados subsidiarão manejo e conservação das áreas</li>
+        </ol>
+
+        <h3>📊 Diferenciais do Projeto</h3>
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4>🎓 Abordagem Integrada</h4>
+                <p>Combinação de estudos sobre biodiversidade nativa e espécies invasoras</p>
+            </div>
+            <div class="area-card">
+                <h4>📏 Gradiente Natural</h4>
+                <p>Três áreas com variação em tamanho, isolamento e pressão antrópica</p>
+            </div>
+            <div class="area-card">
+                <h4>🗺️ Análise Espacial</h4>
+                <p>Uso de GIS e mapeamento para caracterização precisa</p>
+            </div>
+        </div>
+
+        <div class="info-card" style="background: linear-gradient(135deg, #e5f5e0 0%, #ffffff 100%); margin-top: 30px;">
+            <h4>💡 Hipóteses Principais</h4>
+            <ol>
+                <li>Ilhas maiores e mais isoladas (REBIO Arvoredo) apresentam maior biodiversidade</li>
+                <li>Ilhas próximas à costa (Campeche) são mais susceptíveis a invasões biológicas</li>
+                <li>Há correlação negativa entre presença de invasoras e diversidade de espécies nativas</li>
+                <li>Pressão turística está associada à maior ocorrência de espécies invasoras</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ABA 2: ÁREAS DE ESTUDO -->
+    <div id="areas" class="tab-content">
+        <h2>🗺️ Áreas de Estudo</h2>
+
+        <div class="destaque-box">
+            <h3>📍 Localização</h3>
+            <p>Três ilhas costeiras de Santa Catarina, Brasil, formando um gradiente de tamanho, isolamento e pressão antrópica.</p>
+        </div>
+
+        <div class="areas-grid">
+            <!-- REBIO Arvoredo -->
+            <div class="area-card" style="border-color: #E63946; border-width: 3px;">
+                <h3>🔴 REBIO Marinha do Arvoredo</h3>
+                <p><strong>Coordenadas:</strong> 27°13'33"S, 48°21'56"W</p>
+                <p><strong>Área:</strong> 17.131,72 hectares (171,32 km²)</p>
+                <p><strong>Status:</strong> Unidade de Conservação Federal (REBIO)</p>
+                <p><strong>Distância:</strong> ~15 km ao norte de Florianópolis</p>
+                
+                <h4>Características:</h4>
+                <ul>
+                    <li>Maior área de estudo</li>
+                    <li>Bem preservada e protegida</li>
+                    <li>Mergulho regulado</li>
+                    <li>Referência de conservação</li>
+                    <li>Alta biodiversidade</li>
+                </ul>
+            </div>
+
+            <!-- Ilha do Campeche -->
+            <div class="area-card" style="border-color: #2E86AB; border-width: 3px;">
+                <h3>🔵 Ilha do Campeche</h3>
+                <p><strong>Coordenadas:</strong> 27°41'48"S, 48°27'55"W</p>
+                <p><strong>Área:</strong> 76,19 hectares (0,76 km²)</p>
+                <p><strong>Status:</strong> Patrimônio Arqueológico</p>
+                <p><strong>Distância:</strong> ~1,5 km da costa leste de Florianópolis</p>
+                
+                <h4>Características:</h4>
+                <ul>
+                    <li>Área intermediária</li>
+                    <li>Alta pressão turística</li>
+                    <li>Próxima ao continente</li>
+                    <li>Macrófitas bem documentadas</li>
+                    <li>Fácil acesso</li>
+                </ul>
+            </div>
+
+            <!-- Ilha Xavier -->
+            <div class="area-card" style="border-color: #06A77D; border-width: 3px;">
+                <h3>🟢 Ilha Xavier</h3>
+                <p><strong>Coordenadas:</strong> 27°36'36"S, 48°23'11"W</p>
+                <p><strong>Área:</strong> 16,98 hectares (0,17 km²)</p>
+                <p><strong>Status:</strong> Sem proteção específica</p>
+                <p><strong>Distância:</strong> ~8 km ao nordeste de Florianópolis</p>
+                
+                <h4>Características:</h4>
+                <ul>
+                    <li>Menor área de estudo</li>
+                    <li>Menos estudada</li>
+                    <li>Pressão intermediária</li>
+                    <li>3 polígonos (ilhotas)</li>
+                    <li>Acesso moderado</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>📊 Comparação Entre as Áreas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>REBIO Arvoredo</th>
+                    <th>Ilha Campeche</th>
+                    <th>Ilha Xavier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Área (ha)</strong></td>
+                    <td>17.131,72</td>
+                    <td>76,19</td>
+                    <td>16,98</td>
+                </tr>
+                <tr>
+                    <td><strong>Tamanho Relativo</strong></td>
+                    <td>~1.000x</td>
+                    <td>1x (referência)</td>
+                    <td>~1/4</td>
+                </tr>
+                <tr>
+                    <td><strong>Distância da Costa</strong></td>
+                    <td>~15 km</td>
+                    <td>~1,5 km</td>
+                    <td>~8 km</td>
+                </tr>
+                <tr>
+                    <td><strong>Proteção Legal</strong></td>
+                    <td>UC Federal (REBIO)</td>
+                    <td>Patrimônio Arqueológico</td>
+                    <td>Sem proteção</td>
+                </tr>
+                <tr>
+                    <td><strong>Pressão Turística</strong></td>
+                    <td>Baixa (regulada)</td>
+                    <td>Alta</td>
+                    <td>Moderada</td>
+                </tr>
+                <tr>
+                    <td><strong>Acessibilidade</strong></td>
+                    <td>Difícil</td>
+                    <td>Fácil</td>
+                    <td>Moderada</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-card" style="margin-top: 30px;">
+            <h4>🎯 Justificativa da Seleção</h4>
+            <p>
+                Este conjunto de áreas permite avaliar variações em biodiversidade e invasões ao longo de gradientes de:
+            </p>
+            <ul>
+                <li><strong>Tamanho:</strong> Teoria de Biogeografia de Ilhas (relação área-diversidade)</li>
+                <li><strong>Isolamento:</strong> Distância como barreira para dispersão e colonização</li>
+                <li><strong>Pressão antrópica:</strong> Efeitos do turismo e distúrbios humanos</li>
+                <li><strong>Proteção:</strong> Efetividade de áreas marinhas protegidas</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ABA 3: OBJETIVOS -->
+    <div id="objetivos" class="tab-content">
+        <h2>🎯 Objetivos do Projeto</h2>
+
+        <div class="destaque-box pulse">
+            <h3>🎯 Objetivo Geral</h3>
+            <p style="font-size: 1.15em;">
+                Avaliar a <strong>biodiversidade marinha bentônica</strong> e o <strong>impacto de espécies invasoras</strong> 
+                em três ilhas costeiras de Santa Catarina (REBIO Arvoredo, Ilha do Campeche e Ilha Xavier), 
+                identificando padrões de distribuição e fatores que influenciam a perda de biodiversidade e susceptibilidade a invasões.
+            </p>
+        </div>
+
+        <h3>🔬 Objetivos Específicos</h3>
+
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4><span class="badge destaque">1</span> Caracterizar Biodiversidade</h4>
+                <p>
+                    Caracterizar e comparar a <strong>diversidade de espécies bentônicas nativas</strong> 
+                    nas três áreas de estudo, identificando padrões de distribuição e riqueza.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4><span class="badge destaque">2</span> Mapear Invasoras</h4>
+                <p>
+                    Mapear a <strong>distribuição e abundância de espécies invasoras</strong>, 
+                    com ênfase no coral-sol (<em>Tubastraea coccinea</em> e <em>T. tagusensis</em>).
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4><span class="badge destaque">3</span> Avaliar Impactos</h4>
+                <p>
+                    Avaliar o <strong>impacto das espécies invasoras</strong> sobre a estrutura 
+                    e composição das comunidades bentônicas nativas.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4><span class="badge destaque">4</span> Identificar Fatores</h4>
+                <p>
+                    Identificar <strong>fatores ambientais e antrópicos</strong> que facilitam ou 
+                    limitam o estabelecimento de espécies invasoras.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4><span class="badge destaque">5</span> Testar Hipóteses</h4>
+                <p>
+                    Testar hipóteses sobre a relação entre <strong>tamanho de ilha, isolamento, 
+                    pressão antrópica</strong> e padrões de biodiversidade/invasão.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4><span class="badge destaque">6</span> Propor Estratégias</h4>
+                <p>
+                    Propor <strong>estratégias de manejo e conservação</strong> baseadas nos 
+                    resultados, subsidiando gestores das áreas protegidas.
+                </p>
+            </div>
+        </div>
+
+        <h3>❓ Perguntas de Pesquisa</h3>
+        
+        <div class="info-card">
+            <h4>🔵 Sobre Biodiversidade</h4>
+            <ol>
+                <li>Como a biodiversidade bentônica varia entre as três ilhas?</li>
+                <li>Áreas maiores apresentam maior diversidade de espécies?</li>
+                <li>O isolamento da costa afeta a composição de espécies?</li>
+                <li>Existem espécies indicadoras de degradação ambiental?</li>
+            </ol>
+        </div>
+
+        <div class="info-card">
+            <h4>🔴 Sobre Invasões</h4>
+            <ol>
+                <li>Qual a distribuição atual do coral-sol e outras invasoras nas ilhas?</li>
+                <li>Quais fatores facilitam o estabelecimento de invasoras?</li>
+                <li>Áreas mais próximas da costa são mais invadidas?</li>
+                <li>Existe relação entre pressão turística e invasões?</li>
+            </ol>
+        </div>
+
+        <div class="info-card">
+            <h4>🟢 Integração dos Temas</h4>
+            <ol>
+                <li>Áreas com maior perda de biodiversidade são mais susceptíveis a invasões?</li>
+                <li>As invasoras alteram a estrutura das comunidades nativas?</li>
+                <li>Como múltiplos estressores (invasões + poluição + aquecimento) interagem?</li>
+                <li>A proteção legal (REBIO) é efetiva contra invasões?</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ABA 4: METODOLOGIA -->
+    <div id="metodologia" class="tab-content">
+        <h2>🔬 Metodologia</h2>
+
+        <h3>📋 Desenho Amostral</h3>
+        <div class="info-card">
+            <p><strong>Tipo:</strong> Estudo observacional comparativo</p>
+            <p><strong>Abordagem:</strong> Levantamento de biodiversidade + mapeamento de invasoras</p>
+            <p><strong>Período:</strong> Dois períodos sazonais (verão e inverno) para capturar variação temporal</p>
+        </div>
+
+        <h3>🤿 Coleta de Dados em Campo</h3>
+
+        <h4>1. Levantamento de Biodiversidade Bentônica</h4>
+        <ul>
+            <li><strong>Método:</strong> Transectos visuais subaquáticos + Quadrats fotográficos</li>
+            <li><strong>Profundidades:</strong> 3-5 m, 8-10 m, 15-20 m (quando aplicável)</li>
+            <li><strong>Réplicas:</strong> Mínimo 5 transectos por profundidade por área</li>
+            <li><strong>Tamanho dos quadrats:</strong> 0,5 x 0,5 m (0,25 m²)</li>
+            <li><strong>Registro:</strong> Fotografia subaquática de alta resolução</li>
+            <li><strong>Coleta:</strong> Espécimes de difícil identificação para análise em laboratório</li>
+        </ul>
+
+        <h4>2. Mapeamento de Espécies Invasoras</h4>
+        <ul>
+            <li><strong>Foco:</strong> Coral-sol (<em>Tubastraea coccinea</em> e <em>T. tagusensis</em>)</li>
+            <li><strong>Método:</strong> GPS subaquático para georreferenciamento de colônias</li>
+            <li><strong>Métricas:</strong> 
+                <ul>
+                    <li>Presença/ausência por ponto amostral</li>
+                    <li>Cobertura percentual (análise de imagens)</li>
+                    <li>Tamanho de colônias</li>
+                    <li>Densidade (colônias/m²)</li>
+                </ul>
+            </li>
+            <li><strong>Distribuição espacial:</strong> Mapeamento em GIS</li>
+        </ul>
+
+        <h4>3. Variáveis Ambientais</h4>
+        <ul>
+            <li>Temperatura da água (dataloggers)</li>
+            <li>Profundidade</li>
+            <li>Tipo de substrato (rochoso, arenoso, misto)</li>
+            <li>Inclinação do substrato</li>
+            <li>Exposição a ondas e correntes</li>
+            <li>Turbidez (disco de Secchi)</li>
+        </ul>
+
+        <h3>🔬 Análise de Dados</h3>
+
+        <h4>Índices de Diversidade</h4>
+        <ul>
+            <li><strong>Riqueza de espécies:</strong> Número de espécies por área</li>
+            <li><strong>Índice de Shannon (H'):</strong> Diversidade considerando abundância</li>
+            <li><strong>Índice de Simpson:</strong> Dominância de espécies</li>
+            <li><strong>Equitabilidade de Pielou:</strong> Distribuição uniforme das espécies</li>
+        </ul>
+
+        <h4>Análises Estatísticas</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Análise</th>
+                    <th>Método</th>
+                    <th>Software</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Comparação de diversidade entre áreas</td>
+                    <td>ANOVA / Kruskal-Wallis</td>
+                    <td>R</td>
+                </tr>
+                <tr>
+                    <td>Análise de composição de comunidades</td>
+                    <td>PERMANOVA</td>
+                    <td>PRIMER-E / R (vegan)</td>
+                </tr>
+                <tr>
+                    <td>Ordenação multivariada</td>
+                    <td>NMDS (Non-metric Multidimensional Scaling)</td>
+                    <td>R (vegan)</td>
+                </tr>
+                <tr>
+                    <td>Correlação com variáveis ambientais</td>
+                    <td>Regressão múltipla / CCA</td>
+                    <td>R</td>
+                </tr>
+                <tr>
+                    <td>Análise espacial</td>
+                    <td>Autocorrelação espacial</td>
+                    <td>QGIS / R (spatial)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>Análise de Imagens</h4>
+        <ul>
+            <li><strong>Software:</strong> CPCe (Coral Point Count with Excel extensions)</li>
+            <li><strong>Método:</strong> Pontos aleatórios estratificados (mínimo 100 pontos/imagem)</li>
+            <li><strong>Categorias:</strong> Corais, algas, invertebrados, substrato não colonizado</li>
+        </ul>
+
+        <h3>📜 Aspectos Éticos e Legais</h3>
+        <div class="info-card">
+            <h4>Autorizações Necessárias:</h4>
+            <ul>
+                <li>✅ <strong>SISBIO:</strong> Autorização ICMBio para coleta em Unidade de Conservação</li>
+                <li>✅ <strong>Licenças estaduais:</strong> Para Ilha do Campeche e Ilha Xavier</li>
+                <li>✅ <strong>Comitê de Ética:</strong> Se envolver comunidades locais</li>
+                <li>✅ <strong>Acesso ao patrimônio genético:</strong> Se realizar análises moleculares</li>
+            </ul>
+        </div>
+
+        <h3>⚠️ Limitações e Desafios</h3>
+        <ul>
+            <li><strong>Condições meteorológicas:</strong> Janelas de amostragem dependentes do clima</li>
+            <li><strong>Logística:</strong> Acesso às ilhas requer embarcação</li>
+            <li><strong>Segurança:</strong> Mergulho em áreas remotas requer planejamento rigoroso</li>
+            <li><strong>Identificação taxonômica:</strong> Algumas espécies requerem especialistas</li>
+        </ul>
+    </div>
+
+    <!-- ABA 5: MAPAS -->
+    <div id="mapas" class="tab-content">
+        <h2>📍 Mapas das Áreas de Estudo</h2>
+
+        <div class="info-card">
+            <p>
+                Os mapas abaixo foram gerados a partir de dados geoespaciais oficiais (GeoPackage e KML) 
+                utilizando Python (GeoPandas, Matplotlib, Folium) e apresentam as localizações precisas 
+                das três áreas de estudo.
+            </p>
+        </div>
+
+        <h3>🗺️ Mapa de Todas as Áreas</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_todas_areas.png" alt="Mapa com todas as áreas de estudo">
+            <p class="mapa-caption">Figura 1: Localização das três áreas de estudo em Santa Catarina</p>
+        </div>
+
+        <h3>📊 Mapa Comparativo</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_comparativo.png" alt="Comparação das três áreas">
+            <p class="mapa-caption">Figura 2: Comparação visual das três ilhas com suas respectivas áreas</p>
+        </div>
+
+        <h3>📏 Comparação de Escala</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_escala_comparativa.png" alt="Comparação de escala">
+            <p class="mapa-caption">Figura 3: Comparação de tamanho das áreas na mesma escala</p>
+        </div>
+
+        <h3>🔴 REBIO Marinha do Arvoredo</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_Marinha_do_Arvoredo.png" alt="REBIO Arvoredo">
+            <p class="mapa-caption">Figura 4: REBIO Marinha do Arvoredo (17.131,72 ha)</p>
+        </div>
+
+        <h3>🔵 Ilha do Campeche</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_Campeche.png" alt="Ilha do Campeche">
+            <p class="mapa-caption">Figura 5: Ilha do Campeche (76,19 ha)</p>
+        </div>
+
+        <h3>🟢 Ilha Xavier</h3>
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_Ilha_Xavier.png" alt="Ilha Xavier">
+            <p class="mapa-caption">Figura 6: Ilha Xavier (16,98 ha)</p>
+        </div>
+
+        <h3>🌐 Mapa Interativo</h3>
+        <div class="info-card">
+            <h4>💡 Acesse o Mapa Interativo</h4>
+            <p>
+                Um mapa interativo em HTML também foi gerado, permitindo zoom, exploração e visualização 
+                de informações detalhadas de cada área.
+            </p>
+            <a href="Mapas_Gerados/mapa_interativo.html" class="btn" target="_blank">
+                🗺️ Abrir Mapa Interativo
+            </a>
+        </div>
+
+        <h3>📊 Dados Cartográficos</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Área</th>
+                    <th>Coordenadas (Centroide)</th>
+                    <th>Área (ha)</th>
+                    <th>Sistema de Coordenadas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>REBIO Arvoredo</strong></td>
+                    <td>27°13'33"S, 48°21'56"W</td>
+                    <td>17.131,72</td>
+                    <td>SIRGAS 2000 / UTM 22S</td>
+                </tr>
+                <tr>
+                    <td><strong>Ilha do Campeche</strong></td>
+                    <td>27°41'48"S, 48°27'55"W</td>
+                    <td>76,19</td>
+                    <td>SIRGAS 2000 / UTM 22S</td>
+                </tr>
+                <tr>
+                    <td><strong>Ilha Xavier</strong></td>
+                    <td>27°36'36"S, 48°23'11"W</td>
+                    <td>16,98</td>
+                    <td>SIRGAS 2000 / UTM 22S</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ABA 6: ORIENTADOR -->
+    <div id="orientador" class="tab-content">
+        <h2>👨‍🏫 Proposta de Orientação</h2>
+
+        <div class="destaque-box">
+            <h3>🎓 Orientador Proposto</h3>
+            <h2 style="color: white; border: none; margin: 10px 0;">Prof. Dr. Paulo Antunes Horta</h2>
+            <p style="font-size: 1.1em;">Universidade Federal de Santa Catarina (UFSC)</p>
+        </div>
+
+        <h3>📋 Perfil Acadêmico</h3>
+        <div class="info-card">
+            <p><strong>Departamento:</strong> Botânica / Ecologia e Zoologia - CCB/UFSC</p>
+            <p><strong>Programa:</strong> PPGECO - Programa de Pós-Graduação em Ecologia</p>
+            <p><strong>Linha de Pesquisa:</strong> Ecologia Marinha e Costeira</p>
+            <p><strong>Especialidade:</strong> Macroalgas marinhas, Ecossistemas costeiros, Biodiversidade marinha</p>
+        </div>
+
+        <h3>🔬 Relevância para o Projeto</h3>
+
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4>🌊 Expertise em Macroalgas</h4>
+                <p>
+                    Reconhecido especialista em macroalgas marinhas do Brasil, essencial para identificação 
+                    e caracterização da flora bentônica das ilhas estudadas.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4>🏝️ Estudos na Ilha do Campeche</h4>
+                <p>
+                    Possui publicações específicas sobre macrófitas marinhas da Ilha do Campeche, 
+                    uma das áreas centrais deste projeto.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4>📚 Produção Científica</h4>
+                <p>
+                    Extensa produção científica em ecologia marinha, conservação e biodiversidade 
+                    de ambientes costeiros.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4>🤝 Colaborações</h4>
+                <p>
+                    Rede de colaboração com pesquisadores nacionais e internacionais em ecologia marinha 
+                    e invasões biológicas.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4>🔬 Infraestrutura</h4>
+                <p>
+                    Acesso a laboratórios especializados (Ficologia) e equipamentos para análises 
+                    de comunidades bentônicas.
+                </p>
+            </div>
+
+            <div class="area-card">
+                <h4>🌍 Visão Integradora</h4>
+                <p>
+                    Abordagem integradora entre taxonomia, ecologia e conservação, alinhada 
+                    com os objetivos do projeto.
+                </p>
+            </div>
+        </div>
+
+        <h3>🎯 Alinhamento com o Projeto</h3>
+        <div class="info-card">
+            <h4>Por que o Prof. Paulo Antunes Horta?</h4>
+            <ul>
+                <li>✅ <strong>Experiência direta:</strong> Trabalhos prévios nas áreas de estudo (Ilha do Campeche)</li>
+                <li>✅ <strong>Expertise taxonômica:</strong> Essencial para identificação de espécies bentônicas</li>
+                <li>✅ <strong>Visão de conservação:</strong> Entende a importância de áreas protegidas marinhas</li>
+                <li>✅ <strong>Abordagem ecológica:</strong> Compatível com análises de biodiversidade e comunidades</li>
+                <li>✅ <strong>Infraestrutura:</strong> Laboratórios e equipamentos disponíveis no CCB</li>
+                <li>✅ <strong>Orientação consolidada:</strong> Experiência em formação de mestres e doutores</li>
+            </ul>
+        </div>
+
+        <h3>📚 Publicações Relevantes (Exemplos)</h3>
+        <div class="info-card">
+            <p><strong>Horta, P. A., et al. (2008).</strong> Macrófitas marinhas da Ilha do Campeche (Florianópolis, SC) e suas potencialidades econômicas.</p>
+            
+            <p><strong>Horta, P. A., et al. (2016).</strong> Rhodolith beds in Brazil: a new potential habitat for marine bioprospection. <em>Revista Brasileira de Farmacognosia</em>, 26(3), 327-334.</p>
+            
+            <p style="margin-top: 15px; font-style: italic;">
+                💡 Consultar Plataforma Lattes para lista completa de publicações e orientações
+            </p>
+        </div>
+
+        <h3>🤝 Possíveis Colaboradores</h3>
+        <p>Além do orientador principal, o projeto pode se beneficiar de colaborações com:</p>
+        <ul>
+            <li><strong>Especialistas em coral-sol:</strong> Dr. Joel Christopher Creed (UERJ)</li>
+            <li><strong>Ecólogos marinhos UFSC:</strong> Laboratório de Ecologia Marinha Bentônica</li>
+            <li><strong>Gestores da REBIO:</strong> ICMBio/CEPSUL</li>
+            <li><strong>Laboratório de Bioinvasão:</strong> Se ativo na UFSC</li>
+        </ul>
+
+        <div class="destaque-box" style="margin-top: 30px;">
+            <h3>📧 Próximos Passos</h3>
+            <ol style="color: white;">
+                <li>Entrar em contato com o Prof. Paulo Antunes Horta</li>
+                <li>Apresentar esta proposta preliminar</li>
+                <li>Agendar reunião para discutir viabilidade e ajustes</li>
+                <li>Obter carta de aceite para inscrição no mestrado</li>
+                <li>Refinar objetivos e metodologia com base no feedback</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- ABA 7: CRONOGRAMA -->
+    <div id="cronograma" class="tab-content">
+        <h2>📅 Cronograma</h2>
+
+        <div class="info-card">
+            <p><strong>Duração do Mestrado:</strong> 24 meses</p>
+            <p><strong>Início previsto:</strong> Março de 2026</p>
+        </div>
+
+        <h3>📊 Cronograma Geral (24 meses)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Atividade</th>
+                    <th>Meses 1-6</th>
+                    <th>Meses 7-12</th>
+                    <th>Meses 13-18</th>
+                    <th>Meses 19-24</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Revisão bibliográfica</strong></td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                    <td style="background: #31a354; color: white;">●●●</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Disciplinas obrigatórias</strong></td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Preparação logística e autorizações</strong></td>
+                    <td style="background: #31a354; color: white;">●●●●●●</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Campo 1 (verão)</strong></td>
+                    <td></td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Campo 2 (inverno)</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Análise de dados</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #31a354; color: white;">●●●●●●</td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                </tr>
+                <tr>
+                    <td><strong>Qualificação</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #74c476; color: white;">●</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td><strong>Redação da dissertação</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #31a354; color: white;">●●●●●●</td>
+                    <td style="background: #006d2c; color: white;">●●●●●●</td>
+                </tr>
+                <tr>
+                    <td><strong>Submissão de artigo</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #31a354; color: white;">●●●</td>
+                </tr>
+                <tr>
+                    <td><strong>Defesa</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td style="background: #74c476; color: white;">●</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>📋 Detalhamento por Semestre</h3>
+
+        <div class="area-card">
+            <h3>1º Semestre (Meses 1-6)</h3>
+            <h4>Atividades:</h4>
+            <ul>
+                <li>Matrícula e integração ao programa</li>
+                <li>Cursamento de disciplinas obrigatórias</li>
+                <li>Revisão bibliográfica intensiva</li>
+                <li>Obtenção de licenças (SISBIO, etc.)</li>
+                <li>Preparação de equipamentos</li>
+                <li>Planejamento logístico detalhado</li>
+                <li>Definição de pontos amostrais</li>
+            </ul>
+            <p><strong>Produto:</strong> Projeto detalhado + Licenças obtidas</p>
+        </div>
+
+        <div class="area-card">
+            <h3>2º Semestre (Meses 7-12)</h3>
+            <h4>Atividades:</h4>
+            <ul>
+                <li>Finalização de disciplinas</li>
+                <li><strong>Campanha de campo 1 (VERÃO)</strong>
+                    <ul>
+                        <li>REBIO Arvoredo (5-7 dias)</li>
+                        <li>Ilha do Campeche (3-5 dias)</li>
+                        <li>Ilha Xavier (3-5 dias)</li>
+                    </ul>
+                </li>
+                <li>Identificação preliminar de espécies</li>
+                <li>Processamento de imagens</li>
+                <li>Análises exploratórias</li>
+            </ul>
+            <p><strong>Produto:</strong> Dados do verão coletados e processados</p>
+        </div>
+
+        <div class="area-card">
+            <h3>3º Semestre (Meses 13-18)</h3>
+            <h4>Atividades:</h4>
+            <ul>
+                <li><strong>Campanha de campo 2 (INVERNO)</strong>
+                    <ul>
+                        <li>Mesmos locais da campanha 1</li>
+                        <li>Comparação sazonal</li>
+                    </ul>
+                </li>
+                <li>Identificação taxonômica completa</li>
+                <li>Análises estatísticas principais</li>
+                <li>Análises espaciais (GIS)</li>
+                <li><strong>Exame de Qualificação</strong></li>
+                <li>Início da redação da dissertação</li>
+            </ul>
+            <p><strong>Produto:</strong> Qualificação aprovada + Análises concluídas</p>
+        </div>
+
+        <div class="area-card">
+            <h3>4º Semestre (Meses 19-24)</h3>
+            <h4>Atividades:</h4>
+            <ul>
+                <li>Finalização de análises complementares</li>
+                <li>Redação da dissertação (completa)</li>
+                <li>Preparação de artigo científico</li>
+                <li>Submissão de artigo para revista</li>
+                <li>Revisão final da dissertação</li>
+                <li><strong>Defesa da Dissertação</strong></li>
+            </ul>
+            <p><strong>Produto:</strong> Dissertação defendida + Artigo submetido</p>
+        </div>
+
+        <h3>🎯 Marcos Importantes (Milestones)</h3>
+        <div class="info-card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mês</th>
+                        <th>Marco</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Mês 6</strong></td>
+                        <td>✅ Todas as licenças obtidas + Equipamentos prontos</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mês 12</strong></td>
+                        <td>✅ Primeira campanha de campo completa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mês 15</strong></td>
+                        <td>✅ Segunda campanha completa</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mês 18</strong></td>
+                        <td>✅ Qualificação aprovada</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mês 22</strong></td>
+                        <td>✅ Artigo submetido</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Mês 24</strong></td>
+                        <td>🎓 DEFESA DA DISSERTAÇÃO</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h3>💰 Orçamento Estimado</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantidade</th>
+                    <th>Valor Estimado (R$)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Transporte (embarcações para ilhas)</td>
+                    <td>6 saídas</td>
+                    <td>6.000,00</td>
+                </tr>
+                <tr>
+                    <td>Cilindros de mergulho e recarga</td>
+                    <td>24 meses</td>
+                    <td>3.000,00</td>
+                </tr>
+                <tr>
+                    <td>Material de coleta e análise</td>
+                    <td>-</td>
+                    <td>2.000,00</td>
+                </tr>
+                <tr>
+                    <td>Câmera subaquática (se necessário)</td>
+                    <td>1</td>
+                    <td>5.000,00</td>
+                </tr>
+                <tr>
+                    <td>GPS subaquático</td>
+                    <td>1</td>
+                    <td>3.000,00</td>
+                </tr>
+                <tr>
+                    <td>Dataloggers de temperatura</td>
+                    <td>10</td>
+                    <td>2.000,00</td>
+                </tr>
+                <tr>
+                    <td>Congressos e publicações</td>
+                    <td>2 congressos</td>
+                    <td>4.000,00</td>
+                </tr>
+                <tr>
+                    <td><strong>TOTAL</strong></td>
+                    <td></td>
+                    <td><strong>25.000,00</strong></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-card">
+            <h4>💡 Fontes de Financiamento</h4>
+            <ul>
+                <li>Bolsa CAPES/CNPq (se aprovado)</li>
+                <li>Projetos do orientador</li>
+                <li>Editais UFSC/FAPESC</li>
+                <li>Parcerias com ICMBio/REBIO Arvoredo</li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p><strong>Projeto de Mestrado - PPGECO/UFSC</strong></p>
+    <p>Candidato: Caetano Ronan | Orientador Proposto: Prof. Dr. Paulo Antunes Horta</p>
+    <p>Novembro de 2025</p>
+    <p style="margin-top: 20px; font-size: 0.9em;">
+        Apresentação gerada com dados geoespaciais reais e bibliografia científica atualizada
+    </p>
+</footer>
+
+<script>
+    function openTab(evt, tabName) {
+        // Esconder todos os conteúdos
+        var tabContents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+        
+        // Remover classe active de todos os botões
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("active");
+        }
+        
+        // Mostrar conteúdo atual e ativar botão
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+        
+        // Scroll suave para o topo
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+
+    // Adicionar efeito de hover nas áreas
+    document.querySelectorAll('.area-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
+</script>
+
+</body>
+</html>
