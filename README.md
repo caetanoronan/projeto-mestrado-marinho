@@ -26,7 +26,7 @@ Avaliar padrões de biodiversidade e invasões ao longo de gradientes de:
 
 ## 🔗 Acesse a Apresentação
 
-👉 **[Apresentação Completa do Projeto](Apresentacao_Projeto_Mestrado.html)**
+👉 **[Apresentação Completa do Projeto](Apresentacao_Projeto_Mestrado_Publica.html)**
 
 ## 📊 Conteúdo
 
@@ -36,9 +36,7 @@ Avaliar padrões de biodiversidade e invasões ao longo de gradientes de:
 - 📅 Cronograma detalhado (24 meses)
 - 💰 Orçamento estimado
 
-## 👨‍🏫 Orientação
 
-**Orientador Proposto:** Prof. Dr. Paulo Antunes Horta (UFSC)
 
 ## 🛠️ Tecnologias Utilizadas
 
@@ -51,12 +49,12 @@ Avaliar padrões de biodiversidade e invasões ao longo de gradientes de:
 
 ```
 .
-├── Apresentacao_Projeto_Mestrado.html  # 🌐 Apresentação principal
-├── Mapas_Gerados/                       # 🗺️ Mapas estáticos e interativos
-├── Documentacao_Areas_Estudo.md         # 📄 Documentação detalhada
-├── Bibliografia_Biodiversidade_Invasoes.md # 📚 Referências bibliográficas
-├── Checklist_Candidatura_Mestrado_2026.md  # ✅ Guia de candidatura
-└── Scripts Python                       # 🐍 Análises e visualizações
+├── Apresentacao_Projeto_Mestrado_Publica.html  # 🌐 Apresentação principal (pública)
+├── Mapas_Gerados/                              # 🗺️ Mapas estáticos e interativos
+├── Documentacao_Areas_Estudo.md                # 📄 Documentação detalhada
+├── Bibliografia_Biodiversidade_Invasoes.md     # 📚 Referências bibliográficas
+├── Checklist_Candidatura_Mestrado_2026.md      # ✅ Guia de candidatura
+└── Scripts Python                              # 🐍 Análises e visualizações
 ```
 
 ## 📖 Documentos
