@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evolução Botânica Completa: Da Origem da Terra às Angiospermas</title>
+    <style>
+        * { box-sizing: border-box; }
+        
+        body {
+            font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            transition: background 0.3s, color 0.3s;
+            font-size: 16px;
+        }
+        
+        body.dark-mode {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+        
+        .header-content h1 {
+            margin: 0 0 12px 0;
+            font-size: 2rem;
+        }
+        
+        .header-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            padding: 10px 14px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            width: 250px;
+            transition: all 0.2s;
+        }
+        
+        body.dark-mode .search-box {
+            background: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        
+        .search-box:focus {
+            outline: none;
+            border-color: #66c2a4;
+            box-shadow: 0 0 8px rgba(102, 194, 164, 0.3);
+        }
+        
+        button {
+            padding: 8px 16px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        body.dark-mode button {
+            background: #333;
+            color: #e0e0e0;
+            border-color: #555;
+        }
+        
+        button:hover {
+            background: #66c2a4;
+            color: white;
+            border-color: #66c2a4;
+        }
+        
+        /* ABAS - Cores BuGn Graduadas por Período Geológico */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 24px;
+            border-bottom: 3px solid #66c2a4;
+            flex-wrap: wrap;
+            background: #edf8fb;
+            padding: 12px;
+            border-radius: 8px;
+            overflow-x: auto;
+        }
+        
+        body.dark-mode .tabs {
+            background: #1a3a3a;
+            border-color: #52a896;
+        }
+        
+        .tab-btn {
+            padding: 10px 16px;
+            background: #e0f2f1;
+            border: 2px solid #b2e2e2;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #00695c;
+            transition: all 0.2s;
+            font-weight: 600;
+            border-radius: 6px;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        
+        body.dark-mode .tab-btn {
+            background: #1e4d47;
+            color: #4ecdc4;
+            border-color: #2a6b63;
+        }
+        
+        .tab-btn:hover {
+            background: #b2e2e2;
+            color: #00695c;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(102, 194, 164, 0.3);
+        }
+        
+        .tab-btn.active {
+            background: #66c2a4;
+            color: white;
+            border-color: #27ae60;
+            box-shadow: 0 4px 12px rgba(102, 194, 164, 0.5);
+        }
+        
+        body.dark-mode .tab-btn.active {
+            background: #52a896;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        body.dark-mode .container {
+            background-color: #2a2a2a;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+        }
+        
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #66c2a4;
+            padding-bottom: 15px;
+            margin-bottom: 10px;
+        }
+        
+        body.dark-mode h1 {
+            color: #52c77f;
+        }
+        
+        h2 {
+            color: #00695c;
+            background: #e0f2f1;
+            padding: 15px;
+            margin-top: 40px;
+            border-left: 4px solid #66c2a4;
+            border-radius: 6px;
+            font-size: 1.5rem;
+        }
+        
+        body.dark-mode h2 {
+            background: #1e4d47;
+            color: #4ecdc4;
+            border-color: #52a896;
+        }
+        
+        h3 {
+            color: #00897b;
+            background: #b2e2e2;
+            padding: 10px 12px;
+            margin-top: 25px;
+            border-left: 4px solid #00897b;
+            border-radius: 4px;
+        }
+        
+        body.dark-mode h3 {
+            background: #2a6b63;
+            color: #4ecdc4;
+        }
+        
+        .timeline {
+            background: linear-gradient(135deg, #edf8fb 0%, #e0f2f1 100%);
+            border: 3px solid #66c2a4;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        
+        body.dark-mode .timeline {
+            background: linear-gradient(135deg, #1a3a3a 0%, #1e4d47 100%);
+            border-color: #52a896;
+        }
+        
+        .timeline-item {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #00695c;
+            min-width: 100px;
+            background: #b2e2e2;
+            padding: 5px 10px;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        body.dark-mode .timeline-date {
+            color: #4ecdc4;
+            background: #2a6b63;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 0.98em;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 14px 16px;
+            border: 1px solid #b2e2e2;
+            text-align: left;
+        }
+        
+        body.dark-mode th, body.dark-mode td {
+            border-color: #2a6b63;
+        }
+        
+        th {
+            background-color: #66c2a4;
+            color: #ffffff;
+            font-weight: bold;
+        }
+        
+        tr:nth-of-type(even) {
+            background-color: #e0f2f1;
+        }
+        
+        body.dark-mode tr:nth-of-type(even) {
+            background-color: #1e4d47;
+        }
+        
+        tr:hover {
+            background-color: #b2e2e2;
+        }
+        
+        body.dark-mode tr:hover {
+            background-color: #2a6b63;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #e0f2f1 0%, #b2e2e2 100%);
+            border-left: 4px solid #66c2a4;
+            padding: 16px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        
+        body.dark-mode .highlight-box {
+            background: linear-gradient(135deg, #1e4d47 0%, #2a6b63 100%);
+            border-color: #52a896;
+        }
+        
+        .meta {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+        
+        body.dark-mode .meta {
+            color: #aaa;
+        }
+        
+        ul, ol {
+            padding-left: 24px;
+            line-height: 1.8;
+        }
+        
+        li {
+            margin-bottom: 12px;
+        }
+        
+        @media (max-width: 768px) {
+            header { flex-direction: column; }
+            .header-controls { width: 100%; }
+            .search-box { width: 100%; }
+            .container { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h1>🌍 Evolução Botânica Completa: Da Origem da Terra às Angiospermas</h1>
+        <div class="meta">Revisão Sistemática Integrativa | PPGOceano - UFSC</div>
+    </div>
+    <div class="header-controls">
+        <input type="text" id="searchBox" class="search-box" placeholder="🔍 Buscar...">
+        <button id="darkModeBtn" title="Alternar modo escuro">🌙</button>
+        <button id="printBtn" title="Imprimir">🖨️</button>
+    </div>
+</header>
+
+<!-- 12 ABAS TEMÁTICAS -->
+<div class="tabs">
+    <button class="tab-btn active" data-tab="timeline">⏳ Cronologia</button>
+    <button class="tab-btn" data-tab="prebiotica">🧪 Pré-Biótica</button>
+    <button class="tab-btn" data-tab="cianobacterias">🦠 Cianobactérias</button>
+    <button class="tab-btn" data-tab="algas-eucariontes">🌊 Algas Eucarióticas</button>
+    <button class="tab-btn" data-tab="algas-marinhas">🐚 Algas Marinhas</button>
+    <button class="tab-btn" data-tab="streptophyta">🌿 Streptophyta</button>
+    <button class="tab-btn" data-tab="colonizacao">🏝️ Colonização</button>
+    <button class="tab-btn" data-tab="briofitas">🍀 Briófitas</button>
+    <button class="tab-btn" data-tab="pteridofitas">🌾 Pteridófitas</button>
+    <button class="tab-btn" data-tab="gimnospermas">🌲 Gimnospermas</button>
+    <button class="tab-btn" data-tab="angiospermas">🌺 Angiospermas</button>
+    <button class="tab-btn" data-tab="prisma">📋 Protocolo PRISMA</button>
+</div>
+
+<!-- ABA 1: CRONOLOGIA GEOLÓGICA -->
+<div id="timeline" class="tab-content active">
+    <div class="container">
+        <h2>⏳ Cronologia Evolutiva Completa</h2>
+        
+        <div class="timeline">
+            <h3>Linha do Tempo: 4.54 Bilhões de Anos até o Presente</h3>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">4.54 Ga</div>
+                <div><strong>Formação da Terra</strong> - Sistema Solar primitivo, acreção planetária</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">4.0-3.8 Ga</div>
+                <div><strong>Eón Hadeano</strong> - Oceanos primitivos, atmosfera redutora (CH₄, NH₃, H₂O, H₂)</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">3.8 Ga</div>
+                <div><strong>Primeiras Moléculas Orgânicas</strong> - Aminoácidos, nucleotídeos (hipótese fontes hidrotermais)</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">3.5 Ga</div>
+                <div><strong>Primeiras Cianobactérias</strong> - Estromatólitos fósseis (Austrália), fotossíntese anóxica</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">2.7-2.4 Ga</div>
+                <div><strong>Grande Evento de Oxidação (GOE)</strong> - Acúmulo de O₂ atmosférico, extinção de anaeróbios</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">1.6-1.2 Ga</div>
+                <div><strong>Endossimbiose Primária</strong> - Origem das algas eucarióticas (cloroplastos)</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">1.0 Ga</div>
+                <div><strong>Diversificação de Algas Verdes</strong> - Chlorophyta e Streptophyta divergem</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">500-470 Ma</div>
+                <div><strong>Primeiras Plantas Terrestres</strong> - Ordoviciano, esporângios primitivos</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">420 Ma</div>
+                <div><strong>Briófitas</strong> - Musgos e hepáticas, Siluriano</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">360 Ma</div>
+                <div><strong>Pteridófitas</strong> - Samambaias, licófitas, Carbonífero</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">300 Ma</div>
+                <div><strong>Gimnospermas</strong> - Evolução da semente, Permiano</div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-date">140 Ma</div>
+                <div><strong>Angiospermas</strong> - Plantas com flores, Cretáceo</div>
+            </div>
+        </div>
+        
+        <div class="highlight-box">
+            <h3>💡 Destaque para Oceanografia</h3>
+            <p><strong>~80% da evolução botânica ocorreu em ambientes marinhos!</strong></p>
+            <p>Desde as cianobactérias (3.5 Ga) até as algas verdes modernas (presentes), o oceano foi o berço da fotossíntese e da diversificação primária das plantas.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ABA 2: QUÍMICA PRÉ-BIÓTICA -->
+<div id="prebiotica" class="tab-content">
+    <div class="container">
+        <h2>🧪 Química Pré-Biótica e Origem da Vida</h2>
+        
+        <h3>Hipótese de Oparin-Haldane</h3>
+        <p>Nos primórdios da Terra (Hadeano, 4.0-3.8 Ga), a atmosfera era <strong>redutora</strong>, composta principalmente de:</p>
+        <ul>
+            <li>Metano (CH₄)</li>
+            <li>Amônia (NH₃)</li>
+            <li>Vapor d'água (H₂O)</li>
+            <li>Hidrogênio (H₂)</li>
+        </ul>
+        
+        <h3>Experimento de Miller-Urey (1953)</h3>
+        <p>Simulou condições da Terra primitiva com descargas elétricas (raios). Produziu aminoácidos espontaneamente.</p>
+        
+        <h3>Fontes Hidrotermais</h3>
+        <p>Teoria moderna: <strong>fumarolas submarinas</strong> (black smokers) forneceram:</p>
+        <ul>
+            <li>Energia térmica</li>
+            <li>Gradientes químicos (pH, Eh)</li>
+            <li>Minerais catalíticos (FeS, NiS)</li>
+        </ul>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Molécula Pré-Biótica</th>
+                    <th>Função na Vida Moderna</th>
+                    <th>Síntese Abiótica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Aminoácidos (glicina, alanina)</td>
+                    <td>Proteínas</td>
+                    <td>Atmosfera redutora + raios</td>
+                </tr>
+                <tr>
+                    <td>Nucleotídeos (adenina, guanina)</td>
+                    <td>DNA, RNA</td>
+                    <td>HCN polimerizado</td>
+                </tr>
+                <tr>
+                    <td>Ácidos graxos</td>
+                    <td>Membranas celulares</td>
+                    <td>Reações Fischer-Tropsch</td>
+                </tr>
+                <tr>
+                    <td>Ribozimas</td>
+                    <td>Catálise + informação genética</td>
+                    <td>Mundo RNA (hipótese)</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="highlight-box">
+            <h3>🌊 Conexão com Oceanografia</h3>
+            <p>O oceano primitivo era rico em íons metálicos (Fe²⁺, Mn²⁺) e tinha pH ~5.5 (ácido), diferente do moderno (pH 8.1). Compreender essa química ajuda a:</p>
+            <ul>
+                <li>Modelar a origem das primeiras células fotossintetizantes</li>
+                <li>Entender a precipitação de minerais (Formações Ferríferas Bandadas)</li>
+                <li>Contextualizar a evolução da fotossíntese oxigênica</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ABA 3: CIANOBACTÉRIAS & GOE -->
+<div id="cianobacterias" class="tab-content">
+    <div class="container">
+        <h2>🦠 Cianobactérias e o Grande Evento de Oxidação</h2>
+        
+        <h3>Primeiros Fotossintetizantes (3.5 Ga)</h3>
+        <p>Estromatólitos fósseis (Austrália, África do Sul) preservam evidências de <strong>cianobactérias</strong> primitivas.</p>
+        
+        <h3>Fotossíntese Anóxica → Oxigênica</h3>
+        <p><strong>Fotossíntese anóxica (bacteriana):</strong></p>
+        <p>CO₂ + 2H₂S → [CH₂O] + H₂O + 2S</p>
+        
+        <p><strong>Fotossíntese oxigênica (cianobacteriana):</strong></p>
+        <p>CO₂ + 2H₂O → [CH₂O] + O₂ + H₂O</p>
+        
+        <h3>Grande Evento de Oxidação (GOE, 2.4 Ga)</h3>
+        <p>Acúmulo de O₂ atmosférico teve consequências dramáticas:</p>
+        <ul>
+            <li><strong>Extinção em massa:</strong> Organismos anaeróbios morreram</li>
+            <li><strong>Oxidação de minerais:</strong> Fe²⁺ → Fe₂O₃ (formações ferríferas)</li>
+            <li><strong>Mudança climática:</strong> Glaciação Huroniana (2.4-2.1 Ga)</li>
+            <li><strong>Origem dos eucariotos:</strong> Pressão seletiva para metabolismo aeróbio</li>
+        </ul>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Parâmetro</th>
+                    <th>Antes do GOE (>2.4 Ga)</th>
+                    <th>Depois do GOE (<2.4 Ga)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>O₂ atmosférico</td>
+                    <td>< 0.001%</td>
+                    <td>1-10%</td>
+                </tr>
+                <tr>
+                    <td>Metabolismo dominante</td>
+                    <td>Anaeróbio</td>
+                    <td>Aeróbio</td>
+                </tr>
+                <tr>
+                    <td>Organismos dominantes</td>
+                    <td>Procariontes</td>
+                    <td>Procariontes + Eucariontes</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 4: ALGAS EUCARIÓTICAS -->
+<div id="algas-eucariontes" class="tab-content">
+    <div class="container">
+        <h2>🌊 Algas Eucarióticas: Endossimbiose Primária</h2>
+        
+        <h3>Teoria Endossimbiótica (Lynn Margulis, 1967)</h3>
+        <p>Os <strong>cloroplastos</strong> de plantas e algas descendem de cianobactérias ancestrais que foram engolfadas por células eucarióticas primitivas (~1.6 Ga).</p>
+        
+        <h3>Evidências da Endossimbiose</h3>
+        <ul>
+            <li><strong>Dupla membrana:</strong> Cloroplastos têm 2 membranas (interna = cianobactéria; externa = fagossomo)</li>
+            <li><strong>DNA circular:</strong> Genoma plastidial semelhante a bactérias</li>
+            <li><strong>Ribossomos 70S:</strong> Tipo bacteriano (vs. 80S eucariótico)</li>
+            <li><strong>Divisão independente:</strong> Fissão binária (como bactérias)</li>
+        </ul>
+        
+        <h3>Linhagens de Algas (Archaeplastida)</h3>
+        <p>A endossimbiose primária originou três linhagens principais:</p>
+        <ul>
+            <li><strong>Glaucophyta:</strong> Algas raras, cianelas com peptidoglicano</li>
+            <li><strong>Rhodophyta (algas vermelhas):</strong> Ficobilinas, marinhas, sem flagelos</li>
+            <li><strong>Viridiplantae (plantas verdes):</strong> Clorofila a+b
+                <ul>
+                    <li>Chlorophyta (algas verdes marinhas e de água doce)</li>
+                    <li>Streptophyta (algas carófitas + plantas terrestres)</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <div class="highlight-box">
+            <h3>🌊 Relevância para Oceanografia</h3>
+            <p>As algas eucarióticas são responsáveis por ~50% da fotossíntese global! No oceano:</p>
+            <ul>
+                <li><strong>Fitoplâncton:</strong> Diatomáceas, dinoflagelados, cocolitóforos</li>
+                <li><strong>Macroalgas:</strong> Algas verdes (Ulva), vermelhas (Gracilaria), pardas (Sargassum)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ABA 5: ALGAS VERDES MARINHAS -->
+<div id="algas-marinhas" class="tab-content">
+    <div class="container">
+        <h2>🐚 Algas Verdes Marinhas (Chlorophyta)</h2>
+        
+        <h3>Diversidade de Chlorophyta</h3>
+        <p>As algas verdes (Chlorophyta) divergiram de Streptophyta há ~1.0 Ga. São predominantemente <strong>marinhas</strong> ou de água doce.</p>
+        
+        <h3>Principais Ordens</h3>
+        
+        <h4>1. Ulvophyceae (Algas Verdes Multicelulares)</h4>
+        <ul>
+            <li><strong>Ulva</strong> (alface-do-mar): Lâminas verdes, costões rochosos</li>
+            <li><strong>Enteromorpha</strong>: Tubular, estuários</li>
+            <li><strong>Caulerpa</strong>: Sifonácea, um único célula gigante multinucleada (invasora no Mediterrâneo)</li>
+        </ul>
+        
+        <h4>2. Chlorophyceae (Algas Unicelulares e Coloniais)</h4>
+        <ul>
+            <li><strong>Chlamydomonas</strong>: Organismo-modelo, flagelado</li>
+            <li><strong>Volvox</strong>: Colonial, esferas multicelulares</li>
+        </ul>
+        
+        <h4>3. Trebouxiophyceae</h4>
+        <ul>
+            <li>Simbiontes de líquens (Trebouxia)</li>
+            <li>Algas terrestres (Chlorella)</li>
+        </ul>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Gênero</th>
+                    <th>Habitat</th>
+                    <th>Importância Ecológica/Econômica</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Ulva</td>
+                    <td>Costões, entremarés</td>
+                    <td>Alimento (nori falsa), bioindicador</td>
+                </tr>
+                <tr>
+                    <td>Caulerpa</td>
+                    <td>Substratos consolidados</td>
+                    <td>Espécie invasora (C. taxifolia)</td>
+                </tr>
+                <tr>
+                    <td>Dunaliella</td>
+                    <td>Salinas hipersalinas</td>
+                    <td>Produção de β-caroteno</td>
+                </tr>
+                <tr>
+                    <td>Chlamydomonas</td>
+                    <td>Água doce</td>
+                    <td>Modelo para estudo de flagelos</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="highlight-box">
+            <h3>🌊 Aplicação em Oceanografia</h3>
+            <ul>
+                <li><strong>Eutrofização:</strong> Proliferação de Ulva em ambientes enriquecidos</li>
+                <li><strong>Invasões biológicas:</strong> Caulerpa taxifolia no Mediterrâneo</li>
+                <li><strong>Aquacultura:</strong> Cultivo de algas para alimentação e biocompostos</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- ABA 6: STREPTOPHYTA (Algas Estreptófitas) -->
+<div id="streptophyta" class="tab-content">
+    <div class="container">
+        <h2>🌿 Streptophyta: Algas Aquáticas Precursoras das Plantas Terrestres</h2>
+        
+        <h3>Clados de Algas Estreptófitas</h3>
+        <p>As <strong>Streptophyta</strong> incluem todas as plantas terrestres (Embryophyta) e várias linhagens de algas de água doce:</p>
+        
+        <h4>1. Mesostigmatophyceae</h4>
+        <p>Algas unicelulares, flageladas, encontradas em solos úmidos.</p>
+        
+        <h4>2. Chlorokybophyceae</h4>
+        <p>Algas sarcinóides (pacotes de células), solos.</p>
+        
+        <h4>3. Klebsormidiophyceae</h4>
+        <p>Filamentos não ramificados, <strong>aeroterrestres</strong> (crostas de solo, rochas). Gênero-modelo: <em>Klebsormidium</em>.</p>
+        
+        <h4>4. Charophyceae (Charales)</h4>
+        <p>Morfologicamente complexas (nós, entrenós, oogamia). Ex: <em>Chara</em>, <em>Nitella</em>.</p>
+        
+        <h4>5. Coleochaetophyceae</h4>
+        <p>Discos ou filamentos ramificados. Ex: <em>Coleochaete</em>.</p>
+        
+        <h4>6. Zygnematophyceae (Algas Conjugadas)</h4>
+        <p><strong>GRUPO IRMÃO DAS PLANTAS TERRESTRES!</strong> Ex: <em>Spirogyra</em>, <em>Zygnema</em>.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Chlorophyta</th>
+                    <th>Streptophyta</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Habitat principal</td>
+                    <td>Marinho</td>
+                    <td>Água doce / Terrestre</td>
+                </tr>
+                <tr>
+                    <td>Divisão celular</td>
+                    <td>Ficoplasto</td>
+                    <td>Fragmoplasto (algumas)</td>
+                </tr>
+                <tr>
+                    <td>Parede celular</td>
+                    <td>Polissacarídeos diversos</td>
+                    <td>Celulose + pectinas</td>
+                </tr>
+                <tr>
+                    <td>Reprodução</td>
+                    <td>Isogamia comum</td>
+                    <td>Oogamia (Charales)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 7: COLONIZAÇÃO TERRESTRE -->
+<div id="colonizacao" class="tab-content">
+    <div class="container">
+        <h2>🏝️ Colonização do Ambiente Terrestre</h2>
+        
+        <h3>Desafios da Terrestrialização</h3>
+        <p>A transição da água para a terra (Ordoviciano, ~500 Ma) exigiu adaptações a:</p>
+        <ul>
+            <li><strong>Dessecação:</strong> Perda de água por evaporação</li>
+            <li><strong>Radiação UV:</strong> Ausência da proteção da coluna d'água</li>
+            <li><strong>Gravidade:</strong> Necessidade de suporte estrutural</li>
+            <li><strong>Obtenção de nutrientes:</strong> Absorção do solo (não mais difusão da água)</li>
+        </ul>
+        
+        <h3>Inovações Evolutivas</h3>
+        
+        <h4>1. Cutícula</h4>
+        <p>Camada lipídica impermeável (cutina, suberina) que reduz perda de água.</p>
+        
+        <h4>2. Estômatos</h4>
+        <p>Poros reguláveis para trocas gasosas (CO₂/O₂) sem perda excessiva de H₂O.</p>
+        
+        <h4>3. Tecidos Vasculares</h4>
+        <p><strong>Xilema:</strong> Transporte de água e minerais (das raízes para folhas).<br>
+        <strong>Floema:</strong> Transporte de açúcares (das folhas para raízes).</p>
+        
+        <h4>4. Lignina</h4>
+        <p>Polímero rígido que confere resistência mecânica (suporte contra gravidade).</p>
+        
+        <h4>5. Embrião Protegido</h4>
+        <p>Desenvolvimento do zigoto dentro de tecido materno (gametófito), com nutrição.</p>
+        
+        <div class="highlight-box">
+            <h3>🌊 Conexão Mar-Terra</h3>
+            <p>A colonização terrestre não foi abrupta. Havia uma <strong>zona de transição</strong>:</p>
+            <ul>
+                <li>Praias arenosas úmidas</li>
+                <li>Rochas intercotidais</li>
+                <li>Margens de rios e lagos temporários</li>
+            </ul>
+            <p>Algas como <em>Klebsormidium</em> ainda habitam essas zonas hoje!</p>
+        </div>
+    </div>
+</div>
+
+<!-- ABA 8: BRIÓFITAS -->
+<div id="briofitas" class="tab-content">
+    <div class="container">
+        <h2>🍀 Briófitas: Primeiras Plantas Terrestres</h2>
+        
+        <h3>Características Gerais</h3>
+        <p>Briófitas (musgos, hepáticas, antóceros) são <strong>avasculares</strong> e <strong>pequenas</strong> (< 20 cm). O gametófito é dominante.</p>
+        
+        <h3>Três Linhagens</h3>
+        
+        <h4>1. Marchantiophyta (Hepáticas)</h4>
+        <ul>
+            <li>Corpo taloso ou folhoso</li>
+            <li>Ex: <em>Marchantia polymorpha</em> (organismo-modelo)</li>
+        </ul>
+        
+        <h4>2. Bryophyta (Musgos)</h4>
+        <ul>
+            <li>Folhas em espiral ao redor do caulóide</li>
+            <li>Ex: <em>Sphagnum</em> (turfa), <em>Polytrichum</em></li>
+        </ul>
+        
+        <h4>3. Anthocerotophyta (Antóceros)</h4>
+        <ul>
+            <li>Esporófito cilíndrico e persistente</li>
+            <li>Ex: <em>Anthoceros</em></li>
+        </ul>
+        
+        <h3>Ciclo de Vida (Alternância de Gerações)</h3>
+        <p><strong>Haploide (n):</strong> Gametófito fotossintetizante → produz gametas<br>
+        <strong>Diploide (2n):</strong> Esporófito parasita do gametófito → produz esporos por meiose</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Briófitas</th>
+                    <th>Plantas Vasculares</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tecidos vasculares</td>
+                    <td>❌ Ausentes</td>
+                    <td>✅ Xilema + Floema</td>
+                </tr>
+                <tr>
+                    <td>Tamanho</td>
+                    <td>Pequeno (< 20 cm)</td>
+                    <td>Grande (até 100 m)</td>
+                </tr>
+                <tr>
+                    <td>Geração dominante</td>
+                    <td>Gametófito (n)</td>
+                    <td>Esporófito (2n)</td>
+                </tr>
+                <tr>
+                    <td>Dependência de água</td>
+                    <td>Alta (espermatozoides nadadores)</td>
+                    <td>Reduzida (pólen em gimnospermas/angiospermas)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 9: PTERIDÓFITAS -->
+<div id="pteridofitas" class="tab-content">
+    <div class="container">
+        <h2>🌾 Pteridófitas: Samambaias e Licófitas</h2>
+        
+        <h3>Inovação Chave: Tecidos Vasculares</h3>
+        <p>As pteridófitas foram as primeiras plantas a desenvolver <strong>xilema e floema</strong>, permitindo crescimento vertical e conquista de ambientes secos.</p>
+        
+        <h3>Duas Linhagens Principais</h3>
+        
+        <h4>1. Lycophyta (Licófitas)</h4>
+        <ul>
+            <li>Folhas <strong>microfilos</strong> (única nervura)</li>
+            <li>Ex modernos: <em>Lycopodium</em>, <em>Selaginella</em></li>
+            <li>Ex extintos: <em>Lepidodendron</em> (até 30 m, florestas do Carbonífero)</li>
+        </ul>
+        
+        <h4>2. Monilophyta (Samambaias + Cavalinhas)</h4>
+        <ul>
+            <li>Folhas <strong>megafilos</strong> (nervuras ramificadas)</li>
+            <li><strong>Samambaias:</strong> Folhas compostas (frondes), Ex: <em>Pteridium</em> (samambaia-das-taperas)</li>
+            <li><strong>Cavalinhas:</strong> <em>Equisetum</em> (caules articulados, sílica na parede)</li>
+        </ul>
+        
+        <h3>Importância Geológica: Carbonífero (359-299 Ma)</h3>
+        <p>Florestas gigantes de licófitas e samambaias arbóreas acumularam matéria orgânica → <strong>carvão mineral</strong>.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Tipo de Folha</th>
+                    <th>Reprodução</th>
+                    <th>Exemplos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Lycophyta</td>
+                    <td>Microfilos</td>
+                    <td>Esporos (homósporos ou heterósporos)</td>
+                    <td><em>Lycopodium</em>, <em>Selaginella</em></td>
+                </tr>
+                <tr>
+                    <td>Monilophyta</td>
+                    <td>Megafilos</td>
+                    <td>Esporos (homósporos)</td>
+                    <td><em>Pteridium</em>, <em>Equisetum</em></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 10: GIMNOSPERMAS -->
+<div id="gimnospermas" class="tab-content">
+    <div class="container">
+        <h2>🌲 Gimnospermas: Evolução da Semente</h2>
+        
+        <h3>Inovação Revolucionária: SEMENTE</h3>
+        <p>A <strong>semente</strong> é um embrião protegido por tegumento, com reservas nutritivas (endosperma).</p>
+        <p><strong>Vantagens:</strong></p>
+        <ul>
+            <li>Proteção contra dessecação</li>
+            <li>Dispersão a longas distâncias</li>
+            <li>Dormência (germinação em condições favoráveis)</li>
+        </ul>
+        
+        <h3>Diversidade de Gimnospermas</h3>
+        
+        <h4>1. Pinophyta (Coníferas)</h4>
+        <ul>
+            <li>Pinheiros, abetos, ciprestes</li>
+            <li>Folhas aciculares (agulhas), cones (estróbilos)</li>
+            <li>Ex: <em>Pinus</em>, <em>Araucaria angustifolia</em> (pinheiro-do-paraná)</li>
+        </ul>
+        
+        <h4>2. Cycadophyta (Cicadáceas)</h4>
+        <ul>
+            <li>Palmeiras "falsas", tropicais</li>
+            <li>Ex: <em>Cycas revoluta</em></li>
+        </ul>
+        
+        <h4>3. Ginkgophyta</h4>
+        <ul>
+            <li>Uma única espécie viva: <em>Ginkgo biloba</em></li>
+            <li>"Fóssil vivo", folhas bilobadas</li>
+        </ul>
+        
+        <h4>4. Gnetophyta</h4>
+        <ul>
+            <li>Linhagem próxima às angiospermas?</li>
+            <li>Ex: <em>Welwitschia mirabilis</em> (deserto da Namíbia)</li>
+        </ul>
+        
+        <h3>Dominância no Mesozoico</h3>
+        <p>Gimnospermas dominaram florestas do Triássico ao Cretáceo (250-65 Ma), incluindo alimentação de dinossauros herbívoros.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Característica</th>
+                    <th>Gimnospermas</th>
+                    <th>Angiospermas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Estrutura reprodutiva</td>
+                    <td>Cones (estróbilos)</td>
+                    <td>Flores</td>
+                </tr>
+                <tr>
+                    <td>Óvulos</td>
+                    <td>Expostos ("gimno" = nu)</td>
+                    <td>Encerrados em ovário</td>
+                </tr>
+                <tr>
+                    <td>Fecundação dupla</td>
+                    <td>❌ Não</td>
+                    <td>✅ Sim</td>
+                </tr>
+                <tr>
+                    <td>Diversidade</td>
+                    <td>~1.000 espécies</td>
+                    <td>~300.000 espécies</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 11: ANGIOSPERMAS -->
+<div id="angiospermas" class="tab-content">
+    <div class="container">
+        <h2>🌺 Angiospermas: Plantas com Flores</h2>
+        
+        <h3>Explosão do Cretáceo (140 Ma)</h3>
+        <p>Angiospermas surgiram ~140 Ma e se tornaram <strong>dominantes globalmente</strong> em apenas 50 milhões de anos!</p>
+        
+        <h3>Inovações Chave</h3>
+        
+        <h4>1. Flor</h4>
+        <p>Estrutura reprodutiva com verticilos especializados:</p>
+        <ul>
+            <li>Sépalas (proteção)</li>
+            <li>Pétalas (atração de polinizadores)</li>
+            <li>Estames (órgão masculino)</li>
+            <li>Carpelo (órgão feminino, ovário)</li>
+        </ul>
+        
+        <h4>2. Fecundação Dupla</h4>
+        <p>Um espermatozoide fecunda o óvulo → <strong>embrião</strong> (2n)<br>
+        Outro fecunda núcleos polares → <strong>endosperma</strong> (3n, tecido nutritivo)</p>
+        
+        <h4>3. Fruto</h4>
+        <p>Ovário maduro que protege e dispersa sementes. Ex: carnoso (tomate), seco (feijão).</p>
+        
+        <h3>Diversidade Extraordinária</h3>
+        <p>~300.000 espécies! Incluem:</p>
+        <ul>
+            <li><strong>Monocotiledôneas:</strong> Gramíneas (arroz, trigo), orquídeas, palmeiras</li>
+            <li><strong>Eudicotiledôneas:</strong> Rosáceas (rosas), Fabáceas (feijão), Asteráceas (girassol)</li>
+        </ul>
+        
+        <h3>Coevolução com Animais</h3>
+        <p>Polinização por insetos, aves, morcegos → diversificação mútua.</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Grupo</th>
+                    <th>Cotilédones</th>
+                    <th>Nervação Foliar</th>
+                    <th>Exemplos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Monocotiledôneas</td>
+                    <td>1</td>
+                    <td>Paralela</td>
+                    <td>Gramíneas, orquídeas, lírios</td>
+                </tr>
+                <tr>
+                    <td>Eudicotiledôneas</td>
+                    <td>2</td>
+                    <td>Reticulada</td>
+                    <td>Rosas, legumes, girassóis</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- ABA 12: PROTOCOLO PRISMA -->
+<div id="prisma" class="tab-content">
+    <div class="container">
+        <h2>📋 Protocolo PRISMA para Revisão Sistemática</h2>
+        
+        <h3>O que é PRISMA?</h3>
+        <p><strong>PRISMA</strong> (Preferred Reporting Items for Systematic Reviews and Meta-Analyses) é um guia metodológico para revisões sistemáticas.</p>
+        <p><strong>PRISMA-EcoEvo:</strong> Adaptação para ecologia e biologia evolutiva.</p>
+        
+        <h3>Pergunta de Pesquisa (Estrutura PECO)</h3>
+        
+        <div class="highlight-box">
+            <h4>P - População</h4>
+            <p>Linhagens de plantas verdes (Viridiplantae), desde cianobactérias até angiospermas, com foco em transições evolutivas.</p>
+            
+            <h4>E - Exposição/Intervenção</h4>
+            <p>Mudanças ambientais (Grande Evento de Oxidação, colonização terrestre, glaciações, eventos de extinção).</p>
+            
+            <h4>C - Comparador</h4>
+            <p>Comparações entre linhagens irmãs (ex: Chlorophyta vs. Streptophyta; Briófitas vs. Pteridófitas).</p>
+            
+            <h4>O - Desfecho (Outcome)</h4>
+            <p>Inovações genômicas (genes ortólogos), morfológicas (sementes, flores) e ecológicas (dominância global).</p>
+        </div>
+        
+        <h3>Bases de Dados</h3>
+        <ul>
+            <li><strong>NCBI GenBank:</strong> Sequências genômicas</li>
+            <li><strong>TimeTree:</strong> Datas de divergência molecular</li>
+            <li><strong>Paleobiology Database:</strong> Registros fósseis</li>
+            <li><strong>AlgaeBase:</strong> Taxonomia de algas</li>
+            <li><strong>Tropicos:</strong> Taxonomia de plantas terrestres</li>
+            <li><strong>GBIF:</strong> Distribuição de espécies</li>
+        </ul>
+        
+        <h3>Strings de Busca (Exemplo)</h3>
+        <p><code>("plant evolution" OR "algal evolution") AND ("land colonization" OR "terrestrialization") AND ("genomics" OR "phylogenomics")</code></p>
+        
+        <h3>Critérios de Inclusão</h3>
+        <ul>
+            <li>Estudos filogenômicos com ≥ 3 genes</li>
+            <li>Dados de fósseis calibrados temporalmente</li>
+            <li>Análises integrativas (morfologia + moléculas)</li>
+        </ul>
+        
+        <h3>Critérios de Exclusão</h3>
+        <ul>
+            <li>Estudos baseados em 1 gene apenas</li>
+            <li>Especulações sem suporte empírico</li>
+            <li>Publicações não revisadas por pares</li>
+        </ul>
+        
+        <h3>Registro do Protocolo</h3>
+        <p><strong>Recomendação:</strong> Registrar protocolo no <strong>Open Science Framework (OSF)</strong> antes de iniciar a revisão.</p>
+        <p><strong>Link:</strong> <a href="https://osf.io" target="_blank">https://osf.io</a></p>
+        
+        <h3>Fluxograma PRISMA</h3>
+        <p>O fluxograma documenta:</p>
+        <ul>
+            <li>Registros identificados (n)</li>
+            <li>Registros rastreados (n)</li>
+            <li>Registros excluídos (n, com motivo)</li>
+            <li>Estudos incluídos na síntese qualitativa (n)</li>
+            <li>Estudos incluídos na meta-análise (n, se aplicável)</li>
+        </ul>
+        
+        <div class="highlight-box">
+            <h3>💡 Próximos Passos</h3>
+            <p><strong>Para seu projeto de mestrado:</strong></p>
+            <ol>
+                <li>Refine a pergunta PECO (defina escopo temporal e taxonômico)</li>
+                <li>Execute buscas preliminares nas bases de dados</li>
+                <li>Registre o protocolo no OSF</li>
+                <li>Conduza triagem de títulos/resumos (2 revisores independentes)</li>
+                <li>Leia textos completos e extraia dados</li>
+                <li>Sintetize resultados (tabelas, árvores filogenéticas)</li>
+                <li>Escreva manuscrito seguindo checklist PRISMA</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<script>
+// ========== ABAS ==========
+const tabBtns = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(tc => tc.classList.remove('active'));
+        
+        btn.classList.add('active');
+        const tabName = btn.getAttribute('data-tab');
+        document.getElementById(tabName).classList.add('active');
+    });
+});
+
+// ========== BUSCA ==========
+const searchBox = document.getElementById('searchBox');
+
+searchBox.addEventListener('input', (e) => {
+    const query = e.target.value.toLowerCase().trim();
+    
+    document.querySelectorAll('.tab-content').forEach(tab => {
+        const content = tab.innerHTML;
+        if (query === '') {
+            tab.innerHTML = content.replace(/<mark>(.*?)<\/mark>/g, '$1');
+        } else {
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+            tab.innerHTML = content.replace(/<mark>(.*?)<\/mark>/g, '$1').replace(regex, '<mark>$1</mark>');
+        }
+    });
+});
+
+// ========== MODO ESCURO ==========
+const darkModeBtn = document.getElementById('darkModeBtn');
+const isDarkMode = localStorage.getItem('darkMode') === 'true';
+
+if (isDarkMode) {
+    document.body.classList.add('dark-mode');
+    darkModeBtn.textContent = '☀️';
+}
+
+darkModeBtn.addEventListener('click', () => {
+    document.body.classList.toggle('dark-mode');
+    const isNowDark = document.body.classList.contains('dark-mode');
+    localStorage.setItem('darkMode', isNowDark);
+    darkModeBtn.textContent = isNowDark ? '☀️' : '🌙';
+});
+
+// ========== IMPRESSÃO ==========
+const printBtn = document.getElementById('printBtn');
+printBtn.addEventListener('click', () => {
+    window.print();
+});
+</script>
+
+</body>
+</html>
