@@ -6,7 +6,7 @@
 
 ## 📋 Sobre o Projeto
 
-Projeto de mestrado proposto para o **PPGECO/UFSC - 2026** focando em:
+Projeto de mestrado proposto para o **PPGOceano/UFSC - 2026** focando em:
 - 🔬 Perda de biodiversidade marinha bentônica
 - 🦠 Impacto de espécies invasoras (coral-sol)
 - 🏝️ Três áreas de estudo em Santa Catarina
@@ -128,7 +128,7 @@ Mapas gerados com dados geoespaciais oficiais:
 
 **Candidato:** Caetano Ronan  
 **Instituição:** Universidade Federal de Santa Catarina (UFSC)  
-**Programa:** PPGECO - Programa de Pós-Graduação em Ecologia
+**Programa:** PPGOceano - Programa de Pós-graduação em Oceanografia (UFSC)
 
 ---
 
