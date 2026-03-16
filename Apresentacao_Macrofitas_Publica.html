@@ -1,0 +1,2139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto de Mestrado - Macrófitas Marinhas em Ilhas Costeiras de SC</title>
+    <style>
+        :root {
+            --cor-primaria: #005f73;
+            --cor-secundaria: #0a9396;
+            --cor-terciaria: #94d2bd;
+            --cor-fundo: #e9f7f5;
+            --cor-texto: #14213d;
+            --cor-destaque: #003845;
+            --bg-page-start: #e9f7f5;
+            --bg-page-end: #ffffff;
+            --surface: #ffffff;
+            --surface-soft: #f2fbfa;
+            --surface-alt: #edf9f7;
+            --border-soft: #cde8e2;
+            --border-strong: #dcefeb;
+            --shadow-1: rgba(0, 0, 0, 0.1);
+            --shadow-2: rgba(0, 0, 0, 0.06);
+            --row-hover: #f4fbfa;
+            --footer-bg: var(--cor-fundo);
+            --focus-ring: #f0b429;
+        }
+
+        body.dark-mode {
+            --cor-primaria: #4db3c8;
+            --cor-secundaria: #49d0cf;
+            --cor-terciaria: #2f7078;
+            --cor-fundo: #0f1b24;
+            --cor-texto: #e2edf5;
+            --cor-destaque: #9be5f3;
+            --bg-page-start: #0a1218;
+            --bg-page-end: #111d27;
+            --surface: #162430;
+            --surface-soft: #1b2e3b;
+            --surface-alt: #213947;
+            --border-soft: #2f4a5a;
+            --border-strong: #365465;
+            --shadow-1: rgba(0, 0, 0, 0.35);
+            --shadow-2: rgba(0, 0, 0, 0.28);
+            --row-hover: #1e3442;
+            --footer-bg: #0e1a22;
+            --focus-ring: #ffd166;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, var(--bg-page-start) 0%, var(--bg-page-end) 100%);
+            color: var(--cor-texto);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+            color: #ffffff;
+            padding: 40px 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode header {
+            background: linear-gradient(135deg, #0f2a36 0%, #174453 100%);
+        }
+
+        header h1 {
+            font-size: 2.3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        header p {
+            font-size: 1.15em;
+            opacity: 0.96;
+        }
+
+        .subtitle {
+            font-size: 1em;
+            margin-top: 8px;
+            font-weight: 300;
+        }
+
+        .lang-switcher {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 0.9em;
+        }
+
+        .lang-switcher a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 4px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+
+        .lang-switcher a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+        }
+
+        .lang-switcher a.lang-active {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.65);
+        }
+
+        .tabs {
+            display: flex;
+            background-color: var(--surface);
+            border-radius: 10px 10px 0 0;
+            overflow-x: auto;
+            box-shadow: 0 2px 4px var(--shadow-1);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 15px 25px;
+            background: var(--surface);
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            color: var(--cor-primaria);
+            transition: all 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .tab-button:hover {
+            background-color: var(--cor-fundo);
+        }
+
+        .tab-button:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        .tab-button.active {
+            background-color: var(--cor-fundo);
+            border-bottom-color: var(--cor-primaria);
+            color: var(--cor-destaque);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--surface);
+            padding: 40px;
+            border-radius: 0 0 10px 10px;
+            box-shadow: 0 4px 6px var(--shadow-1);
+            min-height: 560px;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.45s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--cor-primaria);
+            font-size: 2em;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--cor-secundaria);
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: var(--cor-secundaria);
+            font-size: 1.45em;
+            margin: 28px 0 14px 0;
+        }
+
+        h4 {
+            color: var(--cor-primaria);
+            font-size: 1.15em;
+            margin: 18px 0 10px 0;
+        }
+
+        p {
+            margin: 10px 0;
+        }
+
+        .info-card {
+            background: var(--cor-fundo);
+            border-left: 5px solid var(--cor-primaria);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            box-shadow: 0 2px 4px var(--shadow-2);
+        }
+
+        .info-card strong {
+            color: var(--cor-destaque);
+        }
+
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 18px;
+            margin: 25px 0;
+        }
+
+        .area-card {
+            background: linear-gradient(135deg, var(--cor-fundo) 0%, var(--surface) 100%);
+            border: 2px solid var(--cor-terciaria);
+            border-radius: 10px;
+            padding: 22px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .area-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 7px 14px rgba(0, 95, 115, 0.18);
+        }
+
+        ul, ol {
+            margin: 12px 0 12px 26px;
+        }
+
+        li {
+            margin: 8px 0;
+            line-height: 1.75;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 18px 0;
+            background: var(--surface);
+            box-shadow: 0 2px 4px var(--shadow-1);
+        }
+
+        th {
+            background: var(--cor-primaria);
+            color: #ffffff;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 11px 12px;
+            border-bottom: 1px solid var(--border-strong);
+        }
+
+        tr:hover {
+            background-color: var(--row-hover);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 11px;
+            background: var(--cor-secundaria);
+            color: #ffffff;
+            border-radius: 18px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-right: 8px;
+        }
+
+        .destaque-box {
+            background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
+            color: #ffffff;
+            padding: 28px;
+            border-radius: 10px;
+            margin: 24px 0;
+            box-shadow: 0 6px 12px rgba(0, 95, 115, 0.28);
+        }
+
+        .destaque-box h3 {
+            color: #ffffff;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+            padding-bottom: 8px;
+        }
+
+        .mapa-container {
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .mapa-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .mapa-caption {
+            margin-top: 8px;
+            font-style: italic;
+            color: var(--cor-secundaria);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 26px;
+            background: var(--cor-primaria);
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 22px;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background: var(--cor-destaque);
+            transform: translateY(-2px);
+        }
+
+        .timeline-strip {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding: 8px 2px 16px 44px;
+            margin: 12px 0 22px 0;
+        }
+
+        .timeline-strip::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            bottom: 18px;
+            left: 18px;
+            width: 3px;
+            border-radius: 8px;
+            background: linear-gradient(180deg, var(--cor-secundaria) 0%, #8dd3c3 100%);
+        }
+
+        body.dark-mode .timeline-strip::before {
+            background: linear-gradient(180deg, var(--cor-secundaria) 0%, #2f7078 100%);
+        }
+
+        .timeline-step {
+            position: relative;
+            background: linear-gradient(135deg, var(--surface-soft) 0%, var(--surface) 100%);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 14px 14px 14px 48px;
+            box-shadow: 0 2px 4px var(--shadow-2);
+        }
+
+        .timeline-step:not(:last-child)::after {
+            content: none;
+        }
+
+        .timeline-step:not(:last-child)::before {
+            content: none;
+        }
+
+        .timeline-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #ffffff;
+            background: var(--cor-secundaria);
+            position: absolute;
+            left: -40px;
+            top: 14px;
+            box-shadow: 0 0 0 3px #ffffff;
+        }
+
+        body.dark-mode .timeline-num {
+            box-shadow: 0 0 0 3px #162430;
+        }
+
+        .timeline-step h4 {
+            margin: 2px 0 6px 0;
+            font-size: 1.02em;
+        }
+
+        .gantt-wrap {
+            margin: 14px 0 26px 0;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--surface-soft) 0%, var(--surface) 100%);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+        }
+
+        .gantt-scale {
+            position: relative;
+            height: 28px;
+            margin: 0 0 10px 170px;
+            border-bottom: 2px solid var(--border-soft);
+            background-image: repeating-linear-gradient(
+                to right,
+                transparent,
+                transparent calc(100% / 22 - 1px),
+                var(--border-soft) calc(100% / 22 - 1px),
+                var(--border-soft) calc(100% / 22)
+            );
+        }
+
+        .gantt-scale span {
+            position: absolute;
+            top: 4px;
+            transform: translateX(-50%);
+            font-size: 0.82em;
+            color: var(--cor-destaque);
+            font-weight: 700;
+        }
+
+        .gantt-row {
+            display: grid;
+            grid-template-columns: 160px 1fr;
+            gap: 10px;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .gantt-label {
+            font-weight: 700;
+            color: var(--cor-primaria);
+            font-size: 0.93em;
+        }
+
+        .gantt-track {
+            position: relative;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border-soft);
+            overflow: hidden;
+        }
+
+        .gantt-track.current-month::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: calc((var(--current) - 1) * (100% / 22));
+            width: 2px;
+            background: #003f88;
+            box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.65);
+            z-index: 2;
+        }
+
+        .gantt-track.current-month[data-now]::before {
+            content: attr(data-now);
+            position: absolute;
+            left: calc((var(--current) - 1) * (100% / 22));
+            top: 2px;
+            transform: translateX(6px);
+            font-size: 0.72em;
+            font-weight: 800;
+            color: #003f88;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid #bad4f7;
+            border-radius: 999px;
+            padding: 1px 7px;
+            z-index: 3;
+            white-space: nowrap;
+        }
+
+        body.dark-mode .gantt-track.current-month[data-now]::before {
+            color: #93c5fd;
+            background: rgba(17, 29, 39, 0.9);
+            border: 1px solid rgba(37, 99, 235, 0.6);
+        }
+
+        .gantt-bar {
+            position: absolute;
+            top: 4px;
+            height: 22px;
+            left: calc((var(--start) - 1) * (100% / 22));
+            width: calc(var(--span) * (100% / 22));
+            border-radius: 7px;
+            color: #ffffff;
+            font-size: 0.8em;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.16);
+        }
+
+        .gantt-fase1 { background: linear-gradient(90deg, #0ea5a4 0%, #0b7f86 100%); }
+        .gantt-fase2 { background: linear-gradient(90deg, #0f766e 0%, #0f5f66 100%); }
+        .gantt-fase3 { background: linear-gradient(90deg, #2563eb 0%, #1d4ed8 100%); }
+        .gantt-fase4 { background: linear-gradient(90deg, #1d4ed8 0%, #1e3a8a 100%); }
+
+        .gantt-milestones {
+            margin: 14px 0 0 170px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .gantt-milestone {
+            font-size: 0.82em;
+            font-weight: 700;
+            color: var(--cor-texto);
+            background: var(--surface-alt);
+            border: 1px solid var(--border-soft);
+            border-radius: 999px;
+            padding: 4px 10px;
+        }
+
+        .gantt-legend {
+            margin: 14px 0 0 170px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .gantt-legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.82em;
+            font-weight: 700;
+            color: var(--cor-texto);
+            background: var(--surface-alt);
+            border: 1px solid var(--border-soft);
+            border-radius: 999px;
+            padding: 4px 10px;
+        }
+
+        .gantt-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .gantt-dot.gantt-fase1 { background: #0ea5a4; }
+        .gantt-dot.gantt-fase2 { background: #0f766e; }
+        .gantt-dot.gantt-fase3 { background: #2563eb; }
+        .gantt-dot.gantt-fase4 { background: #1e3a8a; }
+
+        .gantt-progress {
+            margin: 14px 0 0 170px;
+            background: var(--surface-soft);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        .gantt-progress-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 8px;
+            font-size: 0.88em;
+            color: var(--cor-texto);
+        }
+
+        .gantt-progress-bar {
+            height: 10px;
+            background: var(--border-strong);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .gantt-progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #0a9396 0%, #005f73 100%);
+            transition: width 0.4s ease;
+        }
+
+        body.dark-mode .gantt-progress-fill {
+            background: linear-gradient(90deg, #49d0cf 0%, #4db3c8 100%);
+        }
+
+        .gantt-actions {
+            margin: 10px 0 0 170px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .gantt-btn {
+            border: none;
+            border-radius: 999px;
+            padding: 9px 14px;
+            font-weight: 700;
+            font-size: 0.84em;
+            cursor: pointer;
+            color: #ffffff;
+            background: linear-gradient(90deg, #005f73 0%, #0a9396 100%);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .gantt-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .gantt-btn:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        .gantt-row.gantt-row-active {
+            background: linear-gradient(90deg, rgba(240, 180, 41, 0.16) 0%, rgba(240, 180, 41, 0.04) 100%);
+            border-radius: 8px;
+            animation: pulseGantt 1.2s ease 2;
+        }
+
+        /* Bordas dos cards de área de estudo — claro e escuro */
+        .area-card--arvoredo { border-color: #D97706 !important; border-width: 3px !important; }
+        .area-card--campeche { border-color: #1d4ed8 !important; border-width: 3px !important; }
+        .area-card--xavier   { border-color: #16a34a !important; border-width: 3px !important; }
+
+        body.dark-mode .area-card--arvoredo { border-color: #F59E0B !important; }
+        body.dark-mode .area-card--campeche { border-color: #60a5fa !important; }
+        body.dark-mode .area-card--xavier   { border-color: #4ade80 !important; }
+
+        .glossario-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 14px;
+            margin-top: 14px;
+        }
+
+        .glossario-card {
+            background: linear-gradient(135deg, var(--surface-soft) 0%, var(--surface) 100%);
+            border: 1px solid var(--border-soft);
+            border-radius: 10px;
+            padding: 14px;
+        }
+
+        .glossario-card h4 {
+            margin: 0 0 6px 0;
+            color: var(--cor-destaque);
+        }
+
+        .theme-toggle {
+            margin-top: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.16);
+            color: #ffffff;
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-weight: 700;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 3px solid var(--focus-ring);
+            outline-offset: 2px;
+        }
+
+        body.dark-mode .theme-toggle {
+            border-color: rgba(155, 229, 243, 0.45);
+            background: rgba(21, 49, 63, 0.62);
+            color: #d9f4ff;
+        }
+
+        @keyframes pulseGantt {
+            0% { box-shadow: 0 0 0 0 rgba(240, 180, 41, 0.35); }
+            100% { box-shadow: 0 0 0 10px rgba(240, 180, 41, 0); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 28px;
+            margin-top: 45px;
+            background: var(--footer-bg);
+            border-top: 3px solid var(--cor-primaria);
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.75em;
+            }
+
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid var(--border-strong);
+                border-left: 3px solid transparent;
+            }
+
+            .tab-button.active {
+                border-left-color: var(--cor-primaria);
+                border-bottom-color: var(--border-strong);
+            }
+
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gantt-scale {
+                margin-left: 0;
+            }
+
+            .gantt-row {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .gantt-milestones {
+                margin-left: 0;
+            }
+
+            .gantt-legend {
+                margin-left: 0;
+            }
+
+            .gantt-progress {
+                margin-left: 0;
+            }
+
+            .gantt-actions {
+                margin-left: 0;
+            }
+
+            .gantt-progress-top {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .timeline-strip {
+                padding-left: 36px;
+            }
+
+            .timeline-strip::before {
+                left: 14px;
+            }
+
+            .timeline-step {
+                padding: 12px 12px 12px 42px;
+            }
+
+            .timeline-num {
+                left: -34px;
+                top: 12px;
+                width: 26px;
+                height: 26px;
+                font-size: 0.82em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌿 Distribuição e Modelagem de Habitat de Macrófitas Marinhas</h1>
+    <p>Ilhas Costeiras de Santa Catarina no Contexto da Crise Climática</p>
+    <p class="subtitle">Projeto de Mestrado - PPGOceano/UFSC | 2026</p>
+    <p class="subtitle"><strong>Aluno:</strong> Ronan Armando Caetano</p>
+    <div class="lang-switcher" aria-label="Seletor de idioma">
+        <span>🌐</span>
+        <a href="Apresentacao_Macrofitas_Publica.html" class="lang-active" aria-current="page">PT</a>
+        <a href="Apresentacao_Macrofitas_Publica.en.html">EN</a>
+        <a href="Apresentacao_Macrofitas_Publica.es.html">ES</a>
+    </div>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" onclick="toggleTheme()">Ativar modo escuro</button>
+</header>
+
+<div class="container">
+    <div class="tabs" role="tablist" aria-label="Seções da apresentação">
+        <button id="tab-visao-geral" class="tab-button active" role="tab" aria-selected="true" aria-controls="visao-geral" tabindex="0" onclick="openTab(event, 'visao-geral')">📋 Visão Geral</button>
+        <button id="tab-areas" class="tab-button" role="tab" aria-selected="false" aria-controls="areas" tabindex="-1" onclick="openTab(event, 'areas')">🗺️ Áreas de Estudo</button>
+        <button id="tab-objetivos" class="tab-button" role="tab" aria-selected="false" aria-controls="objetivos" tabindex="-1" onclick="openTab(event, 'objetivos')">🎯 Objetivos</button>
+        <button id="tab-metodologia" class="tab-button" role="tab" aria-selected="false" aria-controls="metodologia" tabindex="-1" onclick="openTab(event, 'metodologia')">🔬 Metodologia</button>
+        <button id="tab-produtos" class="tab-button" role="tab" aria-selected="false" aria-controls="produtos" tabindex="-1" onclick="openTab(event, 'produtos')">📦 Produtos</button>
+        <button id="tab-glossario" class="tab-button" role="tab" aria-selected="false" aria-controls="glossario" tabindex="-1" onclick="openTab(event, 'glossario')">📚 Glossário</button>
+        <button id="tab-cronograma" class="tab-button" role="tab" aria-selected="false" aria-controls="cronograma" tabindex="-1" onclick="openTab(event, 'cronograma')">📅 Cronograma</button>
+    </div>
+
+    <div id="visao-geral" class="tab-content active" role="tabpanel" aria-labelledby="tab-visao-geral">
+        <h2>📋 Panorama do Projeto</h2>
+
+        <div class="destaque-box">
+            <h3>Tema Central</h3>
+            <p style="font-size: 1.1em; line-height: 1.8;">
+                Investigar como variáveis ambientais e geomorfológicas influenciam a
+                <strong>diversidade e distribuição de macrófitas marinhas</strong> em três ilhas costeiras de Santa Catarina,
+                com foco em mapeamento espacial e modelagem de adequabilidade de habitat.
+            </p>
+        </div>
+
+        <h3>Contexto e Relevância</h3>
+        <div class="info-card">
+            <ul>
+                <li>Macrófitas marinhas são engenheiras de ecossistemas e sustentam alta biodiversidade costeira.</li>
+                <li>Essas comunidades respondem a mudanças de temperatura, transparência da água e estrutura de substrato.</li>
+                <li>A crise climática e a pressão antrópica aumentam a vulnerabilidade de habitats insulares.</li>
+                <li>O projeto integra inventário biológico, geoprocessamento e SDMs (modelos que estimam onde as espécies têm maior chance de ocorrer) para apoiar conservação aplicada.</li>
+            </ul>
+        </div>
+
+        <h3>O problema que o projeto enfrenta</h3>
+        <div class="info-card">
+            <p>
+                Hoje, ainda faltam mapas detalhados e comparáveis sobre onde as macrófitas marinhas
+                ocorrem nas ilhas costeiras de Santa Catarina e como elas respondem às mudanças ambientais.
+                Sem essa base, fica mais difícil priorizar monitoramento e planejar ações de conservação.
+            </p>
+        </div>
+
+        <h3>O que será feito na prática</h3>
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4>1) Levantamento em campo</h4>
+                <p>
+                    A equipe registra espécies, abundância e condições ambientais nas três ilhas,
+                    em uma metodologia padronizada para permitir comparação justa.
+                </p>
+            </div>
+            <div class="area-card">
+                <h4>2) Mapeamento e modelagem</h4>
+                <p>
+                    Os dados de campo são integrados em mapas e modelos para indicar áreas mais
+                    favoráveis para as macrófitas e áreas prioritárias para acompanhamento.
+                </p>
+            </div>
+            <div class="area-card">
+                <h4>3) Entregas aplicáveis</h4>
+                <p>
+                    O projeto gera produtos científicos e técnicos que podem ser usados por pesquisa,
+                    gestão ambiental e planejamento de monitoramento costeiro.
+                </p>
+            </div>
+        </div>
+
+        <h3>Por que isso importa para quem não é da área?</h3>
+        <div class="info-card">
+            <ul>
+                <li>Ajuda a identificar áreas marinhas mais sensíveis e que precisam de cuidado.</li>
+                <li>Melhora a base técnica para decisões públicas sobre conservação costeira.</li>
+                <li>Cria um histórico comparável para acompanhar mudanças ao longo dos anos.</li>
+                <li>Traduz dados complexos em mapas e informações úteis para diferentes públicos.</li>
+            </ul>
+        </div>
+
+        <h3>Perguntas que o projeto responde</h3>
+        <ol>
+            <li>Quais espécies de macrófitas dominam cada ilha e como variam com profundidade?</li>
+            <li>Quais condições de habitat favorecem maior ocorrência e abundância relativa?</li>
+            <li>Como representar espacialmente zonas prioritárias para monitoramento e manejo?</li>
+            <li>Como os cenários de aquecimento podem deslocar áreas de maior adequabilidade?</li>
+        </ol>
+
+        <h3>Como ler esta apresentação</h3>
+        <div class="info-card">
+            <ul>
+                <li><strong>Áreas de Estudo:</strong> mostra onde o projeto acontece e por que essas ilhas foram escolhidas.</li>
+                <li><strong>Objetivos:</strong> explica claramente o que o projeto pretende entregar.</li>
+                <li><strong>Metodologia:</strong> detalha como os dados serão coletados, analisados e transformados em mapas.</li>
+                <li><strong>Produtos:</strong> apresenta os resultados esperados para ciência e gestão ambiental.</li>
+                <li><strong>Glossário:</strong> define termos técnicos em linguagem acessível.</li>
+                <li><strong>Cronograma:</strong> mostra quando cada etapa será executada.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="areas" class="tab-content" role="tabpanel" aria-labelledby="tab-areas">
+        <h2>🗺️ Áreas de Estudo</h2>
+
+        <div class="destaque-box">
+            <h3>Recorte Geográfico</h3>
+            <p>Três ilhas costeiras de Santa Catarina com gradiente de tamanho, isolamento e pressão antrópica.</p>
+        </div>
+
+        <div class="areas-grid">
+            <div class="area-card area-card--arvoredo">
+                <h3>🟠 REBIO Marinha do Arvoredo</h3>
+                <p><strong>Centroide:</strong> 27°13'33"S, 48°21'56"W</p>
+                <p><strong>Área:</strong> 17.131,72 ha</p>
+                <p><strong>Status:</strong> Unidade de Conservação Federal</p>
+                <p><strong>Distância da costa:</strong> ~15 km</p>
+                <p><strong>Faixa de estudo:</strong> 0-15 m</p>
+                <ul>
+                    <li>Maior área do estudo</li>
+                    <li>Referência de conservação</li>
+                    <li>Mergulho regulado</li>
+                    <li>Alta heterogeneidade de microhabitats</li>
+                    <li>Substrato rochoso com costões e zonas de alta energia</li>
+                    <li>Maior potencial para gradientes ecológicos internos</li>
+                </ul>
+            </div>
+
+            <div class="area-card area-card--campeche">
+                <h3>🔵 Ilha do Campeche</h3>
+                <p><strong>Centroide:</strong> 27°41'48"S, 48°27'55"W</p>
+                <p><strong>Área:</strong> 76,19 ha</p>
+                <p><strong>Status:</strong> Patrimônio Arqueológico/Paisagístico</p>
+                <p><strong>Distância da costa:</strong> ~1,5 km</p>
+                <p><strong>Faixa de estudo:</strong> 0-15 m</p>
+                <ul>
+                    <li>Proximidade do continente</li>
+                    <li>Alta pressão turística</li>
+                    <li>Boa acessibilidade para campo</li>
+                    <li>Ambiente ideal para avaliar influência antrópica</li>
+                    <li>Substrato misto (rochoso/arenoso) em setores distintos</li>
+                    <li>Maior exposição a usos recreativos e tráfego de embarcações</li>
+                </ul>
+            </div>
+
+            <div class="area-card area-card--xavier">
+                <h3>🟢 Ilha Xavier</h3>
+                <p><strong>Centroide:</strong> 27°36'36"S, 48°23'11"W</p>
+                <p><strong>Área:</strong> 16,98 ha</p>
+                <p><strong>Status:</strong> Sem proteção específica</p>
+                <p><strong>Distância da costa:</strong> ~8 km</p>
+                <p><strong>Faixa de estudo:</strong> 0-15 m</p>
+                <ul>
+                    <li>Menor área do estudo</li>
+                    <li>Conjunto de ilhotas</li>
+                    <li>Condição intermediária de pressão</li>
+                    <li>Área menos estudada na literatura local</li>
+                    <li>Boa sensibilidade para detectar mudanças rápidas</li>
+                    <li>Conectividade intermediária entre continente e Arvoredo</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>Comparação completa entre as áreas</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Critério</th>
+                    <th>Arvoredo</th>
+                    <th>Campeche</th>
+                    <th>Xavier</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Área (ha)</strong></td>
+                    <td>17.131,72</td>
+                    <td>76,19</td>
+                    <td>16,98</td>
+                </tr>
+                <tr>
+                    <td><strong>Tamanho relativo</strong></td>
+                    <td>~1.000x maior que Xavier</td>
+                    <td>Intermediário</td>
+                    <td>Menor área do gradiente</td>
+                </tr>
+                <tr>
+                    <td><strong>Distância da costa</strong></td>
+                    <td>~15 km</td>
+                    <td>~1,5 km</td>
+                    <td>~8 km</td>
+                </tr>
+                <tr>
+                    <td><strong>Status de proteção</strong></td>
+                    <td>UC Federal (REBIO)</td>
+                    <td>Patrimônio Arqueológico/Paisagístico</td>
+                    <td>Sem proteção específica</td>
+                </tr>
+                <tr>
+                    <td><strong>Pressão antrópica</strong></td>
+                    <td>Baixa (regulada)</td>
+                    <td>Alta</td>
+                    <td>Moderada</td>
+                </tr>
+                <tr>
+                    <td><strong>Pressão turística</strong></td>
+                    <td>Controlada</td>
+                    <td>Intensa no verão</td>
+                    <td>Menor que Campeche</td>
+                </tr>
+                <tr>
+                    <td><strong>Acessibilidade logística</strong></td>
+                    <td>Mais complexa (embarcação e janela climática)</td>
+                    <td>Mais simples e rápida</td>
+                    <td>Intermediária</td>
+                </tr>
+                <tr>
+                    <td><strong>Grau de isolamento</strong></td>
+                    <td>Alto</td>
+                    <td>Baixo</td>
+                    <td>Intermediário</td>
+                </tr>
+                <tr>
+                    <td><strong>Complexidade de habitat</strong></td>
+                    <td>Alta (múltiplos microambientes)</td>
+                    <td>Média (setores contrastantes)</td>
+                    <td>Média/alta em pequena escala</td>
+                </tr>
+                <tr>
+                    <td><strong>Substrato predominante</strong></td>
+                    <td>Costões rochosos com zonas de alta energia</td>
+                    <td>Mosaico rochoso e arenoso</td>
+                    <td>Costões e ilhotas rochosas</td>
+                </tr>
+                <tr>
+                    <td><strong>Relevância para modelagem</strong></td>
+                    <td>Referência para condições mais preservadas</td>
+                    <td>Referência para alta influência antrópica</td>
+                    <td>Referência para área pequena e menos estudada</td>
+                </tr>
+                <tr>
+                    <td><strong>Papel no gradiente do estudo</strong></td>
+                    <td>Extremo de maior área/isolamento</td>
+                    <td>Extremo de maior uso humano/proximidade</td>
+                    <td>Ponto intermediário de conectividade</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-card" style="margin-top: 28px;">
+            <h4>🎯 Justificativa da Seleção</h4>
+            <p>
+                A seleção de Arvoredo, Campeche e Xavier foi feita para representar um gradiente ecológico realista
+                e comparável em escala regional, permitindo testes robustos sobre distribuição de macrófitas e
+                adequabilidade de habitat.
+            </p>
+            <ul>
+                <li><strong>Gradiente de área:</strong> contraste forte entre ilhas grandes, médias e pequenas.</li>
+                <li><strong>Gradiente de isolamento:</strong> variação de conectividade com a costa e entre ilhas.</li>
+                <li><strong>Gradiente de pressão antrópica:</strong> de uso regulado a uso turístico intenso.</li>
+                <li><strong>Diferentes regimes de proteção:</strong> comparação entre UC federal e áreas sem proteção equivalente.</li>
+                <li><strong>Viabilidade operacional:</strong> conjunto com logística possível para campanhas repetidas e modelagem espacial.</li>
+            </ul>
+        </div>
+
+        <h3>🗺️ Mapas das Áreas de Estudo</h3>
+        <div class="info-card">
+            <p>
+                Os mapas abaixo mostram a base espacial usada para comparar Arvoredo, Campeche e Xavier.
+                Aqui ficam os produtos cartográficos de contexto territorial do estudo.
+            </p>
+        </div>
+
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_todas_areas.png" alt="Mapa geral das áreas de estudo">
+            <p class="mapa-caption">Mapa de referência das três áreas insulares de estudo.</p>
+        </div>
+
+        <div class="mapa-container">
+            <img src="Mapas_Gerados/mapa_comparativo.png" alt="Mapa comparativo das áreas">
+            <p class="mapa-caption">Comparação espacial entre REBIO Arvoredo, Campeche e Xavier.</p>
+        </div>
+
+        <div class="info-card">
+            <a href="Mapas_Gerados/mapa_interativo.html" class="btn" target="_blank">Abrir mapa interativo das áreas</a>
+        </div>
+    </div>
+
+    <div id="objetivos" class="tab-content" role="tabpanel" aria-labelledby="tab-objetivos">
+        <h2>🎯 Objetivos</h2>
+
+        <div class="destaque-box">
+            <h3>Objetivo Geral</h3>
+            <p style="font-size: 1.12em;">
+                Avaliar a diversidade e a distribuição espacial das comunidades de macrófitas marinhas
+                na Ilha do Campeche, Ilha Xavier e REBIO Arvoredo, correlacionando padrões biológicos
+                com variáveis ambientais e geomorfológicas para gerar modelos de adequabilidade de habitat.
+            </p>
+        </div>
+
+        <h3>Objetivos Específicos</h3>
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4><span class="badge">1</span> Inventário Florístico</h4>
+                <p>Realizar inventário de macrófitas na faixa de 0 a 15 m de profundidade.</p>
+            </div>
+            <div class="area-card">
+                <h4><span class="badge">2</span> Mapeamento SIG</h4>
+                <p>Mapear distribuição espacial e abundância relativa com geoprocessamento.</p>
+            </div>
+            <div class="area-card">
+                <h4><span class="badge">3</span> Fotogrametria por Drone</h4>
+                <p>Gerar ortofotos e modelos de superfície para refinar o mapeamento de habitat.</p>
+            </div>
+            <div class="area-card">
+                <h4><span class="badge">4</span> Variáveis Abióticas</h4>
+                <p>Caracterizar substrato rochoso e variáveis locais, como transparência da água.</p>
+            </div>
+            <div class="area-card">
+                <h4><span class="badge">5</span> Modelagem de Habitat</h4>
+                <p>Construir índice de adequabilidade e SDMs para estimar padrões de ocorrência (ou seja, onde as espécies tendem a aparecer).</p>
+            </div>
+            <div class="area-card">
+                <h4><span class="badge">6</span> Base de Referência</h4>
+                <p>Consolidar coleção de referência (herbário) para monitoramento de longo prazo.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="metodologia" class="tab-content" role="tabpanel" aria-labelledby="tab-metodologia">
+        <h2>🔬 Metodologia</h2>
+
+        <div class="destaque-box">
+            <h3>Metodologia em linguagem simples</h3>
+            <p>
+                A lógica do estudo é direta: <strong>medir as macrófitas em campo</strong>,
+                <strong>registrar as condições do ambiente</strong> e depois
+                <strong>transformar isso em mapas e modelos</strong> para entender onde cada espécie tem maior chance de ocorrer.
+            </p>
+        </div>
+
+        <h3>Infográfico do fluxo metodológico</h3>
+        <div class="info-card">
+            <p><strong>Resumo visual conectado:</strong> da coleta em campo até os produtos finais para conservação.</p>
+        </div>
+        <div class="timeline-strip">
+            <div class="timeline-step">
+                <span class="timeline-num">1</span>
+                <h4>Planejamento</h4>
+                <p>Pontos, transectos e logística.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">2</span>
+                <h4>Coleta Biológica</h4>
+                <p>Apneia/SCUBA, presença, abundância (DAFOR) e coleta em costão.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">3</span>
+                <h4>Coleta Ambiental</h4>
+                <p>Profundidade, transparência e substrato.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">4</span>
+                <h4>Fotogrametria</h4>
+                <p>Ortofoto e MDS com RGB/multiespectral.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">5</span>
+                <h4>SIG</h4>
+                <p>Integração espacial dos dados.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">6</span>
+                <h4>IAH + SDMs</h4>
+                <p>Modelagem da adequabilidade e distribuição.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">7</span>
+                <h4>Validação</h4>
+                <p>Conferência com campo e métricas.</p>
+            </div>
+            <div class="timeline-step">
+                <span class="timeline-num">8</span>
+                <h4>Produtos Finais</h4>
+                <p>Mapas e síntese para monitoramento.</p>
+            </div>
+        </div>
+
+        <h3>1) Como o estudo será feito</h3>
+        <div class="info-card">
+            <p><strong>Tipo de estudo:</strong> comparação entre três ilhas (Arvoredo, Campeche e Xavier).</p>
+            <p><strong>Faixa de profundidade:</strong> 0 a 15 m.</p>
+            <p><strong>Estratégia:</strong> repetir o mesmo método nas três áreas para comparar resultados de forma justa.</p>
+        </div>
+
+        <h3>2) Etapas práticas (passo a passo)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Passo</th>
+                    <th>O que será feito</th>
+                    <th>Resultado esperado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Passo 1</td>
+                    <td>Definir pontos de amostragem, transectos e janelas operacionais (maré/tempo) em cada ilha</td>
+                    <td>Plano de campo padronizado</td>
+                </tr>
+                <tr>
+                    <td>Passo 2</td>
+                    <td>Executar amostragem subaquática por <strong>apneia</strong> (setores rasos) e <strong>mergulho com cilindro - SCUBA</strong> (setores mais profundos), com segurança e dupla de trabalho</td>
+                    <td>Cobertura padronizada da faixa de 0 a 15 m em diferentes condições de profundidade</td>
+                </tr>
+                <tr>
+                    <td>Passo 3</td>
+                    <td>Registrar presença e abundância de macrófitas (DAFOR), com foto georreferenciada por ponto/transecto</td>
+                    <td>Lista e intensidade de ocorrência por ponto e por ilha</td>
+                </tr>
+                <tr>
+                    <td>Passo 4</td>
+                    <td>Realizar <strong>coleta de material em costão rochoso</strong> (amostras/vouchers), com etiquetagem, acondicionamento e rastreabilidade</td>
+                    <td>Material de referência para confirmação taxonômica e herbário</td>
+                </tr>
+                <tr>
+                    <td>Passo 5</td>
+                    <td>Coletar variáveis ambientais no mesmo ponto (ex.: transparência, profundidade, tipo de substrato e geomorfologia)</td>
+                    <td>Base ambiental associada aos registros biológicos</td>
+                </tr>
+                <tr>
+                    <td>Passo 6</td>
+                    <td>Georreferenciar tudo em SIG e integrar dados de campo, drone e camadas ambientais</td>
+                    <td>Banco espacial organizado, auditável e comparável entre campanhas</td>
+                </tr>
+                <tr>
+                    <td>Passo 7</td>
+                    <td>Calcular IAH, rodar SDMs e validar os resultados com dados independentes de campo</td>
+                    <td>Mapas de adequabilidade e distribuição potencial com qualidade controlada</td>
+                </tr>
+                <tr>
+                    <td>Passo 8</td>
+                    <td>Conferir consistência final, gerar mapas temáticos e consolidar produtos para dissertação e gestão</td>
+                    <td>Produtos técnicos e científicos prontos para uso e comunicação</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-card">
+            <h4>🧭 Protocolo de amostragem subaquática e coleta em costão rochoso</h4>
+            <ul>
+                <li><strong>Apneia:</strong> aplicada nos trechos rasos e de maior agilidade operacional, com registro padronizado por transecto.</li>
+                <li><strong>Mergulho com cilindro (SCUBA):</strong> aplicado nos trechos mais profundos da faixa de estudo (até 15 m), mantendo tempo/fundo e segurança da equipe.</li>
+                <li><strong>Coleta em costão rochoso:</strong> retirada criteriosa de amostras representativas, minimizando impacto e mantendo georreferenciamento do ponto.</li>
+                <li><strong>Rastreabilidade:</strong> código único de amostra, etiqueta de campo, foto de contexto e registro de profundidade/substrato.</li>
+            </ul>
+        </div>
+
+        <h3>3) O que será medido em campo</h3>
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4>📌 Dados biológicos</h4>
+                <ul>
+                    <li>Método de amostragem (apneia e/ou SCUBA)</li>
+                    <li>Presença/ausência de espécies</li>
+                    <li>Abundância relativa (DAFOR)</li>
+                    <li>Registro fotográfico de apoio</li>
+                    <li>Coleta de vouchers em costão rochoso para herbário</li>
+                </ul>
+            </div>
+            <div class="area-card">
+                <h4>🌊 Dados ambientais</h4>
+                <ul>
+                    <li>Profundidade</li>
+                    <li>Transparência da água (Secchi)</li>
+                    <li>Tipo de substrato</li>
+                    <li>Geomorfologia (toca/fenda, matacão/parede, laje)</li>
+                </ul>
+            </div>
+            <div class="area-card">
+                <h4>🗺️ Dados espaciais</h4>
+                <ul>
+                    <li>Coordenadas dos pontos</li>
+                    <li>Camadas por ilha</li>
+                    <li>Mapas de ocorrência</li>
+                    <li>Mapas de adequabilidade</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>4) Fotogrametria por Drone (explicação simples)</h3>
+        <div class="info-card">
+            <p>
+                A fotogrametria por drone serve para transformar muitas fotos aéreas em
+                <strong>mapas detalhados e mensuráveis</strong> da área costeira.
+            </p>
+            <ul>
+                <li><strong>O que é gerado:</strong> ortofotos (imagem corrigida, sem distorção) e modelo de superfície (MDS).</li>
+                <li><strong>Como ajuda no projeto:</strong> melhora o mapeamento de feições do habitat e do contorno do costão.</li>
+                <li><strong>Vantagem prática:</strong> maior precisão espacial para comparar campanhas ao longo do tempo.</li>
+                <li><strong>Integração:</strong> os produtos do drone entram no SIG junto com os dados de mergulho.</li>
+            </ul>
+            <p>
+                Em resumo: o drone melhora a base cartográfica do estudo e dá mais confiança para os modelos de habitat.
+            </p>
+        </div>
+
+        <h4>🔎 Protocolo de teste: RGB vs Multiespectral</h4>
+        <div class="info-card">
+            <p>
+                Para fortalecer a metodologia, será realizado um teste comparativo entre câmera <strong>RGB</strong>
+                e câmera <strong>multiespectral</strong>, na mesma área e com condições semelhantes de maré e iluminação.
+            </p>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Etapa do teste</th>
+                    <th>Como será executada</th>
+                    <th>Produto/indicador</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1. Planejamento de voo</td>
+                    <td>Mesma área, altura e sobreposição equivalentes para os dois sensores</td>
+                    <td>Comparação justa entre RGB e multiespectral</td>
+                </tr>
+                <tr>
+                    <td>2. Aquisição dos dados</td>
+                    <td>Voos em janela curta para reduzir variação de luz, vento e mar</td>
+                    <td>Conjunto de imagens pareáveis</td>
+                </tr>
+                <tr>
+                    <td>3. Processamento fotogramétrico</td>
+                    <td>Geração de ortomosaico e MDS em ambos os sensores</td>
+                    <td>Ortofotos e modelos de superfície comparáveis</td>
+                </tr>
+                <tr>
+                    <td>4. Produtos espectrais</td>
+                    <td>No multiespectral, calcular índices (ex.: NDVI/GNDVI/NDRE ou equivalente costeiro)</td>
+                    <td>Camadas para discriminar cobertura e vigor da vegetação</td>
+                </tr>
+                <tr>
+                    <td>5. Métricas de resolução</td>
+                    <td>Comparar GSD, nitidez visual e erro geométrico (RMSE de checkpoints)</td>
+                    <td>Desempenho espacial objetivo por sensor</td>
+                </tr>
+                <tr>
+                    <td>6. Validação ecológica</td>
+                    <td>Conferir mapas com pontos de campo (presença/ausência e DAFOR)</td>
+                    <td>Acurácia temática para habitat/macrófitas</td>
+                </tr>
+                <tr>
+                    <td>7. Síntese final</td>
+                    <td>Comparar vantagens de cada sensor e recomendar uso isolado ou combinado</td>
+                    <td>Protocolo otimizado para campanhas futuras</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>📏 Tabela Operacional Integrada do Teste (Parâmetros e Critérios de Qualidade)</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Indicador</th>
+                    <th>Meta ideal</th>
+                    <th>Faixa aceitável</th>
+                    <th>Como verificar</th>
+                    <th>Ação corretiva</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GSD (resolução no solo)</td>
+                    <td>2-5 cm/pixel</td>
+                    <td>até 7 cm/pixel</td>
+                    <td>Relatório do processamento fotogramétrico</td>
+                    <td>Ajustar altura de voo e/ou distância focal</td>
+                </tr>
+                <tr>
+                    <td>Sobreposição frontal</td>
+                    <td>80%</td>
+                    <td>75-85%</td>
+                    <td>Plano de voo + log do drone</td>
+                    <td>Replanejar linhas de voo e velocidade</td>
+                </tr>
+                <tr>
+                    <td>Sobreposição lateral</td>
+                    <td>70%</td>
+                    <td>65-75%</td>
+                    <td>Plano de voo + inspeção do ortomosaico</td>
+                    <td>Reduzir espaçamento entre faixas</td>
+                </tr>
+                <tr>
+                    <td>Altura de voo</td>
+                    <td>60-100 m (conforme sensor)</td>
+                    <td>até 120 m (norma vigente)</td>
+                    <td>Telemetria do drone e caderno de campo</td>
+                    <td>Padronizar altitude por campanha e sensor</td>
+                </tr>
+                <tr>
+                    <td>Velocidade de voo</td>
+                    <td>3-6 m/s</td>
+                    <td>até 8 m/s</td>
+                    <td>Log de missão</td>
+                    <td>Reduzir velocidade em mar agitado/vento</td>
+                </tr>
+                <tr>
+                    <td>Horário de aquisição</td>
+                    <td>10h-14h, com baixa cobertura de nuvens</td>
+                    <td>9h-15h</td>
+                    <td>Registro de campo e metadados EXIF</td>
+                    <td>Remarcar voo para reduzir sombra e reflexo</td>
+                </tr>
+                <tr>
+                    <td>Estado do mar/vento</td>
+                    <td>Mar calmo e vento baixo</td>
+                    <td>vento até ~20 km/h</td>
+                    <td>Boletim meteorológico + observação local</td>
+                    <td>Suspender voo em condições críticas</td>
+                </tr>
+                <tr>
+                    <td>RMSE geométrico</td>
+                    <td>&lt; 10 cm</td>
+                    <td>10-15 cm</td>
+                    <td>Checkpoints/GCPs independentes</td>
+                    <td>Refazer ajuste de bloco e revisar GCPs</td>
+                </tr>
+                <tr>
+                    <td>Densidade de GCP/Checkpoint</td>
+                    <td>Distribuição em todo o mosaico</td>
+                    <td>mínimo 5 pontos bem distribuídos</td>
+                    <td>Mapa de pontos de controle</td>
+                    <td>Adicionar pontos nas bordas e no centro</td>
+                </tr>
+                <tr>
+                    <td>Qualidade radiométrica (multiespectral)</td>
+                    <td>Painel de calibração antes/depois do voo</td>
+                    <td>Ao menos 1 calibração por missão</td>
+                    <td>Metadados e imagens do painel</td>
+                    <td>Recalibrar e repetir aquisição se necessário</td>
+                </tr>
+                <tr>
+                    <td>Validação temática</td>
+                    <td>Acurácia global &gt; 85% e Kappa &gt; 0,75</td>
+                    <td>Acurácia &gt; 80% e Kappa &gt; 0,65</td>
+                    <td>Matriz de confusão com pontos de campo</td>
+                    <td>Revisar classes, treino e amostragem</td>
+                </tr>
+                <tr>
+                    <td>Reprodutibilidade entre campanhas</td>
+                    <td>Mesmo protocolo e configurações-chave</td>
+                    <td>Diferenças documentadas e justificadas</td>
+                    <td>Checklist de padronização por campanha</td>
+                    <td>Atualizar protocolo e registrar desvios</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4>🌤️ Fontes meteorológicas e software para plano de voo</h4>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fonte/Ferramenta</th>
+                    <th>Quando consultar</th>
+                    <th>Para que usar</th>
+                    <th>Critério prático (go/no-go)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>INMET (previsão e alertas)</td>
+                    <td>24-48 h antes e na manhã do voo</td>
+                    <td>Checar tendência de chuva, vento e alertas oficiais</td>
+                    <td><strong>No-go:</strong> alerta ativo para vento forte, chuva intensa ou tempestade</td>
+                </tr>
+                <tr>
+                    <td>CPTEC/INPE (modelos)</td>
+                    <td>24 h antes + revisão no dia</td>
+                    <td>Comparar cenários de vento/nuvem e reduzir incerteza da janela de missão</td>
+                    <td><strong>No-go:</strong> divergência alta entre modelos e risco de instabilidade no horário planejado</td>
+                </tr>
+                <tr>
+                    <td>Marinha (DHN/CHM: maré e estado do mar)</td>
+                    <td>24 h antes e imediatamente antes da saída</td>
+                    <td>Avaliar segurança de navegação, ondulação e condições costeiras</td>
+                    <td><strong>No-go:</strong> mar agitado/ressaca para acesso seguro e decolagem em embarcação</td>
+                </tr>
+                <tr>
+                    <td>METAR/TAF (REDEMET/aeroporto próximo)</td>
+                    <td>2-6 h antes da missão</td>
+                    <td>Confirmar condição observada em tempo real e tendência de curtíssimo prazo</td>
+                    <td><strong>No-go:</strong> visibilidade baixa, rajadas fortes ou células de chuva em aproximação</td>
+                </tr>
+                <tr>
+                    <td>Windy/Meteoblue (apoio visual)</td>
+                    <td>Planejamento inicial e ajuste final</td>
+                    <td>Visualizar vento por altitude e nuvens; apoio à decisão logística</td>
+                    <td>Usar apenas como apoio; decisão final deve seguir fontes oficiais + observação local</td>
+                </tr>
+                <tr>
+                    <td>Observação local de campo</td>
+                    <td>Imediatamente antes da decolagem</td>
+                    <td>Validar vento real, brilho na água, nuvem baixa e segurança operacional</td>
+                    <td><strong>No-go:</strong> rajadas acima do limite do drone, chuva, visibilidade ruim ou reflexo excessivo</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Tipo de drone/cenário</th>
+                    <th>Software de plano de voo recomendado</th>
+                    <th>Ponto forte para o projeto</th>
+                    <th>Observação operacional</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>DJI Enterprise (Mavic 3E, Matrice)</td>
+                    <td>DJI Pilot 2</td>
+                    <td>Missão de mapeamento automática estável e rápida em campo</td>
+                    <td>Padronizar altitude, sobreposição e velocidade entre campanhas</td>
+                </tr>
+                <tr>
+                    <td>DJI com fluxo iPad</td>
+                    <td>DJI GS Pro</td>
+                    <td>Interface simples para grade fotogramétrica</td>
+                    <td>Verificar compatibilidade do modelo antes da campanha</td>
+                </tr>
+                <tr>
+                    <td>Campanhas com ênfase em fotogrametria acadêmica</td>
+                    <td>Pix4Dcapture Pro</td>
+                    <td>Boa padronização de missão e integração com processamento</td>
+                    <td>Manter parâmetros fixos para comparação temporal</td>
+                </tr>
+                <tr>
+                    <td>Operação multiárea com gestão em nuvem</td>
+                    <td>DroneDeploy</td>
+                    <td>Fluxo de campo ágil e centralização de missões</td>
+                    <td>Revisar custos/licenciamento para uso contínuo</td>
+                </tr>
+                <tr>
+                    <td>Missões complexas e alta customização</td>
+                    <td>UgCS</td>
+                    <td>Planejamento avançado para cenários costeiros</td>
+                    <td>Exige curva de aprendizado maior, porém com maior controle</td>
+                </tr>
+                <tr>
+                    <td>Plataformas ArduPilot/PX4</td>
+                    <td>QGroundControl ou Mission Planner</td>
+                    <td>Grande flexibilidade para parametrização técnica</td>
+                    <td>Checar telemetria, failsafe e logs antes de cada missão</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="info-card">
+            <p><strong>Recomendação operacional para este projeto:</strong> decisão de voo com base em fontes oficiais (INMET + Marinha + METAR), validada por observação local no ponto de decolagem, e uso de plano de voo padronizado por sensor para garantir comparabilidade entre campanhas.</p>
+        </div>
+
+        <div class="areas-grid">
+            <div class="area-card">
+                <h4>📷 Câmera RGB</h4>
+                <ul>
+                    <li>Maior detalhamento visual do costão e feições geomorfológicas</li>
+                    <li>Ótima leitura de textura e contorno de manchas</li>
+                    <li>Boa base para interpretação manual e mapeamento de referência</li>
+                </ul>
+            </div>
+            <div class="area-card">
+                <h4>🛰️ Câmera Multiespectral</h4>
+                <ul>
+                    <li>Melhor separação de classes por assinatura espectral</li>
+                    <li>Permite cálculo de índices para apoiar classificação temática</li>
+                    <li>Útil para detectar variações sutis não visíveis no RGB</li>
+                </ul>
+            </div>
+            <div class="area-card">
+                <h4>✅ Resultado esperado</h4>
+                <ul>
+                    <li>RGB como base cartográfica de alta leitura visual</li>
+                    <li>Multiespectral para refino temático/ecológico</li>
+                    <li>Integração dos dois sensores como estratégia preferencial</li>
+                </ul>
+            </div>
+        </div>
+
+        <h3>5) Como os dados viram decisão</h3>
+        <div class="info-card">
+            <ul>
+                <li><strong>QGIS e R:</strong> organização, análise e integração dos dados.</li>
+                <li><strong>IAH:</strong> identifica áreas com maior potencial de habitat para macrófitas.</li>
+                <li><strong>SDMs (ODMAP):</strong> estimam a distribuição provável das espécies com base no ambiente, de forma transparente e reprodutível.</li>
+                <li><strong>Mapas finais:</strong> mostram áreas prioritárias para monitoramento e conservação.</li>
+            </ul>
+        </div>
+
+        <h3>6) Garantia de qualidade</h3>
+        <div class="info-card">
+            <ul>
+                <li>Método único e replicável nas três ilhas.</li>
+                <li>Padronização dos registros para reduzir viés de coleta.</li>
+                <li>Dados e produtos em formatos abertos (GPKG, CSV e HTML).</li>
+                <li>Rastreabilidade entre dado de campo, análise e mapa final.</li>
+            </ul>
+        </div>
+
+        <div class="destaque-box">
+            <h3>Síntese metodológica</h3>
+            <p>
+                Metodologia integrada, replicável e orientada a decisão,
+                conectando observação de campo, geotecnologias e modelagem ecológica
+                para apoiar monitoramento e manejo de habitats de macrófitas marinhas.
+            </p>
+        </div>
+    </div>
+
+    <div id="produtos" class="tab-content" role="tabpanel" aria-labelledby="tab-produtos">
+        <h2>📦 Produtos Esperados</h2>
+
+        <div class="info-card">
+            <p>
+                Os produtos desta pesquisa foram planejados para transformar dados de campo em
+                <strong>evidências úteis para ciência e gestão costeira</strong>. Em outras palavras,
+                cada entrega responde a uma etapa da pergunta central do projeto: onde estão as
+                macrófitas, quais condições favorecem sua ocorrência e como priorizar monitoramento.
+            </p>
+        </div>
+
+        <h3>Entregáveis científicos</h3>
+        <ul>
+            <li><strong>Inventário florístico comparativo:</strong> lista padronizada de espécies por ilha, com registros de presença e abundância relativa.</li>
+            <li><strong>Modelos e mapas temáticos:</strong> produtos cartográficos de distribuição e adequabilidade de habitat para apoiar interpretação ecológica.</li>
+            <li><strong>Base geoespacial estruturada:</strong> conjunto organizado de camadas e tabelas para uso em monitoramentos futuros.</li>
+            <li><strong>Síntese acadêmica:</strong> dissertação de mestrado e manuscrito científico para divulgação dos resultados.</li>
+        </ul>
+
+        <h3>Aplicação prática dos resultados</h3>
+        <div class="info-card">
+            <p>
+                Além da produção científica, os resultados serão entregues em formato aplicável,
+                com documentação clara e organização padronizada. Isso facilita o reuso por equipes
+                de pesquisa, órgãos ambientais e iniciativas de acompanhamento de habitats insulares.
+            </p>
+            <ul>
+                <li>Identificação de áreas prioritárias para monitoramento periódico.</li>
+                <li>Base comparável para avaliar mudanças temporais nas três ilhas.</li>
+                <li>Suporte técnico para planejamento de conservação e manejo local.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="glossario" class="tab-content" role="tabpanel" aria-labelledby="tab-glossario">
+        <h2>📚 Glossário</h2>
+
+        <div class="info-card">
+            <p>
+                Termos-chave usados nesta apresentação com linguagem simples.
+                A ideia é facilitar a leitura de quem não é da área, sem perder o rigor técnico.
+            </p>
+        </div>
+
+        <h3>Ecologia e Ambiente Costeiro</h3>
+        <div class="glossario-grid">
+            <div class="glossario-card"><h4>Macrófitas Marinhas</h4><p>Plantas e algas de maior porte que vivem no mar e ajudam a manter o equilíbrio ecológico.</p></div>
+            <div class="glossario-card"><h4>Habitat</h4><p>Local com as condições necessárias para uma espécie viver (luz, substrato, temperatura, etc.).</p></div>
+            <div class="glossario-card"><h4>Adequabilidade de Habitat</h4><p>Nível de "favorabilidade" de um lugar para a ocorrência de uma espécie.</p></div>
+            <div class="glossario-card"><h4>Costão Rochoso</h4><p>Área litorânea de rochas expostas, com muitas fendas e microambientes.</p></div>
+            <div class="glossario-card"><h4>Substrato</h4><p>Base onde os organismos se fixam, como rocha, areia ou sedimento.</p></div>
+            <div class="glossario-card"><h4>Geomorfologia</h4><p>Forma física do ambiente (paredões, lajes, blocos, fendas), importante para a biodiversidade.</p></div>
+            <div class="glossario-card"><h4>Pressão Antrópica</h4><p>Impacto causado por atividades humanas (turismo, poluição, obras, tráfego de barcos).</p></div>
+            <div class="glossario-card"><h4>Conectividade</h4><p>Grau de ligação entre áreas; influencia dispersão e recolonização de espécies.</p></div>
+        </div>
+
+        <h3>Trabalho de Campo e Coleta</h3>
+        <div class="glossario-grid">
+            <div class="glossario-card"><h4>Apneia</h4><p>Mergulho sem cilindro, usado em áreas rasas e com operação rápida.</p></div>
+            <div class="glossario-card"><h4>SCUBA</h4><p>Mergulho autônomo com cilindro, usado em áreas mais profundas.</p></div>
+            <div class="glossario-card"><h4>Transecto</h4><p>Linha de amostragem em campo para padronizar observações entre áreas.</p></div>
+            <div class="glossario-card"><h4>Ponto Amostral</h4><p>Local definido para coleta de dados biológicos e ambientais.</p></div>
+            <div class="glossario-card"><h4>DAFOR</h4><p>Escala de abundância: Dominante, Abundante, Frequente, Ocasional e Raro.</p></div>
+            <div class="glossario-card"><h4>Voucher</h4><p>Amostra física coletada para confirmação de identificação e guarda em coleção científica.</p></div>
+            <div class="glossario-card"><h4>Herbário</h4><p>Coleção organizada de amostras vegetais usadas como referência científica.</p></div>
+            <div class="glossario-card"><h4>Rastreabilidade</h4><p>Capacidade de ligar cada dado ao local, data, método e responsável pela coleta.</p></div>
+            <div class="glossario-card"><h4>Checklist de Campo</h4><p>Lista de verificação para garantir segurança, padronização e completude da campanha.</p></div>
+            <div class="glossario-card"><h4>Georreferenciamento</h4><p>Associação do dado com coordenadas geográficas exatas.</p></div>
+        </div>
+
+        <h3>Mapeamento, Drone e Imagens</h3>
+        <div class="glossario-grid">
+            <div class="glossario-card"><h4>Fotogrametria</h4><p>Técnica que transforma várias fotos em mapas e modelos com medidas reais.</p></div>
+            <div class="glossario-card"><h4>Ortomosaico</h4><p>Imagem aérea corrigida, como um "mapa-foto" sem distorções relevantes.</p></div>
+            <div class="glossario-card"><h4>MDS (Modelo Digital de Superfície)</h4><p>Modelo em 3D da superfície, incluindo relevo e elementos sobre ela.</p></div>
+            <div class="glossario-card"><h4>GSD</h4><p>Tamanho do pixel no terreno. Pixel menor significa maior detalhe.</p></div>
+            <div class="glossario-card"><h4>Sobreposição Frontal/Lateral</h4><p>Percentual de repetição entre fotos para garantir reconstrução estável.</p></div>
+            <div class="glossario-card"><h4>RGB</h4><p>Câmera comum (vermelho, verde e azul), com ótima leitura visual.</p></div>
+            <div class="glossario-card"><h4>Multiespectral</h4><p>Câmera que registra faixas além do visível, útil para separar tipos de cobertura.</p></div>
+            <div class="glossario-card"><h4>NDVI / GNDVI / NDRE</h4><p>Índices de vegetação calculados a partir da reflectância da luz.</p></div>
+            <div class="glossario-card"><h4>EXIF</h4><p>Metadados da foto (data, hora, coordenadas e parâmetros da câmera).</p></div>
+            <div class="glossario-card"><h4>Telemetria</h4><p>Dados do voo registrados pelo drone (altura, velocidade, posição, bateria).</p></div>
+            <div class="glossario-card"><h4>GCP / Checkpoint</h4><p>Pontos de controle no terreno para ajustar e validar a precisão do mapeamento.</p></div>
+            <div class="glossario-card"><h4>RMSE</h4><p>Indicador do erro médio de posicionamento; quanto menor, melhor.</p></div>
+        </div>
+
+        <h3>Modelagem e Estatística (explicado em linguagem simples)</h3>
+        <div class="glossario-grid">
+            <div class="glossario-card"><h4>SIG (GIS)</h4><p>Ferramenta para juntar mapas, tabelas e análises em um único ambiente.</p></div>
+            <div class="glossario-card"><h4>IAH</h4><p>Índice que resume se um local é mais ou menos favorável para a espécie.</p></div>
+            <div class="glossario-card"><h4>SDM</h4><p>Modelo que prevê onde uma espécie pode ocorrer com base no ambiente.</p></div>
+            <div class="glossario-card"><h4>ODMAP</h4><p>Padrão de documentação que ajuda a explicar e reproduzir modelos ecológicos.</p></div>
+            <div class="glossario-card"><h4>Acurácia Global</h4><p>Percentual total de acertos de uma classificação.</p></div>
+            <div class="glossario-card"><h4>Kappa</h4><p>Métrica de concordância que desconta acertos por acaso.</p></div>
+            <div class="glossario-card"><h4>Matriz de Confusão</h4><p>Tabela que compara classe prevista com classe observada em campo.</p></div>
+            <div class="glossario-card"><h4>Validação</h4><p>Etapa de teste para verificar se o resultado é confiável.</p></div>
+            <div class="glossario-card"><h4>Reprodutibilidade</h4><p>Capacidade de repetir o método e obter resultados comparáveis.</p></div>
+            <div class="glossario-card"><h4>Cenário Climático</h4><p>Projeção de condições futuras usada para avaliar possíveis mudanças de distribuição.</p></div>
+        </div>
+
+        <h3>Planejamento e Operação de Voo</h3>
+        <div class="glossario-grid">
+            <div class="glossario-card"><h4>Janela Operacional</h4><p>Período com condições adequadas para executar campo e voo com segurança.</p></div>
+            <div class="glossario-card"><h4>Go / No-go</h4><p>Decisão de realizar ou cancelar missão com base em critérios prévios de segurança e qualidade.</p></div>
+            <div class="glossario-card"><h4>Boletim Meteorológico</h4><p>Previsão oficial do tempo usada para planejar e ajustar as atividades de campo.</p></div>
+            <div class="glossario-card"><h4>METAR / TAF</h4><p>Mensagens meteorológicas de aeroportos, úteis para condição observada e previsão de curtíssimo prazo.</p></div>
+            <div class="glossario-card"><h4>Estado do Mar</h4><p>Condição de ondulação e agitação da água, essencial para segurança em área costeira.</p></div>
+            <div class="glossario-card"><h4>Failsafe</h4><p>Modo de segurança do drone em caso de perda de sinal ou problemas críticos.</p></div>
+            <div class="glossario-card"><h4>Padronização de Campanhas</h4><p>Uso dos mesmos parâmetros entre campanhas para permitir comparação justa no tempo.</p></div>
+            <div class="glossario-card"><h4>Contingência</h4><p>Plano alternativo para imprevistos (vento forte, chuva, mar ruim, falha técnica).</p></div>
+        </div>
+    </div>
+
+    <div id="cronograma" class="tab-content" role="tabpanel" aria-labelledby="tab-cronograma">
+        <h2>📅 Cronograma (Mar/2026 - Dez/2027)</h2>
+
+        <div class="info-card">
+            <p><strong>Início previsto:</strong> Março de 2026</p>
+            <p><strong>Duração principal:</strong> 22 meses + etapa pós-defesa</p>
+            <p>
+                O cronograma foi estruturado para manter um fluxo contínuo entre
+                <strong>planejamento, campo, análise e redação</strong>, reduzindo sobrecarga no fim do curso
+                e garantindo tempo para validação dos resultados.
+            </p>
+        </div>
+
+        <h3>Cronograma visual (estilo Gantt)</h3>
+        <div class="gantt-wrap" data-start-month="3" data-start-year="2026" data-total-months="22">
+            <div class="gantt-scale">
+                <span style="left: 0%;">M1</span>
+                <span style="left: 18.2%;">M5</span>
+                <span style="left: 40.9%;">M10</span>
+                <span style="left: 63.6%;">M15</span>
+                <span style="left: 95.5%;">M22</span>
+            </div>
+
+            <div class="gantt-row" data-start="1" data-end="5">
+                <div class="gantt-label">Fase 1 (M1-M5)</div>
+                <div class="gantt-track current-month">
+                    <div class="gantt-bar gantt-fase1" style="--start: 1; --span: 5;">Base teórica + preparo</div>
+                </div>
+            </div>
+
+            <div class="gantt-row" data-start="6" data-end="10">
+                <div class="gantt-label">Fase 2 (M6-M10)</div>
+                <div class="gantt-track current-month">
+                    <div class="gantt-bar gantt-fase2" style="--start: 6; --span: 5;">Campo 1 + organização</div>
+                </div>
+            </div>
+
+            <div class="gantt-row" data-start="11" data-end="15">
+                <div class="gantt-label">Fase 3 (M11-M15)</div>
+                <div class="gantt-track current-month">
+                    <div class="gantt-bar gantt-fase3" style="--start: 11; --span: 5;">Campo 2 + modelagem</div>
+                </div>
+            </div>
+
+            <div class="gantt-row" data-start="16" data-end="22">
+                <div class="gantt-label">Fase 4 (M16-M22)</div>
+                <div class="gantt-track current-month">
+                    <div class="gantt-bar gantt-fase4" style="--start: 16; --span: 7;">Síntese + defesa</div>
+                </div>
+            </div>
+
+            <div class="gantt-milestones">
+                <span class="gantt-milestone">M5: protocolo fechado</span>
+                <span class="gantt-milestone">M10: campanha 1 consolidada</span>
+                <span class="gantt-milestone">M15: IAH/SDMs validados</span>
+                <span class="gantt-milestone">M18: qualificação</span>
+                <span class="gantt-milestone">M22: defesa</span>
+                <span class="gantt-milestone">Jan/2028: artigo</span>
+            </div>
+
+            <div class="gantt-legend" aria-label="Legenda de cores por fase">
+                <span class="gantt-legend-item"><span class="gantt-dot gantt-fase1"></span>Fase 1</span>
+                <span class="gantt-legend-item"><span class="gantt-dot gantt-fase2"></span>Fase 2</span>
+                <span class="gantt-legend-item"><span class="gantt-dot gantt-fase3"></span>Fase 3</span>
+                <span class="gantt-legend-item"><span class="gantt-dot gantt-fase4"></span>Fase 4</span>
+            </div>
+
+            <div class="gantt-progress" aria-live="polite">
+                <div class="gantt-progress-top">
+                    <strong>Progresso do cronograma</strong>
+                    <span id="gantt-progress-label">Calculando...</span>
+                </div>
+                <div class="gantt-progress-bar">
+                    <div id="gantt-progress-fill" class="gantt-progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="gantt-actions">
+                <button type="button" class="gantt-btn" onclick="irParaMesAtual()">Ir para o mês atual</button>
+            </div>
+        </div>
+
+        <h3>Visão geral por fase</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Fase</th>
+                    <th>Período</th>
+                    <th>Objetivo central</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Fase 1</td>
+                    <td>M1-M5</td>
+                    <td>Fundamentação teórica, desenho amostral e preparação operacional</td>
+                </tr>
+                <tr>
+                    <td>Fase 2</td>
+                    <td>M6-M10</td>
+                    <td>Primeira campanha de campo e consolidação inicial da base de dados</td>
+                </tr>
+                <tr>
+                    <td>Fase 3</td>
+                    <td>M11-M15</td>
+                    <td>Segunda campanha, integração final e modelagem ecológica</td>
+                </tr>
+                <tr>
+                    <td>Fase 4</td>
+                    <td>M16-M22</td>
+                    <td>Síntese científica, qualificação, defesa e publicação</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Detalhamento mês a mês (com entregas)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Período</th>
+                    <th>Atividades principais</th>
+                    <th>Entregáveis previstos</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>M1-M2</td>
+                    <td>Imersão bibliográfica, alinhamento metodológico e definição final do desenho amostral.</td>
+                    <td>Protocolo metodológico consolidado e plano de trabalho validado com orientação.</td>
+                </tr>
+                <tr>
+                    <td>M3-M5</td>
+                    <td>Licenças, logística de campo, padronização de fichas e treinamento de coleta.</td>
+                    <td>Checklist operacional completo e cronograma de saídas de campo fechado.</td>
+                </tr>
+                <tr>
+                    <td>M6-M8</td>
+                    <td>1a campanha: inventário, DAFOR, variáveis ambientais e registro georreferenciado.</td>
+                    <td>Base primária de campo (biológica + ambiental + espacial) organizada.</td>
+                </tr>
+                <tr>
+                    <td>M9-M10</td>
+                    <td>Limpeza de dados, organização em SIG e análise descritiva preliminar.</td>
+                    <td>Mapas iniciais de ocorrência e relatório técnico parcial da campanha 1.</td>
+                </tr>
+                <tr>
+                    <td>M11-M13</td>
+                    <td>2a campanha para reforço amostral, validação de padrões e ajuste de lacunas.</td>
+                    <td>Base integrada das duas campanhas e banco geoespacial final de trabalho.</td>
+                </tr>
+                <tr>
+                    <td>M14-M15</td>
+                    <td>Cálculo do IAH, execução dos SDMs e avaliação de desempenho dos modelos.</td>
+                    <td>Mapas de adequabilidade e distribuição potencial com validação estatística.</td>
+                </tr>
+                <tr>
+                    <td>M16-M18</td>
+                    <td>Interpretação ecológica dos resultados e redação da Etapa 1 de qualificação.</td>
+                    <td>Capítulos parciais e apresentação da qualificação intermediária (M18).</td>
+                </tr>
+                <tr>
+                    <td>M19-M21</td>
+                    <td>Redação final da dissertação, revisão técnica, ajustes de figuras e tabelas.</td>
+                    <td>Versão completa da dissertação pronta para banca.</td>
+                </tr>
+                <tr>
+                    <td>M22</td>
+                    <td>Defesa pública e incorporação das recomendações da banca.</td>
+                    <td>Dissertação defendida e versão final para depósito institucional.</td>
+                </tr>
+                <tr>
+                    <td>Pós-defesa (Jan/2028)</td>
+                    <td>Conversão dos resultados em manuscrito científico para periódico.</td>
+                    <td>Artigo submetido.</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Marcos acadêmicos e de gestão</h3>
+        <ol>
+            <li><strong>M5:</strong> desenho metodológico fechado e operação de campo pronta.</li>
+            <li><strong>M10:</strong> conclusão da campanha 1 e primeira síntese espacial.</li>
+            <li><strong>M15:</strong> modelagem IAH/SDMs concluída e validada.</li>
+            <li><strong>M18:</strong> qualificação intermediária com resultados robustos.</li>
+            <li><strong>M22:</strong> defesa pública da dissertação e finalização acadêmica.</li>
+            <li><strong>Pós-defesa (Jan/2028):</strong> submissão de artigo científico.</li>
+        </ol>
+
+        <h3>Lógica de execução e controle</h3>
+        <div class="info-card">
+            <ul>
+                <li><strong>Ritmo em ciclos:</strong> cada fase combina coleta, organização e síntese parcial para evitar acúmulo de tarefas.</li>
+                <li><strong>Ponto de verificação:</strong> ao final de cada fase, há uma entrega objetiva para acompanhamento com a orientação.</li>
+                <li><strong>Janela de contingência:</strong> a sequência prevê margem para remarcação de saídas por condições climáticas/marítimas.</li>
+                <li><strong>Produto acumulativo:</strong> os resultados de uma fase alimentam diretamente a seguinte (campo -> SIG -> modelagem -> redação).</li>
+            </ul>
+        </div>
+
+        <div class="destaque-box">
+            <h3>Viabilidade</h3>
+            <p>
+                O projeto é viável pela aderência entre tema e linha de orientação,
+                disponibilidade de infraestrutura laboratorial na UFSC e planejamento
+                de campo compatível com o prazo do mestrado.
+            </p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p><strong>Programa de Pós-graduação em Oceanografia (PPGOceano/UFSC)</strong></p>
+    <p>Aluno: Ronan Armando Caetano</p>
+    <p>Atualizado em março de 2026</p>
+    <p style="margin-top: 16px; font-size: 0.92em;">
+        Entre costões, ilhas e marés,<br>
+        onde a luz revela o fundo e o vento define o ritmo do campo,<br>
+        as macrófitas desenham, no mapa vivo da costa,<br>
+        a memória do clima, da água e da biodiversidade.
+    </p>
+</footer>
+
+<script>
+    function updateThemeButton() {
+        var btn = document.getElementById('theme-toggle');
+        if (!btn) {
+            return;
+        }
+
+        var dark = document.body.classList.contains('dark-mode');
+        btn.textContent = dark ? 'Ativar modo claro' : 'Ativar modo escuro';
+        btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+    }
+
+    function applyTheme(theme) {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
+        updateThemeButton();
+    }
+
+    function initTheme() {
+        var saved = window.localStorage.getItem('ppgoceano-theme');
+        if (saved === 'dark' || saved === 'light') {
+            applyTheme(saved);
+            return;
+        }
+
+        var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDark ? 'dark' : 'light');
+    }
+
+    function toggleTheme() {
+        var dark = document.body.classList.contains('dark-mode');
+        var next = dark ? 'light' : 'dark';
+        applyTheme(next);
+        window.localStorage.setItem('ppgoceano-theme', next);
+    }
+
+    function atualizarMarcadorGantt() {
+        var ganttWrap = document.querySelector('.gantt-wrap');
+        if (!ganttWrap) {
+            return;
+        }
+
+        var startMonth = parseInt(ganttWrap.getAttribute('data-start-month') || '3', 10);
+        var startYear = parseInt(ganttWrap.getAttribute('data-start-year') || '2026', 10);
+        var totalMonths = parseInt(ganttWrap.getAttribute('data-total-months') || '22', 10);
+        var tracks = ganttWrap.querySelectorAll('.gantt-track.current-month');
+        var progressLabel = document.getElementById('gantt-progress-label');
+        var progressFill = document.getElementById('gantt-progress-fill');
+        if (!tracks.length) {
+            return;
+        }
+
+        var hoje = new Date();
+        var mesAtual = hoje.getMonth() + 1;
+        var anoAtual = hoje.getFullYear();
+        var indiceMes = ((anoAtual - startYear) * 12) + (mesAtual - startMonth) + 1;
+        var indiceExibicao = Math.min(Math.max(indiceMes, 1), totalMonths);
+        var mesesPt = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
+
+        ganttWrap.setAttribute('data-current-index', String(indiceExibicao));
+
+        for (var i = 0; i < tracks.length; i++) {
+            tracks[i].style.setProperty('--current', indiceExibicao);
+            tracks[i].removeAttribute('data-now');
+        }
+
+        var rotuloAtual;
+        var percentual;
+        if (indiceMes < 1) {
+            rotuloAtual = 'Mês atual: antes do cronograma';
+            percentual = 0;
+        } else if (indiceMes > totalMonths) {
+            rotuloAtual = 'Mês atual: após M' + totalMonths;
+            percentual = 100;
+        } else {
+            rotuloAtual = 'Mês atual: ' + mesesPt[mesAtual - 1] + '/' + anoAtual + ' (M' + indiceMes + ')';
+            percentual = Math.round((indiceMes / totalMonths) * 100);
+        }
+
+        tracks[0].setAttribute('data-now', rotuloAtual);
+
+        if (progressLabel) {
+            progressLabel.textContent = 'M' + indiceExibicao + ' de ' + totalMonths + ' (' + percentual + '%)';
+        }
+
+        if (progressFill) {
+            progressFill.style.width = percentual + '%';
+        }
+    }
+
+    function irParaMesAtual() {
+        var ganttWrap = document.querySelector('.gantt-wrap');
+        if (!ganttWrap) {
+            return;
+        }
+
+        var indiceAtual = parseInt(ganttWrap.getAttribute('data-current-index') || '1', 10);
+        var rows = ganttWrap.querySelectorAll('.gantt-row');
+        var faseAtual = null;
+
+        for (var i = 0; i < rows.length; i++) {
+            rows[i].classList.remove('gantt-row-active');
+            var start = parseInt(rows[i].getAttribute('data-start') || '0', 10);
+            var end = parseInt(rows[i].getAttribute('data-end') || '0', 10);
+            if (indiceAtual >= start && indiceAtual <= end) {
+                faseAtual = rows[i];
+            }
+        }
+
+        if (!faseAtual) {
+            return;
+        }
+
+        faseAtual.classList.add('gantt-row-active');
+        faseAtual.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        window.setTimeout(function() {
+            faseAtual.classList.remove('gantt-row-active');
+        }, 2600);
+    }
+
+    function activateTab(tabButton, tabName) {
+        var tabContents = document.getElementsByClassName('tab-content');
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove('active');
+        }
+
+        var tabButtons = document.getElementsByClassName('tab-button');
+        for (var j = 0; j < tabButtons.length; j++) {
+            tabButtons[j].classList.remove('active');
+            tabButtons[j].setAttribute('aria-selected', 'false');
+            tabButtons[j].setAttribute('tabindex', '-1');
+        }
+
+        document.getElementById(tabName).classList.add('active');
+        tabButton.classList.add('active');
+        tabButton.setAttribute('aria-selected', 'true');
+        tabButton.setAttribute('tabindex', '0');
+        tabButton.focus();
+    }
+
+    function openTab(evt, tabName) {
+        activateTab(evt.currentTarget, tabName);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function configurarAcessibilidadeAbas() {
+        var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab-button'));
+        if (!tabs.length) {
+            return;
+        }
+
+        for (var i = 0; i < tabs.length; i++) {
+            tabs[i].addEventListener('keydown', function(e) {
+                var currentIndex = tabs.indexOf(e.currentTarget);
+                var targetIndex = currentIndex;
+
+                if (e.key === 'ArrowRight') {
+                    targetIndex = (currentIndex + 1) % tabs.length;
+                } else if (e.key === 'ArrowLeft') {
+                    targetIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                } else if (e.key === 'Home') {
+                    targetIndex = 0;
+                } else if (e.key === 'End') {
+                    targetIndex = tabs.length - 1;
+                } else if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    var panelId = e.currentTarget.getAttribute('aria-controls');
+                    activateTab(e.currentTarget, panelId);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                    return;
+                } else {
+                    return;
+                }
+
+                e.preventDefault();
+                tabs[targetIndex].focus();
+            });
+        }
+    }
+
+    initTheme();
+    atualizarMarcadorGantt();
+    configurarAcessibilidadeAbas();
+</script>
+
+</body>
+</html>
