@@ -134,6 +134,8 @@ Mapas gerados com dados geoespaciais oficiais:
 ---
 
 <p align="center">
-  <em>Gerado com dados reais e bibliografia científica atualizada</em><br>
-  <em>Novembro de 2025</em>
+  <em>Entre costões, ilhas e marés,</em><br>
+  <em>onde a luz revela o fundo e o vento define o ritmo do campo,</em><br>
+  <em>as macrófitas desenham, no mapa vivo da costa,</em><br>
+  <em>a memória do clima, da água e da biodiversidade.</em>
 </p>
