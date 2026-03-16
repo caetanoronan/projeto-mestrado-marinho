@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Mestrado - Biodiversidade Marinha</title>
+    <title>Distribuição e Modelagem de Habitat de Macrófitas Marinhas — PPGOceano/UFSC</title>
     <style>
         :root {
             --cor-primaria: #006d2c;
@@ -142,25 +142,60 @@
         .pulse {
             animation: pulse 2s infinite;
         }
+
+        .btn-secondary {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--cor-primaria);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.0em;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cor-fundo);
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #dde;
+            margin: 30px 0 10px;
+        }
+
+        .section-label {
+            font-size: 0.82em;
+            color: #aaa;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 6px 0 14px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="emoji">🌊</div>
-        <h1>Biodiversidade e Invasões Marinhas</h1>
-        <p>Ilhas Costeiras de Santa Catarina</p>
+        <div class="emoji">�</div>
+        <h1>Distribuição e Modelagem de Habitat de Macrófitas Marinhas</h1>
+        <p>Ilhas Costeiras de Santa Catarina no Contexto da Crise Climática</p>
 
         <div class="info-box">
-            <h3>📚 Projeto de Mestrado</h3>
+            <h3>🎓 Projeto de Mestrado — PPGOceano/UFSC · 2026</h3>
             <p style="font-size: 1em;">
-                <strong class="highlight">Vínculo:</strong> Aluno do Programa de Pós-graduação em Oceanografia (PPGOceano/UFSC)<br>
+                <strong class="highlight">Mestrando:</strong> Ronan Armando Caetano<br>
+                <strong class="highlight">Programa:</strong> Pós-Graduação em Oceanografia (PPGOceano/UFSC)<br>
                 <strong class="highlight">Orientador Proposto:</strong> Prof. Dr. Paulo Antunes Horta
             </p>
         </div>
 
         <p>
-            Avaliação da <span class="highlight">perda de biodiversidade</span> e 
-            <span class="highlight">impacto de invasões</span> em três ilhas de Santa Catarina
+            Mapeamento e modelagem da <span class="highlight">distribuição de macrófitas marinhas</span>
+            em ilhas costeiras de SC, avaliando <span class="highlight">adequabilidade de habitat</span>
+            frente à <span class="highlight">crise climática</span>.
         </p>
 
         <div class="areas">
@@ -178,52 +213,69 @@
             </div>
         </div>
 
-        <a href="Apresentacao_Projeto_Mestrado_Publica.html" class="btn pulse">
-            📊 Ver Apresentação Completa
+        <a href="Apresentacao_Macrofitas_Publica.html" class="btn pulse">
+            🌿 Apresentação — Português
         </a>
 
         <div style="margin-top: 16px;"></div>
-        <a href="Apresentacao_Macrofitas_Publica.html" class="btn">
-            🌿 Ver Apresentação de Macrófitas
+        <a href="Apresentacao_Macrofitas_Publica.en.html" class="btn">
+            🇬🇧 Presentation — English
         </a>
 
         <div style="margin-top: 16px;"></div>
-        <a href="qr_apresentacao_macrofitas.png" class="btn" target="_blank">
-            📱 Abrir QR Code da Apresentação
+        <a href="Apresentacao_Macrofitas_Publica.es.html" class="btn">
+            🇪🇸 Presentación — Español
         </a>
 
         <div style="margin-top: 16px;"></div>
-        <a href="Evolucao_Completa_Plantas_Terra.html" class="btn">
-            🌿 Evolução das Plantas Terrestres
+        <a href="Mapas_Gerados/mapa_interativo.html" class="btn">
+            🗺️ Mapa Interativo das Áreas de Estudo
         </a>
 
-        <div style="margin-top: 16px;"></div>
-        <a href="Mapas_Gerados/mapa_manguezais_SC_GMW.html" class="btn">
-            🪸 Ver Mapa de Manguezais (GMW)
+        <hr class="divider">
+        <p class="section-label">Outros conteúdos</p>
+
+        <a href="qr_apresentacao_macrofitas.png" class="btn-secondary" target="_blank">
+            📱 QR Code da Apresentação
         </a>
 
-        <div style="margin-top: 16px;"></div>
-        <a href="Mapas_Gerados/mapa_manguezais_por_uf_cor_regiao.html" class="btn">
-            🗺️ Ver Mapa Nacional de Manguezais (UF e Região)
+        <div style="margin-top: 12px;"></div>
+        <a href="Apresentacao_Projeto_Mestrado_Publica.html" class="btn-secondary">
+            📊 Apresentação Completa (Versão Anterior)
         </a>
 
-        <div style="margin-top: 16px;"></div>
-        <a href="Mapas_Gerados/dashboard_manguezais_regioes.html" class="btn">
-            📊 Ver Dashboard de Manguezais por Região
+        <div style="margin-top: 12px;"></div>
+        <a href="Evolucao_Completa_Plantas_Terra.html" class="btn-secondary">
+            🌱 Evolução das Plantas Terrestres
         </a>
 
-        <div style="margin-top: 16px;"></div>
-        <a href="https://caetanoronan.github.io/labficol-tutorial/" class="btn" target="_blank">
+        <div style="margin-top: 12px;"></div>
+        <a href="Mapas_Gerados/mapa_manguezais_SC_GMW.html" class="btn-secondary">
+            🪸 Manguezais SC (GMW)
+        </a>
+
+        <div style="margin-top: 12px;"></div>
+        <a href="Mapas_Gerados/mapa_manguezais_por_uf_cor_regiao.html" class="btn-secondary">
+            🗺️ Manguezais Brasil (UF e Região)
+        </a>
+
+        <div style="margin-top: 12px;"></div>
+        <a href="Mapas_Gerados/dashboard_manguezais_regioes.html" class="btn-secondary">
+            📊 Dashboard Manguezais por Região
+        </a>
+
+        <div style="margin-top: 12px;"></div>
+        <a href="https://caetanoronan.github.io/labficol-tutorial/" class="btn-secondary" target="_blank">
             🔬 Tutorial LABFICOL
         </a>
 
-        <div style="margin-top: 16px;"></div>
-        <a href="https://caetanoronan.github.io/olokun-website/docs/mini_curso_traducao_capa_indice.html" class="btn" target="_blank">
-            📖 Mini Curso Olokun - Tradução
+        <div style="margin-top: 12px;"></div>
+        <a href="https://caetanoronan.github.io/olokun-website/docs/mini_curso_traducao_capa_indice.html" class="btn-secondary" target="_blank">
+            📖 Mini Curso Olokun — Tradução
         </a>
 
         <p style="font-size: 0.9em; margin-top: 40px; color: #999;">
-            Mapas interativos • Dashboard público • Bibliografia • Metodologia • Cronograma • Manguezais
+            Macrófitas Marinhas · Modelagem de Habitat · Ilhas Costeiras · SC · Brasil · 2026
         </p>
     </div>
 </body>
