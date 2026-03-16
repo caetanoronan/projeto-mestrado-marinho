@@ -73,6 +73,7 @@
         header h1 { font-size: 2.3em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.25); }
         header p { font-size: 1.15em; opacity: 0.96; }
         .subtitle { font-size: 1em; margin-top: 8px; font-weight: 300; }
+        .key-message { font-size: 0.98em; margin-top: 10px; font-weight: 600; opacity: 0.96; }
 
         .lang-switcher {
             margin-top: 14px;
@@ -109,11 +110,16 @@
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.03em;
             font-weight: 600;
             color: var(--cor-primaria);
             transition: all 0.25s ease;
             white-space: nowrap;
+        }
+        @media (min-width: 1200px) {
+            header h1 { font-size: 2.5em; }
+            .tab-button { font-size: 1.07em; padding: 16px 26px; }
+            .tab-content { font-size: 1.03em; }
         }
         .tab-button:hover { background-color: var(--cor-fundo); }
         .tab-button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
@@ -340,10 +346,11 @@
 <body>
 
 <header>
-    <h1>🌿 Distribucion y Modelado de Habitat de Macrofitas Marinas</h1>
-    <p>Islas Costeras de Santa Catarina en el Contexto de la Crisis Climatica</p>
-    <p class="subtitle">Proyecto de Maestria - PPGOceano/UFSC | 2026</p>
+    <h1>🌿 Distribución y Modelado de Hábitat de Macrófitas Marinas</h1>
+    <p>Islas Costeras de Santa Catarina en el Contexto de la Crisis Climática</p>
+    <p class="subtitle">Proyecto de Maestría - PPGOceano/UFSC | 2026</p>
     <p class="subtitle"><strong>Estudiante:</strong> Ronan Armando Caetano</p>
+    <p class="key-message"><strong>Mensaje clave:</strong> evidencia espacial para apoyar el monitoreo y la conservación de hábitats insulares.</p>
     <div class="lang-switcher" aria-label="Selector de idioma">
         <span>🌐</span>
         <a href="Apresentacao_Macrofitas_Publica.html">PT</a>
@@ -354,11 +361,11 @@
 </header>
 
 <div class="container">
-    <div class="tabs" role="tablist" aria-label="Secciones de la presentacion">
-        <button id="tab-visao-geral" class="tab-button active" role="tab" aria-selected="true" aria-controls="visao-geral" tabindex="0" onclick="openTab(event, 'visao-geral')">📋 Vision General</button>
-        <button id="tab-areas" class="tab-button" role="tab" aria-selected="false" aria-controls="areas" tabindex="-1" onclick="openTab(event, 'areas')">🗺️ Areas de Estudio</button>
+    <div class="tabs" role="tablist" aria-label="Secciones de la presentación">
+        <button id="tab-visao-geral" class="tab-button active" role="tab" aria-selected="true" aria-controls="visao-geral" tabindex="0" onclick="openTab(event, 'visao-geral')">📋 Visión General</button>
+        <button id="tab-areas" class="tab-button" role="tab" aria-selected="false" aria-controls="areas" tabindex="-1" onclick="openTab(event, 'areas')">🗺️ Áreas de Estudio</button>
         <button id="tab-objetivos" class="tab-button" role="tab" aria-selected="false" aria-controls="objetivos" tabindex="-1" onclick="openTab(event, 'objetivos')">🎯 Objetivos</button>
-        <button id="tab-metodologia" class="tab-button" role="tab" aria-selected="false" aria-controls="metodologia" tabindex="-1" onclick="openTab(event, 'metodologia')">🔬 Metodologia</button>
+        <button id="tab-metodologia" class="tab-button" role="tab" aria-selected="false" aria-controls="metodologia" tabindex="-1" onclick="openTab(event, 'metodologia')">🔬 Metodología</button>
         <button id="tab-produtos" class="tab-button" role="tab" aria-selected="false" aria-controls="produtos" tabindex="-1" onclick="openTab(event, 'produtos')">📦 Productos</button>
         <button id="tab-glossario" class="tab-button" role="tab" aria-selected="false" aria-controls="glossario" tabindex="-1" onclick="openTab(event, 'glossario')">📚 Glosario</button>
         <button id="tab-cronograma" class="tab-button" role="tab" aria-selected="false" aria-controls="cronograma" tabindex="-1" onclick="openTab(event, 'cronograma')">📅 Cronograma</button>

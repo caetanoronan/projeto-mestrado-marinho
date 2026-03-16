@@ -73,6 +73,7 @@
         header h1 { font-size: 2.3em; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.25); }
         header p { font-size: 1.15em; opacity: 0.96; }
         .subtitle { font-size: 1em; margin-top: 8px; font-weight: 300; }
+        .key-message { font-size: 0.98em; margin-top: 10px; font-weight: 600; opacity: 0.96; }
 
         .lang-switcher {
             margin-top: 14px;
@@ -109,11 +110,16 @@
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.03em;
             font-weight: 600;
             color: var(--cor-primaria);
             transition: all 0.25s ease;
             white-space: nowrap;
+        }
+        @media (min-width: 1200px) {
+            header h1 { font-size: 2.5em; }
+            .tab-button { font-size: 1.07em; padding: 16px 26px; }
+            .tab-content { font-size: 1.03em; }
         }
         .tab-button:hover { background-color: var(--cor-fundo); }
         .tab-button:focus-visible { outline: 3px solid var(--focus-ring); outline-offset: 2px; }
@@ -344,6 +350,7 @@
     <p>Coastal Islands of Santa Catarina in the Context of the Climate Crisis</p>
     <p class="subtitle">Master's Project - PPGOceano/UFSC | 2026</p>
     <p class="subtitle"><strong>Student:</strong> Ronan Armando Caetano</p>
+    <p class="key-message"><strong>Key message:</strong> spatial evidence to support monitoring and conservation of island habitats.</p>
     <div class="lang-switcher" aria-label="Language selector">
         <span>🌐</span>
         <a href="Apresentacao_Macrofitas_Publica.html">PT</a>

@@ -96,6 +96,13 @@
             font-weight: 300;
         }
 
+        .key-message {
+            font-size: 0.98em;
+            margin-top: 10px;
+            font-weight: 600;
+            opacity: 0.96;
+        }
+
         .lang-switcher {
             margin-top: 14px;
             display: flex;
@@ -141,11 +148,26 @@
             border: none;
             border-bottom: 3px solid transparent;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 1.03em;
             font-weight: 600;
             color: var(--cor-primaria);
             transition: all 0.25s ease;
             white-space: nowrap;
+        }
+
+        @media (min-width: 1200px) {
+            header h1 {
+                font-size: 2.5em;
+            }
+
+            .tab-button {
+                font-size: 1.07em;
+                padding: 16px 26px;
+            }
+
+            .tab-content {
+                font-size: 1.03em;
+            }
         }
 
         .tab-button:hover {
@@ -822,6 +844,7 @@
     <p>Ilhas Costeiras de Santa Catarina no Contexto da Crise Climática</p>
     <p class="subtitle">Projeto de Mestrado - PPGOceano/UFSC | 2026</p>
     <p class="subtitle"><strong>Aluno:</strong> Ronan Armando Caetano</p>
+    <p class="key-message"><strong>Mensagem-chave:</strong> evidencias espaciais para monitoramento e conservacao de habitats insulares.</p>
     <div class="lang-switcher" aria-label="Seletor de idioma">
         <span>🌐</span>
         <a href="Apresentacao_Macrofitas_Publica.html" class="lang-active" aria-current="page">PT</a>
