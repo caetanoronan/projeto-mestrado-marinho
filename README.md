@@ -1,15 +1,16 @@
-# 🌊 Projeto de Mestrado - Biodiversidade e Invasões Marinhas
+# 🌊 Distribuição e Modelagem de Habitat de Macrófitas Marinhas
 
-**Ilhas Costeiras de Santa Catarina**
+## Ilhas Costeiras de Santa Catarina no Contexto da Crise Climática
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Online-success)](https://caetanoronan.github.io/projeto-mestrado-marinho/)
 
 ## 📋 Sobre o Projeto
 
 Projeto de mestrado proposto para o **PPGOceano/UFSC - 2026** focando em:
-- 🔬 Perda de biodiversidade marinha bentônica
-- 🦠 Impacto de espécies invasoras (coral-sol)
-- 🏝️ Três áreas de estudo em Santa Catarina
+- 🌿 Distribuição e diversidade de macrófitas marinhas bentônicas
+- 🗺️ Modelagem de adequabilidade de habitat e análise espacial
+- 🌡️ Respostas ecológicas no contexto da crise climática
+- 🏝️ Três áreas de estudo insulares em Santa Catarina
 
 ## 🗺️ Áreas de Estudo
 
@@ -19,7 +20,7 @@ Projeto de mestrado proposto para o **PPGOceano/UFSC - 2026** focando em:
 
 ## 🎯 Objetivos
 
-Avaliar padrões de biodiversidade e invasões ao longo de gradientes de:
+Avaliar padrões de distribuição e adequabilidade de habitat de macrófitas marinhas ao longo de gradientes de:
 - Tamanho de ilha
 - Isolamento geográfico
 - Pressão antrópica
