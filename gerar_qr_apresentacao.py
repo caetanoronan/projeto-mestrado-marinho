@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 
 import qrcode
+from qrcode.image.svg import SvgPathImage
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -12,7 +13,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "outputs",
         nargs="+",
-        help="Um ou mais caminhos de saida para o arquivo PNG.",
+        help="Um ou mais caminhos de saida para os arquivos PNG/SVG.",
     )
     parser.add_argument("--box-size", type=int, default=12, help="Tamanho de cada modulo do QR.")
     parser.add_argument("--border", type=int, default=4, help="Margem externa do QR.")
@@ -30,12 +31,17 @@ def main() -> None:
     )
     qr.add_data(args.url)
     qr.make(fit=True)
-    image = qr.make_image(fill_color="black", back_color="white")
 
     for output in args.outputs:
         path = Path(output)
         path.parent.mkdir(parents=True, exist_ok=True)
-        image.save(path)
+        if path.suffix.lower() == ".svg":
+            image = qr.make_image(image_factory=SvgPathImage)
+            with path.open("wb") as file_obj:
+                image.save(file_obj)
+        else:
+            image = qr.make_image(fill_color="black", back_color="white")
+            image.save(path)
         print(path.as_posix())
 
 

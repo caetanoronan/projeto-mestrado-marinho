@@ -314,10 +314,16 @@
         @keyframes pulseGantt { 0% { box-shadow: 0 0 0 0 rgba(240,180,41,0.35); } 100% { box-shadow: 0 0 0 10px rgba(240,180,41,0); } }
 
         footer { text-align: center; padding: 28px; margin-top: 45px; background: var(--footer-bg); border-top: 3px solid var(--cor-primaria); }
+        .footer-qr { margin: 22px auto 8px; max-width: 220px; padding: 14px; border: 1px solid var(--border-strong); border-radius: 18px; background: rgba(255,255,255,0.72); }
+        body.dark-mode .footer-qr { background: rgba(13,31,42,0.78); }
+        .footer-qr img { width: 132px; height: 132px; display: block; margin: 0 auto 10px; border-radius: 12px; background: #ffffff; padding: 8px; }
+        .footer-qr a { color: inherit; font-weight: 700; }
+        .footer-qr p { margin: 0; font-size: 0.92em; }
 
         @media (max-width: 768px) {
             header h1 { font-size: 1.75em; }
             .tabs { flex-direction: column; }
+            .footer-qr { max-width: 190px; }
             .tab-button { border-bottom: 1px solid var(--border-strong); border-left: 3px solid transparent; }
             .tab-button.active { border-left-color: var(--cor-primaria); border-bottom-color: var(--border-strong); }
             .areas-grid { grid-template-columns: 1fr; }
@@ -1075,6 +1081,12 @@
     <p><strong>Postgraduate Program in Oceanography (PPGOceano/UFSC)</strong></p>
     <p>Student: Ronan Armando Caetano</p>
     <p>Updated March 2026</p>
+    <div class="footer-qr">
+        <a href="https://caetanoronan.github.io/projeto-mestrado-marinho/Apresentacao_Macrofitas_Publica.html" target="_blank" rel="noopener noreferrer">
+            <img src="qr_apresentacao_macrofitas.svg" alt="QR code to open the public macrophytes presentation">
+        </a>
+        <p><a href="https://caetanoronan.github.io/projeto-mestrado-marinho/Apresentacao_Macrofitas_Publica.html" target="_blank" rel="noopener noreferrer">Open public presentation</a></p>
+    </div>
     <p style="margin-top: 16px; font-size: 0.92em;">
         Between rocky shores, islands, and tides,<br>
         where light reveals the seafloor and wind sets the rhythm of fieldwork,<br>
