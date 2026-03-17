@@ -1,0 +1,1249 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volunteer Registration - Marine Macrophytes / UFSC</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ocean-dark:  #0b3c5d;
+      --ocean-mid:   #0072b2;
+      --ocean-light: #56b4e9;
+      --ocean-pale:  #eaf4fb;
+      --teal:        #e69f00;
+      --teal-light:  #fff4d8;
+      --sand:        #fff8e1;
+      --text:        #1b1f24;
+      --muted:       #4b5563;
+      --success:     #009e73;
+      --success-bg:  #e7f7f2;
+      --error:       #d55e00;
+      --error-bg:    #fff0e6;
+      --border:      #9aa4b2;
+      --radius:      8px;
+      --surface:     #ffffff;
+      --surface-soft:#fafafa;
+      --focus:       #ffd166;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(160deg, #e3f2fd 0%, #e0f7fa 50%, #f3e5f5 100%);
+      min-height: 100vh;
+      color: var(--text);
+      padding: 20px;
+      transition: background .25s ease, color .25s ease;
+    }
+    body.dark-mode {
+      --ocean-dark:  #d6ecff;
+      --ocean-mid:   #56b4e9;
+      --ocean-light: #8fd3ff;
+      --ocean-pale:  #1f2b36;
+      --teal:        #f0b44c;
+      --teal-light:  #3a2e16;
+      --sand:        #2f2a1f;
+      --text:        #f3f7fa;
+      --muted:       #c7d0d9;
+      --success:     #6ed9b6;
+      --success-bg:  #143029;
+      --error:       #ffb08a;
+      --error-bg:    #3a2218;
+      --border:      #5b6b78;
+      --surface:     #121a22;
+      --surface-soft:#1a2530;
+      background: linear-gradient(160deg, #09131a 0%, #10202a 50%, #16202b 100%);
+    }
+
+    /* ─── Page Header ───────────────────────────────────────────── */
+    .page-header {
+      background: linear-gradient(135deg, var(--ocean-dark), var(--teal));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(13,59,94,.35);
+    }
+    body.dark-mode .page-header {
+      color: #08131b;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: .78rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .page-header .subtitle {
+      font-size: .95rem;
+      opacity: .85;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    .page-header .meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-header .meta span {
+      background: rgba(255,255,255,.14);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: .82rem;
+    }
+    .header-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .lang-switcher a {
+      text-decoration: none;
+      color: inherit;
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      opacity: .92;
+    }
+    .lang-switcher a:hover { background: rgba(255,255,255,.24); }
+    .lang-switcher a.lang-active {
+      background: rgba(255,255,255,.30);
+      border: 1px solid rgba(255,255,255,.55);
+      opacity: 1;
+    }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(255,255,255,.16);
+      color: inherit;
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .theme-toggle:hover { transform: translateY(-1px); background: rgba(255,255,255,.24); }
+    body.dark-mode .theme-toggle {
+      border-color: rgba(8,19,27,.3);
+      background: rgba(8,19,27,.14);
+    }
+    body.dark-mode .lang-switcher {
+      border-color: rgba(8,19,27,.3);
+      background: rgba(8,19,27,.14);
+    }
+    body.dark-mode .lang-switcher a.lang-active {
+      background: rgba(8,19,27,.28);
+      border-color: rgba(8,19,27,.42);
+    }
+
+    /* ─── Tabs ──────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid var(--ocean-mid);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ocean-mid);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .tab-btn.active {
+      background: var(--ocean-mid);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(21,101,160,.35);
+    }
+    .tab-btn:hover:not(.active) { background: var(--ocean-pale); }
+
+    /* ─── Section Cards ─────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    }
+    body.dark-mode .card { box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ocean-dark);
+      margin-bottom: 22px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--ocean-pale);
+    }
+    .section-title .icon {
+      width: 32px; height: 32px;
+      background: var(--ocean-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* ─── Form Grid ─────────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .page-header { padding: 22px 20px; }
+      .card { padding: 20px 16px; }
+    }
+
+    /* ─── Form Controls ─────────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    label {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+    label .req { color: var(--error); margin-left: 2px; }
+    input[type="text"], input[type="email"], input[type="tel"],
+    input[type="number"], select, textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: .93rem;
+      color: var(--text);
+      background: var(--surface-soft);
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--ocean-light);
+      box-shadow: 0 0 0 3px rgba(33,150,243,.15);
+      background: var(--surface);
+    }
+    textarea { min-height: 90px; resize: vertical; }
+
+    /* ─── Checkboxes & Radios ───────────────────────────────────── */
+    .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      cursor: pointer;
+      font-size: .9rem;
+      background: var(--ocean-pale);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 13px;
+      transition: all .2s;
+      user-select: none;
+    }
+    .check-item input { accent-color: var(--ocean-mid); width: 14px; height: 14px; cursor: pointer; }
+    .check-item:has(input:checked) {
+      background: var(--ocean-mid);
+      color: #fff;
+      border-color: var(--ocean-mid);
+      border-width: 2px;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22);
+    }
+    .check-item:has(input:checked)::after {
+      content: "✓";
+      font-weight: 800;
+      margin-left: 2px;
+    }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      cursor: pointer;
+      font-size: .9rem;
+      background: var(--teal-light);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      transition: all .2s;
+      user-select: none;
+    }
+    .radio-item input { accent-color: var(--teal); cursor: pointer; }
+    .radio-item:has(input:checked) {
+      background: var(--teal);
+      color: #1b1f24;
+      border-color: var(--teal);
+      border-width: 2px;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);
+    }
+    .radio-item:has(input:checked)::after {
+      content: "●";
+      font-size: .8rem;
+      margin-left: 2px;
+    }
+
+    /* ─── Hint text ─────────────────────────────────────────────── */
+    .hint { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Buttons ───────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--ocean-mid), var(--teal));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(21,101,160,.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(21,101,160,.45); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff;
+      color: var(--ocean-mid);
+      border: 2px solid var(--ocean-mid);
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-size: .93rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { background: var(--ocean-pale); }
+    .btn-danger {
+      background: none;
+      border: 1.5px solid #e57373;
+      color: #c62828;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-danger:hover { background: var(--error-bg); }
+
+    /* ─── Toast / Alert ─────────────────────────────────────────── */
+    #toast {
+      display: none;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    #toast.success { background: var(--success-bg); color: var(--success); border-left: 4px solid var(--success); }
+    #toast.error   { background: var(--error-bg);   color: var(--error);   border-left: 4px solid var(--error); }
+
+    /* ─── Table ─────────────────────────────────────────────────── */
+    .table-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+    thead {
+      background: linear-gradient(135deg, var(--ocean-dark), var(--teal));
+      color: #fff;
+    }
+    thead th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:hover { background: var(--ocean-pale); }
+    tbody td { padding: 10px 14px; vertical-align: middle; }
+    .badge-tag {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal);
+      border-radius: 12px;
+      padding: 2px 9px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin: 1px;
+      white-space: nowrap;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
+
+    /* ─── Summary counters ──────────────────────────────────────── */
+    .summary-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .summary-card {
+      flex: 1;
+      min-width: 130px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      border-top: 3px solid var(--ocean-mid);
+      text-align: center;
+    }
+    .summary-card .num { font-size: 1.85rem; font-weight: 800; color: var(--ocean-mid); }
+    .summary-card .label { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+
+    #privacyNotice,
+    #setupBanner {
+      transition: background .25s ease, color .25s ease, border-color .25s ease;
+    }
+    body.dark-mode #privacyNotice {
+      background: #152632 !important;
+      border-color: #345062 !important;
+      color: #d6ecfb !important;
+    }
+    body.dark-mode #setupBanner {
+      background: #2d2416 !important;
+      color: #f4e8c7 !important;
+      border-left-color: #ffbf47 !important;
+    }
+    body.dark-mode #setupBanner code {
+      background: rgba(255,255,255,.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    body.dark-mode tbody tr:hover { background: #19313f; }
+    body.dark-mode .empty-state { color: var(--muted); }
+
+    .theme-toggle:focus-visible,
+    .tab-btn:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .btn-danger:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* ─── Utility ───────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+    .mt-16 { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CABEÇALHO DA PÁGINA
+════════════════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="badge">🎓 PPGOceano / UFSC</div>
+  <h1>🌊 Volunteer Registration - Marine Macrophytes</h1>
+  <p class="subtitle">
+    Master's Project: <em>Distribution and Habitat Modeling of Marine Macrophytes on the
+    Coastal Islands of Santa Catarina in the Context of the Climate Crisis</em>
+  </p>
+  <div class="meta">
+    <span>👤 Ronan Armando Caetano</span>
+    <span>🔬 Proposed advisor: Prof. Dr. Paulo Antunes Horta</span>
+    <span>📍 UFSC – Florianópolis, SC</span>
+  </div>
+  <div class="header-actions">
+    <nav class="lang-switcher" aria-label="Language">
+      <a href="Formulario_Voluntarios_Macrofitas.html">PT</a>
+      <a href="Formulario_Voluntarios_Macrofitas.en.html" class="lang-active" aria-current="page">EN</a>
+      <a href="Formulario_Voluntarios_Macrofitas.es.html">ES</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" onclick="toggleTheme()">🌙 Enable dark mode</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TABS
+════════════════════════════════════════════════════════════════ -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('formTab', this)">
+    📋 Registration Form
+  </button>
+  <button class="tab-btn" id="adminTabButton" onclick="showTab('tableTab', this)">
+    🔒 Admin Area
+  </button>
+</div>
+
+<div id="privacyNotice" style="background:#eef7ff; border:1px solid #c9e4ff; border-radius:8px; padding:12px 16px; margin-bottom:20px; color:#18486b; font-size:.9rem; line-height:1.5;">
+  Submitted registrations are treated as private data. The applicant list area is protected by an admin password.
+</div>
+
+<!-- Formspree setup banner (hidden after configured) -->
+<div id="setupBanner" style="background:#fff3e0; border-left:4px solid #f57c00; border-radius:8px; padding:16px 20px; margin-bottom:20px; font-size:.92rem; line-height:1.6;">
+  <strong>⚙️ Setup required to receive registrations by email (Formspree)</strong><br/>
+  Follow the steps below <strong>once</strong> to enable centralized submissions:
+  <ol style="margin:10px 0 0 18px;">
+    <li>Open <strong>formspree.io</strong> and create a free account with your email.</li>
+    <li>Click <em>"New Form"</em>, choose a name (e.g. <em>Marine Macrophytes Volunteers</em>), and confirm.</li>
+    <li>Copy the displayed <strong>Form ID</strong> (e.g. <code>xpwzabcd</code>).</li>
+    <li>Open this HTML file in VS Code and replace <code>SEU_ID_FORMSPREE_AQUI</code> with the copied ID (see script section).</li>
+  </ol>
+  <span style="color:#555;font-size:.83rem;">Free plan: up to 50 submissions/month. Each submission is emailed to you and stored in the Formspree dashboard.</span>
+</div>
+
+<!-- Global alert message -->
+<div id="toast"></div>
+
+<!-- ════════════════════════════════════════════════════════════════
+    TAB 1 - REGISTRATION FORM
+═════════════════════════════════════════════════════════════════ -->
+<div id="formTab">
+
+  <form id="inscricaoForm" novalidate>
+
+    <!-- PERSONAL INFORMATION -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">👤</div> Personal Information
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="nome">Full name <span class="req">*</span></label>
+          <input type="text" id="nome" name="nome" placeholder="Your full name" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="you@email.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="telefone">Phone / WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(48) 99999-9999" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="idade">Age</label>
+          <input type="number" id="idade" name="idade" min="17" max="80" placeholder="E.g.: 22" />
+        </div>
+        <div class="field">
+          <label for="cidade">City / State</label>
+          <input type="text" id="cidade" name="cidade" placeholder="E.g.: Florianopolis, SC" />
+        </div>
+      </div>
+    </div>
+
+    <!-- ACADEMIC INFORMATION -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🎓</div> Academic Information
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="instituicao">Institution <span class="req">*</span></label>
+          <input type="text" id="instituicao" name="instituicao" placeholder="E.g.: UFSC" required />
+        </div>
+        <div class="field">
+          <label for="curso">Program <span class="req">*</span></label>
+          <select id="curso" name="curso" required>
+            <option value="">Select...</option>
+            <option>Biological Sciences</option>
+            <option>Oceanografia</option>
+            <option>Biologia Marinha</option>
+            <option>Ecologia</option>
+            <option>Engenharia Ambiental</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="semestre">Current semester</label>
+          <input type="number" id="semestre" name="semestre" min="1" max="15" placeholder="E.g.: 5" />
+        </div>
+        <div class="field">
+          <label for="lattes">Lattes CV link</label>
+          <input type="text" id="lattes" name="lattes" placeholder="http://lattes.cnpq.br/..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- SKILLS AND EXPERIENCE -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🤿</div> Skills and Experience
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Skills related to the project</label>
+          <div class="check-group">
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Mergulho SCUBA" /> 🤿 SCUBA diving
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Apneia / Freediving" /> 🫁 Apnea / Freediving
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Natação" /> 🏊 Swimming
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Trabalho de campo" /> 🏔 Fieldwork
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Identificação botânica" /> 🌿 Botanical identification
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Análise de dados (R/Python)" /> 💻 Data analysis (R/Python)
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Sistemas GIS/SIG" /> 🗺 Sistemas GIS/SIG
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Fotografia subaquática" /> 📷 Underwater photography
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Redação científica" /> ✍ Scientific writing
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Divulgação científica" /> 📢 Science outreach
+            </label>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="experiencia">Briefly describe your relevant experience</label>
+          <textarea id="experiencia" name="experiencia"
+            placeholder="E.g.: I joined rocky-shore surveys during undergraduate research and hold a PADI OW certification..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- AVAILABILITY -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">📅</div> Availability
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Dias da semana disponíveis</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="dias" value="Segunda" /> Monday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Terça" /> Tuesday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Quarta" /> Wednesday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Quinta" /> Thursday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Sexta" /> Friday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Sábado" /> Saturday</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Domingo" /> Sunday</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Turno disponível</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="turno" value="Manhã" /> 🌅 Morning</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Tarde" /> ☀️ Afternoon</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Noite" /> 🌙 Evening</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Integral" /> 🕐 Full day</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Flexível" /> 🔄 Flexible</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Horas por semana que pode dedicar</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="horas" value="Até 5h" /> Up to 5h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="5h – 10h" /> 5h - 10h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="10h – 20h" /> 10h - 20h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="Mais de 20h" /> More than 20h</label>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="disponibilidadeTexto">Availability notes</label>
+          <input type="text" id="disponibilidadeTexto" name="disponibilidadeTexto"
+            placeholder="E.g.: available only after June; I travel on some weekends..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- FIELD ACTIVITIES -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🏝</div> Field Participation
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Field activities of interest</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="campo" value="Coleta subaquática com SCUBA" /> 🤿 SCUBA sampling</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Coleta com apneia" /> 🫁 Apnea sampling</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Caminhada em costão rochoso" /> 🪨 Rocky-shore transects</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Transporte de equipamentos" /> 🎒 Equipment transport</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Registro fotográfico" /> 📸 Photo records</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Somente atividades em laboratório" /> 🧪 Laboratory only</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Do you have any medical restrictions relevant to fieldwork?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="restricao" value="Não" /> No</label>
+            <label class="radio-item"><input type="radio" name="restricao" value="Sim" /> Yes</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="restricaoDetalhe">If yes, briefly describe (optional)</label>
+          <input type="text" id="restricaoDetalhe" name="restricaoDetalhe"
+            placeholder="E.g.: mild asthma, not limiting..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTIVATION -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">💬</div> Motivation and Expectations
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="motivacao">Why do you want to join this project? <span class="req">*</span></label>
+          <textarea id="motivacao" name="motivacao" required
+            placeholder="Briefly tell us what motivated you to apply and what you expect from this experience..." style="min-height:110px;"></textarea>
+        </div>
+        <div class="field full">
+          <label for="comoSoube">How did you hear about the project?</label>
+          <select id="comoSoube" name="comoSoube">
+            <option value="">Select...</option>
+            <option>Professor recommendation</option>
+            <option>Colleagues / friends</option>
+            <option>Redes sociais (Instagram/LinkedIn)</option>
+            <option>WhatsApp / class group</option>
+            <option>Poster / printed flyer</option>
+            <option>Project website / GitHub</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="observacoes">Additional notes</label>
+          <textarea id="observacoes" name="observacoes"
+            placeholder="Any additional information you would like to share..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGPD / CONSENTIMENTO -->
+    <div class="card" style="background: var(--sand); border-left: 4px solid var(--teal);">
+      <div class="section-title" style="border-color:#ffe082;">
+        <div class="icon" style="background:#fff8e1;">🔒</div> Consent - Data Privacy
+      </div>
+      <p style="font-size:.9rem; line-height:1.6; color:var(--text); margin-bottom:14px;">
+        The data provided in this form will be used <strong>exclusively for volunteer selection and
+        coordination</strong> in the master's research project linked to PPGOceano/UFSC.
+        Your information will not be shared with third parties without authorization. You may request
+        deletion of your data at any time by contacting the responsible researcher.
+      </p>
+      <label class="check-item" style="display:inline-flex; background:var(--ocean-pale);">
+        <input type="checkbox" id="lgpd" name="lgpd" required />
+        <strong>I have read and agree to the use of my data as described above. <span class="req">*</span></strong>
+      </label>
+    </div>
+
+    <!-- SUBMIT BUTTON -->
+    <div class="text-center mt-16" style="margin-bottom:40px;">
+      <button type="submit" class="btn-primary">
+        ✅ Submit Registration
+      </button>
+    </div>
+
+  </form>
+</div><!-- /formTab -->
+
+
+<!-- ════════════════════════════════════════════════════════════════
+    TAB 2 - APPLICANTS TABLE
+═════════════════════════════════════════════════════════════════ -->
+<div id="tableTab" class="hidden">
+
+  <!-- Resumo -->
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-card">
+      <div class="num" id="totalCount">0</div>
+      <div class="label">Total applicants</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="scubaCount">0</div>
+      <div class="label">With SCUBA</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="apneiaCount">0</div>
+      <div class="label">With freediving</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="gisCount">0</div>
+      <div class="label">With GIS</div>
+    </div>
+  </div>
+
+  <!-- Toolbar -->
+  <div class="card">
+    <div class="table-toolbar">
+      <div style="font-weight:700; color:var(--ocean-dark); font-size:1rem;">
+        🔒 Received registrations
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="searchInput" placeholder="🔍 Filter by name, program..."
+          style="max-width:240px;" oninput="renderTable()" />
+        <button class="btn-secondary" onclick="exportCSV()">
+          📥 Export CSV
+        </button>
+        <button class="btn-secondary" onclick="exportJSON()">
+          💾 Export JSON
+        </button>
+        <button class="btn-secondary" onclick="lockAdminArea()">
+          🚪 Exit admin area
+        </button>
+        <button class="btn-danger" onclick="clearAll()" style="padding:8px 16px; font-size:.88rem;">
+          🗑 Clear all
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="inscritosTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Date</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Program</th>
+            <th>Institution</th>
+            <th>Semester</th>
+            <th>Skills</th>
+            <th>Campo</th>
+            <th>Turno</th>
+            <th>Horas/sem</th>
+            <th>Motivation (summary)</th>
+            <th>How heard</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Empty state -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="emoji">🌊</div>
+      <p>No registrations found yet.</p>
+      <p style="font-size:.85rem; margin-top:8px;">Go to the <strong>Registration Form</strong> tab and register the first volunteer.</p>
+    </div>
+  </div>
+
+</div><!-- /tableTab -->
+
+<div class="card" style="text-align:center; margin-top:8px; margin-bottom:24px;">
+  <p><strong>Postgraduate Program in Oceanography (PPGOceano/UFSC)</strong></p>
+  <p><strong>Student:</strong> Ronan Armando Caetano</p>
+  <p>Updated in March 2026</p>
+
+  <div style="margin:16px auto 14px; max-width:240px; padding:14px; border:1px solid var(--border); border-radius:14px; background:var(--surface-soft);">
+    <img src="qr_apresentacao_macrofitas.svg" alt="QR code to open the public macrophytes presentation"
+         style="width:140px; height:140px; display:block; margin:0 auto 10px; border-radius:10px; background:#fff; padding:8px;" />
+    <p style="margin:0 0 10px 0; font-size:.9rem; color:var(--muted);">QR code to open the public macrophytes presentation</p>
+    <a href="Apresentacao_Macrofitas_Publica.en.html" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;">
+      Open public presentation
+    </a>
+  </div>
+
+  <p style="max-width:860px; margin:14px auto 0 auto; line-height:1.7; color:var(--text);">
+    Between rocky shores, islands, and tides,<br>
+    where light reveals the seafloor and wind sets the rhythm of fieldwork,<br>
+    macrophytes trace, on the living map of the coast,<br>
+    the memory of climate, water, and biodiversity.
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════════ -->
+<script>
+  // ═══════════════════════════════════════════════════════════════
+  // Formspree setup
+  // ═══════════════════════════════════════════════════════════════
+  const FORMSPREE_ID = 'mgonpabj';
+  const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+  const FORMSPREE_CONFIGURED = FORMSPREE_ID !== 'SEU_ID_FORMSPREE_AQUI';
+  const ADMIN_PASSWORD = 'macrofitas2026';
+  const ADMIN_SESSION_KEY = 'voluntarios_macrofitas_admin';
+  const THEME_KEY = 'voluntarios_macrofitas_theme';
+
+  function updateThemeButton() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const dark = document.body.classList.contains('dark-mode');
+    btn.textContent = dark ? '☀️ Enable light mode' : '🌙 Enable dark mode';
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
+  function applyTheme(theme) {
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    updateThemeButton();
+  }
+
+  function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      applyTheme(savedTheme);
+      return;
+    }
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  function toggleTheme() {
+    const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    localStorage.setItem(THEME_KEY, nextTheme);
+  }
+
+  // Hide setup banner after configuration
+  if (FORMSPREE_CONFIGURED) {
+    const b = document.getElementById('setupBanner');
+    if (b) b.style.display = 'none';
+  }
+
+  function isAdminAuthenticated() {
+    return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'ok';
+  }
+
+  function requestAdminAccess() {
+    if (isAdminAuthenticated()) return true;
+    const typedPassword = prompt('Enter the admin area password:');
+    if (typedPassword === null) return false;
+    if (typedPassword !== ADMIN_PASSWORD) {
+      showToast('Incorrect password. Admin area remains locked.', 'error');
+      return false;
+    }
+    sessionStorage.setItem(ADMIN_SESSION_KEY, 'ok');
+    showToast('Admin access granted for this session.', 'success');
+    return true;
+  }
+
+  function lockAdminArea() {
+    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    document.getElementById('tableTab').classList.add('hidden');
+    document.getElementById('formTab').classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.tab-btn').classList.add('active');
+    showToast('Admin area locked again.', 'success');
+  }
+
+  // ─── TabS ────────────────────────────────────────────────────────
+  function showTab(tabId, btn) {
+    if (tabId === 'tableTab' && !requestAdminAccess()) {
+      return;
+    }
+    ['formTab','tableTab'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (tabId === 'tableTab') { renderTable(); updateSummary(); }
+  }
+
+  // ─── Storage helpers ──────────────────────────────────────────────
+  const STORAGE_KEY = 'voluntarios_macrofitas';
+
+  function loadData() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function saveData(arr) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  }
+
+  // ─── Form submission ──────────────────────────────────────────────
+  document.getElementById('inscricaoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Validate required fields
+    const required = ['nome','email','telefone','instituicao','curso','motivacao','lgpd'];
+    for (const id of required) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      if ((el.type === 'checkbox' && !el.checked) || (el.type !== 'checkbox' && !el.value.trim())) {
+        showToast('Please fill in all required fields (*).', 'error');
+        el.focus();
+        return;
+      }
+    }
+
+    // Collect checkboxes
+    const getChecked = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
+    const getRadio   = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+
+    const record = {
+      id:          Date.now(),
+      data:        new Date().toLocaleDateString('en-US') + ' ' + new Date().toLocaleTimeString('en-US', {hour:'2-digit',minute:'2-digit'}),
+      nome:        document.getElementById('nome').value.trim(),
+      email:       document.getElementById('email').value.trim(),
+      telefone:    document.getElementById('telefone').value.trim(),
+      idade:       document.getElementById('idade').value.trim(),
+      cidade:      document.getElementById('cidade').value.trim(),
+      instituicao: document.getElementById('instituicao').value.trim(),
+      curso:       document.getElementById('curso').value,
+      semestre:    document.getElementById('semestre').value.trim(),
+      lattes:      document.getElementById('lattes').value.trim(),
+      habilidades: getChecked('habilidades'),
+      experiencia: document.getElementById('experiencia').value.trim(),
+      dias:        getChecked('dias'),
+      turno:       getRadio('turno'),
+      horas:       getRadio('horas'),
+      dispObs:     document.getElementById('disponibilidadeTexto').value.trim(),
+      campo:       getChecked('campo'),
+      restricao:   getRadio('restricao'),
+      restricaoDetalhe: document.getElementById('restricaoDetalhe').value.trim(),
+      motivacao:   document.getElementById('motivacao').value.trim(),
+      comoSoube:   document.getElementById('comoSoube').value,
+      observacoes: document.getElementById('observacoes').value.trim(),
+    };
+
+    // Save locally
+    const data = loadData();
+    data.push(record);
+    saveData(data);
+
+    // Send to Formspree (if configured)
+    const submitBtn = document.querySelector('#inscricaoForm .btn-primary');
+    if (FORMSPREE_CONFIGURED) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Sending...';
+
+      // Build readable payload for Formspree email
+      const payload = {
+        Name:              record.nome,
+        Email:             record.email,
+        Phone:             record.telefone,
+        Age:               record.idade || '–',
+        City:              record.cidade || '–',
+        Institution:       record.instituicao,
+        Program:           record.curso,
+        Semestre:          record.semestre || '–',
+        Lattes:            record.lattes || '–',
+        Skills:            (record.habilidades||[]).join(', ') || '–',
+        Experience:        record.experiencia || '–',
+        Available_Days:    (record.dias||[]).join(', ') || '–',
+        Shift:             record.turno || '–',
+        Hours_Per_Week:    record.horas || '–',
+        Availability_Obs: record.dispObs || '–',
+        Field_Activities:  (record.campo||[]).join(', ') || '–',
+        Medical_Restriction:  record.restricao || '–',
+        Restriction_Detail: record.restricaoDetalhe || '–',
+        Motivation:        record.motivacao,
+        How_Heard:         record.comoSoube || '–',
+        Notes:             record.observacoes || '–',
+        Submission_Date:   record.data,
+      };
+
+      fetch(FORMSPREE_URL, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      })
+      .then(res => {
+        if (res.ok) {
+          showToast(`✅ Registration for ${record.nome} submitted successfully! You will receive a confirmation email.`, 'success');
+        } else {
+          showToast(`⚠️ Registration saved locally, but there was an error sending it to Formspree. Check the configured ID.`, 'error');
+        }
+      })
+      .catch(() => {
+        showToast(`⚠️ Registration saved locally. No internet connection - Formspree submission failed.`, 'error');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✅ Submit Registration';
+      });
+    } else {
+      showToast(`✅ Registration for ${record.nome} saved locally! (Set up Formspree to receive by email.)`, 'success');
+    }
+
+    this.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ─── Toast ────────────────────────────────────────────────────────
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = type;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 5000);
+  }
+
+  // ─── Render table ─────────────────────────────────────────────────
+  function renderTable() {
+    const data   = loadData();
+    const query  = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const tbody  = document.getElementById('tableBody');
+    const empty  = document.getElementById('emptyState');
+    const wrap   = document.querySelector('.table-wrap');
+
+    const filtered = data.filter(r => {
+      return !query || [r.nome, r.curso, r.instituicao, r.email, r.cidade].join(' ').toLowerCase().includes(query);
+    });
+
+    document.getElementById('totalCount').textContent  = data.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      wrap.style.display = 'none';
+    } else {
+      empty.classList.add('hidden');
+      wrap.style.display = '';
+      tbody.innerHTML = filtered.map((r, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td style="white-space:nowrap;font-size:.8rem;">${r.data}</td>
+          <td><strong>${r.nome}</strong></td>
+          <td style="font-size:.82rem;">${r.email}</td>
+          <td style="white-space:nowrap;">${r.telefone}</td>
+          <td>${r.curso}</td>
+          <td>${r.instituicao}</td>
+          <td style="text-align:center;">${r.semestre || '–'}</td>
+          <td>${(r.habilidades||[]).map(h => `<span class="badge-tag">${h}</span>`).join('') || '–'}</td>
+          <td>${(r.campo||[]).map(c => `<span class="badge-tag">${c}</span>`).join('') || '–'}</td>
+          <td>${r.turno || '–'}</td>
+          <td>${r.horas || '–'}</td>
+          <td style="max-width:180px;font-size:.82rem;">${(r.motivacao||'').substring(0,80)}${(r.motivacao||'').length>80?'…':''}</td>
+          <td style="font-size:.82rem;">${r.comoSoube || '–'}</td>
+          <td><button class="btn-danger" onclick="deleteRecord(${r.id})">🗑</button></td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // Summary
+  function updateSummary() {
+    const data = loadData();
+    document.getElementById('totalCount').textContent  = data.length;
+    document.getElementById('scubaCount').textContent  = data.filter(r => (r.habilidades||[]).includes('Mergulho SCUBA')).length;
+    document.getElementById('apneiaCount').textContent = data.filter(r => (r.habilidades||[]).includes('Apneia / Freediving')).length;
+    document.getElementById('gisCount').textContent    = data.filter(r => (r.habilidades||[]).includes('Sistemas GIS/SIG')).length;
+  }
+
+  // ─── Delete one record ────────────────────────────────────────────
+  function deleteRecord(id) {
+    if (!confirm('Remove this registration?')) return;
+    const data = loadData().filter(r => r.id !== id);
+    saveData(data);
+    renderTable();
+    updateSummary();
+  }
+
+  // ─── Clear all ────────────────────────────────────────────────────
+  function clearAll() {
+    if (!confirm('Are you sure? This will delete ALL saved registrations.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    renderTable();
+    updateSummary();
+  }
+
+  // ─── Export CSV ───────────────────────────────────────────────────
+  function exportCSV() {
+    const data = loadData();
+    if (data.length === 0) { showToast('No registrations to export.', 'error'); return; }
+
+    const headers = ['ID','Date','Name','Email','Phone','Age','City','Institution','Program',
+      'Semester','Lattes','Skills','Experience','Days','Shift','Hours_Per_Week',
+      'Availability_Notes','Field_Activities','Medical_Restriction','Restriction_Detail',
+      'Motivation','How_Heard','Notes'];
+
+    const rows = data.map(r => [
+      r.id, r.data, r.nome, r.email, r.telefone, r.idade, r.cidade, r.instituicao,
+      r.curso, r.semestre, r.lattes,
+      (r.habilidades||[]).join('; '), r.experiencia,
+      (r.dias||[]).join('; '), r.turno, r.horas, r.dispObs,
+      (r.campo||[]).join('; '), r.restricao, r.restricaoDetalhe,
+      r.motivacao, r.comoSoube, r.observacoes
+    ].map(v => `"${String(v||'').replace(/"/g,'""')}"`));
+
+    const csv = '\uFEFF' + [headers, ...rows].map(r => r.join(',')).join('\r\n');
+    downloadBlob(csv, 'text/csv;charset=utf-8;', `voluntarios_macrofitas_${dateStamp()}.csv`);
+  }
+
+  // ─── Export JSON ──────────────────────────────────────────────────
+  function exportJSON() {
+    const data = loadData();
+    if (data.length === 0) { showToast('No registrations to export.', 'error'); return; }
+    const json = JSON.stringify(data, null, 2);
+    downloadBlob(json, 'application/json', `voluntarios_macrofitas_${dateStamp()}.json`);
+  }
+
+  // ─── Utils ────────────────────────────────────────────────────────
+  function downloadBlob(content, mime, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], { type: mime }));
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function dateStamp() {
+    const d = new Date();
+    return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // Init
+  initTheme();
+  renderTable();
+  updateSummary();
+</script>
+
+</body>
+</html>
+
+
