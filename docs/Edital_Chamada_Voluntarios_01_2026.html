@@ -123,6 +123,17 @@
       word-break: break-word;
     }
 
+    .signup-qr-img {
+      width: 140px;
+      height: 140px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 6px;
+      background: #ffffff;
+      display: block;
+      margin: 8px auto 0;
+    }
+
     .link-card a {
       color: var(--link);
       text-decoration: underline;
@@ -273,6 +284,10 @@
         background: #15232b;
       }
 
+      :root:not([data-theme]) .signup-qr-img {
+        background: #ffffff;
+      }
+
       :root:not([data-theme]) h2 {
         color: #6ee7b7;
         border-bottom-color: #2a4b59;
@@ -420,6 +435,10 @@
             <a href="https://caetanoronan.github.io/projeto-mestrado-marinho/Formulario_Voluntarios_Macrofitas.html" target="_blank" rel="noopener">
               https://caetanoronan.github.io/projeto-mestrado-marinho/Formulario_Voluntarios_Macrofitas.html
             </a>
+          </div>
+          <div class="link-card" style="text-align: center;">
+            <strong>QR code para acesso rápido ao formulário</strong>
+            <img class="signup-qr-img" src="qr_formulario_voluntarios_macrofitas.svg" alt="QR code para o formulário de voluntários" />
           </div>
         </div>
 

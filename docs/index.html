@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -6,10 +6,71 @@
     <title>Distribuição e Modelagem de Habitat de Macrófitas Marinhas — PPGOceano/UFSC</title>
     <style>
         :root {
+            color-scheme: light dark;
             --cor-primaria: #006d2c;
             --cor-secundaria: #31a354;
             --cor-terciaria: #74c476;
             --cor-fundo: #e5f5e0;
+            --cor-bg-inicio: var(--cor-fundo);
+            --cor-bg-fim: #ffffff;
+            --cor-texto: #1a1a1a;
+            --cor-container: #ffffff;
+            --cor-paragrafo: #555555;
+            --cor-info-bg: var(--cor-fundo);
+            --cor-area-bg: #ffffff;
+            --cor-divider: #dde;
+            --cor-section-label: #777777;
+            --cor-qr-card-bg: #ffffff;
+            --cor-qr-card-border: #cfe9d0;
+            --cor-qr-label: #2f4f2f;
+            --cor-sombra: rgba(0,109,44,0.2);
+            --cor-focus: #f59e0b;
+        }
+
+        :root[data-theme="dark"] {
+            color-scheme: dark;
+            --cor-primaria: #4ade80;
+            --cor-secundaria: #22c55e;
+            --cor-terciaria: #16a34a;
+            --cor-fundo: #0d1712;
+            --cor-bg-inicio: #0d1712;
+            --cor-bg-fim: #09110d;
+            --cor-texto: #e8f3ed;
+            --cor-container: #122019;
+            --cor-paragrafo: #b7c8be;
+            --cor-info-bg: #173126;
+            --cor-area-bg: #15261e;
+            --cor-divider: #2b4035;
+            --cor-section-label: #9eb2a5;
+            --cor-qr-card-bg: #1a2b22;
+            --cor-qr-card-border: #325243;
+            --cor-qr-label: #d6e9dc;
+            --cor-sombra: rgba(0,0,0,0.4);
+            --cor-focus: #fde047;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root:not([data-theme]) {
+                color-scheme: dark;
+                --cor-primaria: #4ade80;
+                --cor-secundaria: #22c55e;
+                --cor-terciaria: #16a34a;
+                --cor-fundo: #0d1712;
+                --cor-bg-inicio: #0d1712;
+                --cor-bg-fim: #09110d;
+                --cor-texto: #e8f3ed;
+                --cor-container: #122019;
+                --cor-paragrafo: #b7c8be;
+                --cor-info-bg: #173126;
+                --cor-area-bg: #15261e;
+                --cor-divider: #2b4035;
+                --cor-section-label: #9eb2a5;
+                --cor-qr-card-bg: #1a2b22;
+                --cor-qr-card-border: #325243;
+                --cor-qr-label: #d6e9dc;
+                --cor-sombra: rgba(0,0,0,0.4);
+                --cor-focus: #fde047;
+            }
         }
 
         * {
@@ -20,8 +81,8 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, var(--cor-fundo) 0%, #ffffff 100%);
-            color: #1a1a1a;
+            background: linear-gradient(135deg, var(--cor-bg-inicio) 0%, var(--cor-bg-fim) 100%);
+            color: var(--cor-texto);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -31,11 +92,31 @@
 
         .container {
             max-width: 800px;
-            background: white;
+            background: var(--cor-container);
             padding: 60px 40px;
             border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,109,44,0.2);
+            box-shadow: 0 10px 40px var(--cor-sombra);
             text-align: center;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 12px;
+        }
+
+        .theme-toggle {
+            border: 1px solid var(--cor-primaria);
+            background: transparent;
+            color: var(--cor-primaria);
+            border-radius: 999px;
+            padding: 8px 14px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            background: var(--cor-info-bg);
         }
 
         h1 {
@@ -52,7 +133,7 @@
 
         p {
             font-size: 1.2em;
-            color: #555;
+            color: var(--cor-paragrafo);
             margin: 20px 0;
             line-height: 1.6;
         }
@@ -66,7 +147,7 @@
             display: inline-block;
             padding: 20px 50px;
             background: linear-gradient(135deg, var(--cor-primaria) 0%, var(--cor-secundaria) 100%);
-            color: white;
+            color: #ffffff;
             text-decoration: none;
             border-radius: 50px;
             font-size: 1.3em;
@@ -82,7 +163,7 @@
         }
 
         .info-box {
-            background: var(--cor-fundo);
+            background: var(--cor-info-bg);
             padding: 30px;
             border-radius: 15px;
             margin: 30px 0;
@@ -104,7 +185,7 @@
         .area {
             flex: 1;
             padding: 20px;
-            background: white;
+            background: var(--cor-area-bg);
             border: 2px solid var(--cor-terciaria);
             border-radius: 10px;
         }
@@ -115,9 +196,95 @@
             margin-bottom: 5px;
         }
 
+        .btn-secondary {
+            display: inline-block;
+            padding: 12px 30px;
+            background: transparent;
+            color: var(--cor-primaria);
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1em;
+            font-weight: 600;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--cor-primaria);
+        }
+
+        .btn-secondary:hover {
+            background: var(--cor-info-bg);
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid var(--cor-divider);
+            margin: 30px 0 10px;
+        }
+
+        .section-label {
+            font-size: 0.82em;
+            color: var(--cor-section-label);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 6px 0 14px;
+        }
+
+        .qr-grid {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .qr-card {
+            background: var(--cor-qr-card-bg);
+            border: 1px solid var(--cor-qr-card-border);
+            border-radius: 12px;
+            padding: 12px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .qr-card img {
+            width: 140px;
+            height: 140px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #ffffff;
+            padding: 4px;
+        }
+
+        .qr-card p {
+            font-size: 0.95em;
+            margin: 10px 0 6px;
+            color: var(--cor-qr-label);
+            font-weight: 600;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid var(--cor-focus);
+            outline-offset: 2px;
+            border-radius: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 40px 20px;
+            }
+
+            .top-actions {
+                justify-content: center;
             }
 
             h1 {
@@ -132,54 +299,20 @@
                 padding: 15px 30px;
                 font-size: 1.1em;
             }
-        }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .pulse {
-            animation: pulse 2s infinite;
-        }
-
-        .btn-secondary {
-            display: inline-block;
-            padding: 12px 30px;
-            background: transparent;
-            color: var(--cor-primaria);
-            text-decoration: none;
-            border-radius: 50px;
-            font-size: 1.0em;
-            font-weight: 600;
-            margin-top: 12px;
-            transition: all 0.3s ease;
-            border: 2px solid var(--cor-primaria);
-        }
-
-        .btn-secondary:hover {
-            background: var(--cor-fundo);
-            transform: translateY(-2px);
-        }
-
-        .divider {
-            border: none;
-            border-top: 1px solid #dde;
-            margin: 30px 0 10px;
-        }
-
-        .section-label {
-            font-size: 0.82em;
-            color: #aaa;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin: 6px 0 14px;
+            .theme-toggle {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="emoji">�</div>
+        <div class="top-actions">
+            <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar entre modo claro e escuro" aria-pressed="false">Modo escuro</button>
+        </div>
+
+        <div class="emoji">🌿</div>
         <h1>Distribuição e Modelagem de Habitat de Macrófitas Marinhas</h1>
         <p>Ilhas Costeiras de Santa Catarina no Contexto da Crise Climática</p>
 
@@ -244,6 +377,21 @@
             📱 QR Code da Apresentação
         </a>
 
+        <div style="margin-top: 16px;"></div>
+        <p class="section-label">QR Codes de Acesso Rápido</p>
+
+        <div class="qr-grid">
+            <a class="qr-card" href="qr_formulario_voluntarios_macrofitas.png" target="_blank" style="text-decoration: none;">
+                <img src="qr_formulario_voluntarios_macrofitas.svg" alt="QR code do formulário de voluntários">
+                <p>Formulário de Voluntários</p>
+            </a>
+
+            <a class="qr-card" href="qr_edital_chamada_voluntarios_01_2026.png" target="_blank" style="text-decoration: none;">
+                <img src="qr_edital_chamada_voluntarios_01_2026.svg" alt="QR code do edital de chamamento público">
+                <p>Edital de Chamamento</p>
+            </a>
+        </div>
+
         <div style="margin-top: 12px;"></div>
         <a href="Edital_Chamada_Voluntarios_01_2026.html" class="btn-secondary">
             📣 Edital de Chamamento Público
@@ -284,9 +432,42 @@
             📖 Mini Curso Olokun — Tradução
         </a>
 
-        <p style="font-size: 0.9em; margin-top: 40px; color: #999;">
+        <p style="font-size: 0.9em; margin-top: 40px; color: var(--cor-section-label);">
             Macrófitas Marinhas · Modelagem de Habitat · Ilhas Costeiras · SC · Brasil · 2026
         </p>
     </div>
+
+    <script>
+        (function () {
+            var storageKey = 'index-theme';
+            var root = document.documentElement;
+            var toggle = document.getElementById('themeToggle');
+
+            if (!toggle) {
+                return;
+            }
+
+            var savedTheme = localStorage.getItem(storageKey);
+            if (savedTheme === 'dark' || savedTheme === 'light') {
+                root.setAttribute('data-theme', savedTheme);
+            }
+
+            function syncLabel() {
+                var isDark = root.getAttribute('data-theme') === 'dark';
+                toggle.textContent = isDark ? 'Modo claro' : 'Modo escuro';
+                toggle.setAttribute('aria-pressed', isDark ? 'true' : 'false');
+            }
+
+            toggle.addEventListener('click', function () {
+                var isDark = root.getAttribute('data-theme') === 'dark';
+                var nextTheme = isDark ? 'light' : 'dark';
+                root.setAttribute('data-theme', nextTheme);
+                localStorage.setItem(storageKey, nextTheme);
+                syncLabel();
+            });
+
+            syncLabel();
+        })();
+    </script>
 </body>
 </html>
