@@ -1,0 +1,1248 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inscripcion de Voluntarios - Macrofitas Marinas / UFSC</title>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ocean-dark:  #0b3c5d;
+      --ocean-mid:   #0072b2;
+      --ocean-light: #56b4e9;
+      --ocean-pale:  #eaf4fb;
+      --teal:        #e69f00;
+      --teal-light:  #fff4d8;
+      --sand:        #fff8e1;
+      --text:        #1b1f24;
+      --muted:       #4b5563;
+      --success:     #009e73;
+      --success-bg:  #e7f7f2;
+      --error:       #d55e00;
+      --error-bg:    #fff0e6;
+      --border:      #9aa4b2;
+      --radius:      8px;
+      --surface:     #ffffff;
+      --surface-soft:#fafafa;
+      --focus:       #ffd166;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: linear-gradient(160deg, #e3f2fd 0%, #e0f7fa 50%, #f3e5f5 100%);
+      min-height: 100vh;
+      color: var(--text);
+      padding: 20px;
+      transition: background .25s ease, color .25s ease;
+    }
+    body.dark-mode {
+      --ocean-dark:  #d6ecff;
+      --ocean-mid:   #56b4e9;
+      --ocean-light: #8fd3ff;
+      --ocean-pale:  #1f2b36;
+      --teal:        #f0b44c;
+      --teal-light:  #3a2e16;
+      --sand:        #2f2a1f;
+      --text:        #f3f7fa;
+      --muted:       #c7d0d9;
+      --success:     #6ed9b6;
+      --success-bg:  #143029;
+      --error:       #ffb08a;
+      --error-bg:    #3a2218;
+      --border:      #5b6b78;
+      --surface:     #121a22;
+      --surface-soft:#1a2530;
+      background: linear-gradient(160deg, #09131a 0%, #10202a 50%, #16202b 100%);
+    }
+
+    /* ─── Page Header ───────────────────────────────────────────── */
+    .page-header {
+      background: linear-gradient(135deg, var(--ocean-dark), var(--teal));
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 32px 36px;
+      margin-bottom: 28px;
+      box-shadow: 0 4px 20px rgba(13,59,94,.35);
+    }
+    body.dark-mode .page-header {
+      color: #08131b;
+      box-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+    .page-header .badge {
+      display: inline-block;
+      background: rgba(255,255,255,.18);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      padding: 3px 14px;
+      font-size: .78rem;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-size: 1.65rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+    .page-header .subtitle {
+      font-size: .95rem;
+      opacity: .85;
+      max-width: 700px;
+      line-height: 1.5;
+    }
+    .page-header .meta {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .page-header .meta span {
+      background: rgba(255,255,255,.14);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: .82rem;
+    }
+    .header-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .lang-switcher {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 999px;
+      padding: 4px;
+    }
+    .lang-switcher a {
+      text-decoration: none;
+      color: inherit;
+      font-size: .82rem;
+      font-weight: 700;
+      padding: 6px 10px;
+      border-radius: 999px;
+      opacity: .92;
+    }
+    .lang-switcher a:hover { background: rgba(255,255,255,.24); }
+    .lang-switcher a.lang-active {
+      background: rgba(255,255,255,.30);
+      border: 1px solid rgba(255,255,255,.55);
+      opacity: 1;
+    }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.45);
+      background: rgba(255,255,255,.16);
+      color: inherit;
+      font-size: .92rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .theme-toggle:hover { transform: translateY(-1px); background: rgba(255,255,255,.24); }
+    body.dark-mode .theme-toggle {
+      border-color: rgba(8,19,27,.3);
+      background: rgba(8,19,27,.14);
+    }
+    body.dark-mode .lang-switcher {
+      border-color: rgba(8,19,27,.3);
+      background: rgba(8,19,27,.14);
+    }
+    body.dark-mode .lang-switcher a.lang-active {
+      background: rgba(8,19,27,.28);
+      border-color: rgba(8,19,27,.42);
+    }
+
+    /* ─── Tabs ──────────────────────────────────────────────────── */
+    .tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border: 2px solid var(--ocean-mid);
+      border-radius: var(--radius);
+      background: var(--surface);
+      color: var(--ocean-mid);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .tab-btn.active {
+      background: var(--ocean-mid);
+      color: #fff;
+      box-shadow: 0 3px 12px rgba(21,101,160,.35);
+    }
+    .tab-btn:hover:not(.active) { background: var(--ocean-pale); }
+
+    /* ─── Section Cards ─────────────────────────────────────────── */
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 32px;
+      margin-bottom: 22px;
+      box-shadow: 0 2px 10px rgba(0,0,0,.07);
+    }
+    body.dark-mode .card { box-shadow: 0 6px 18px rgba(0,0,0,.28); }
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ocean-dark);
+      margin-bottom: 22px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--ocean-pale);
+    }
+    .section-title .icon {
+      width: 32px; height: 32px;
+      background: var(--ocean-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+    }
+
+    /* ─── Form Grid ─────────────────────────────────────────────── */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .form-grid .full { grid-column: 1 / -1; }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .page-header { padding: 22px 20px; }
+      .card { padding: 20px 16px; }
+    }
+
+    /* ─── Form Controls ─────────────────────────────────────────── */
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    label {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: .02em;
+    }
+    label .req { color: var(--error); margin-left: 2px; }
+    input[type="text"], input[type="email"], input[type="tel"],
+    input[type="number"], select, textarea {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-size: .93rem;
+      color: var(--text);
+      background: var(--surface-soft);
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--ocean-light);
+      box-shadow: 0 0 0 3px rgba(33,150,243,.15);
+      background: var(--surface);
+    }
+    textarea { min-height: 90px; resize: vertical; }
+
+    /* ─── Checkboxes & Radios ───────────────────────────────────── */
+    .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      cursor: pointer;
+      font-size: .9rem;
+      background: var(--ocean-pale);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 13px;
+      transition: all .2s;
+      user-select: none;
+    }
+    .check-item input { accent-color: var(--ocean-mid); width: 14px; height: 14px; cursor: pointer; }
+    .check-item:has(input:checked) {
+      background: var(--ocean-mid);
+      color: #fff;
+      border-color: var(--ocean-mid);
+      border-width: 2px;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.22);
+    }
+    .check-item:has(input:checked)::after {
+      content: "✓";
+      font-weight: 800;
+      margin-left: 2px;
+    }
+    .radio-group { display: flex; flex-wrap: wrap; gap: 10px; }
+    .radio-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      position: relative;
+      cursor: pointer;
+      font-size: .9rem;
+      background: var(--teal-light);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 5px 14px;
+      transition: all .2s;
+      user-select: none;
+    }
+    .radio-item input { accent-color: var(--teal); cursor: pointer; }
+    .radio-item:has(input:checked) {
+      background: var(--teal);
+      color: #1b1f24;
+      border-color: var(--teal);
+      border-width: 2px;
+      box-shadow: inset 0 0 0 2px rgba(255,255,255,.25);
+    }
+    .radio-item:has(input:checked)::after {
+      content: "●";
+      font-size: .8rem;
+      margin-left: 2px;
+    }
+
+    /* ─── Hint text ─────────────────────────────────────────────── */
+    .hint { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+
+    /* ─── Buttons ───────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--ocean-mid), var(--teal));
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 13px 32px;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(21,101,160,.35);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(21,101,160,.45); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #fff;
+      color: var(--ocean-mid);
+      border: 2px solid var(--ocean-mid);
+      border-radius: 8px;
+      padding: 10px 22px;
+      font-size: .93rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-secondary:hover { background: var(--ocean-pale); }
+    .btn-danger {
+      background: none;
+      border: 1.5px solid #e57373;
+      color: #c62828;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: .8rem;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-danger:hover { background: var(--error-bg); }
+
+    /* ─── Toast / Alert ─────────────────────────────────────────── */
+    #toast {
+      display: none;
+      border-radius: 8px;
+      padding: 14px 20px;
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    #toast.success { background: var(--success-bg); color: var(--success); border-left: 4px solid var(--success); }
+    #toast.error   { background: var(--error-bg);   color: var(--error);   border-left: 4px solid var(--error); }
+
+    /* ─── Table ─────────────────────────────────────────────────── */
+    .table-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: .88rem;
+    }
+    thead {
+      background: linear-gradient(135deg, var(--ocean-dark), var(--teal));
+      color: #fff;
+    }
+    thead th {
+      padding: 12px 14px;
+      text-align: left;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    tbody tr { border-bottom: 1px solid var(--border); transition: background .15s; }
+    tbody tr:hover { background: var(--ocean-pale); }
+    tbody td { padding: 10px 14px; vertical-align: middle; }
+    .badge-tag {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal);
+      border-radius: 12px;
+      padding: 2px 9px;
+      font-size: .78rem;
+      font-weight: 600;
+      margin: 1px;
+      white-space: nowrap;
+    }
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--muted);
+    }
+    .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
+
+    /* ─── Summary counters ──────────────────────────────────────── */
+    .summary-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+    .summary-card {
+      flex: 1;
+      min-width: 130px;
+      background: #fff;
+      border-radius: 8px;
+      padding: 14px 18px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+      border-top: 3px solid var(--ocean-mid);
+      text-align: center;
+    }
+    .summary-card .num { font-size: 1.85rem; font-weight: 800; color: var(--ocean-mid); }
+    .summary-card .label { font-size: .8rem; color: var(--muted); margin-top: 2px; }
+
+    #privacyNotice,
+    #setupBanner {
+      transition: background .25s ease, color .25s ease, border-color .25s ease;
+    }
+    body.dark-mode #privacyNotice {
+      background: #152632 !important;
+      border-color: #345062 !important;
+      color: #d6ecfb !important;
+    }
+    body.dark-mode #setupBanner {
+      background: #2d2416 !important;
+      color: #f4e8c7 !important;
+      border-left-color: #ffbf47 !important;
+    }
+    body.dark-mode #setupBanner code {
+      background: rgba(255,255,255,.08);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    body.dark-mode tbody tr:hover { background: #19313f; }
+    body.dark-mode .empty-state { color: var(--muted); }
+
+    .theme-toggle:focus-visible,
+    .tab-btn:focus-visible,
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible,
+    .btn-danger:focus-visible,
+    input:focus-visible,
+    select:focus-visible,
+    textarea:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* ─── Utility ───────────────────────────────────────────────── */
+    .hidden { display: none !important; }
+    .text-center { text-align: center; }
+    .mt-16 { margin-top: 16px; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CABEÇALHO DA PÁGINA
+════════════════════════════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="badge">🎓 PPGOceano / UFSC</div>
+  <h1>🌊 Inscripcion de Voluntarios(as) - Macrofitas Marinas</h1>
+  <p class="subtitle">
+    Proyecto de Maestria: <em>Distribucion y Modelado de Habitat de Macrofitas Marinas en las Islas
+    Costeras de Santa Catarina en el Contexto de la Crisis Climatica</em>
+  </p>
+  <div class="meta">
+    <span>👤 Ronan Armando Caetano</span>
+    <span>🔬 Director propuesto: Prof. Dr. Paulo Antunes Horta</span>
+    <span>📍 UFSC - Florianopolis, SC</span>
+  </div>
+  <div class="header-actions">
+    <nav class="lang-switcher" aria-label="Idioma">
+      <a href="Formulario_Voluntarios_Macrofitas.html">PT</a>
+      <a href="Formulario_Voluntarios_Macrofitas.en.html">EN</a>
+      <a href="Formulario_Voluntarios_Macrofitas.es.html" class="lang-active" aria-current="page">ES</a>
+    </nav>
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-pressed="false" onclick="toggleTheme()">🌙 Activar modo oscuro</button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     TABS
+════════════════════════════════════════════════════════════════ -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="showTab('formTab', this)">
+    📋 Formulario de Inscripcion
+  </button>
+  <button class="tab-btn" id="adminTabButton" onclick="showTab('tableTab', this)">
+    🔒 Area Administrativa
+  </button>
+</div>
+
+<div id="privacyNotice" style="background:#eef7ff; border:1px solid #c9e4ff; border-radius:8px; padding:12px 16px; margin-bottom:20px; color:#18486b; font-size:.9rem; line-height:1.5;">
+  Las inscripciones enviadas se tratan como datos privados. El area con lista de inscritos esta protegida por contrasena administrativa.
+</div>
+
+<!-- Banner de configuracion de Formspree (se oculta al configurar) -->
+<div id="setupBanner" style="background:#fff3e0; border-left:4px solid #f57c00; border-radius:8px; padding:16px 20px; margin-bottom:20px; font-size:.92rem; line-height:1.6;">
+  <strong>⚙️ Configuracion necesaria para recibir inscripciones por correo (Formspree)</strong><br/>
+  Siga los pasos siguientes <strong>una sola vez</strong> para activar el envio centralizado:
+  <ol style="margin:10px 0 0 18px;">
+    <li>Acceda a <strong>formspree.io</strong> y cree una cuenta gratuita con su correo.</li>
+    <li>Haga clic en <em>"New Form"</em>, asigne un nombre (ej.: <em>Voluntarios Macrofitas</em>) y confirme.</li>
+    <li>Copie el <strong>Form ID</strong> mostrado (ej.: <code>xpwzabcd</code>).</li>
+    <li>Abra este archivo HTML en VS Code y sustituya <code>SEU_ID_FORMSPREE_AQUI</code> por el ID copiado (linea indicada en el script).</li>
+  </ol>
+  <span style="color:#555;font-size:.83rem;">Plan gratuito: hasta 50 inscripciones/mes. Cada envio llega a su correo y queda guardado en el panel de Formspree.</span>
+</div>
+
+<!-- Mensaje global -->
+<div id="toast"></div>
+
+<!-- ════════════════════════════════════════════════════════════════
+    PESTANA 1 - FORMULARIO
+═════════════════════════════════════════════════════════════════ -->
+<div id="formTab">
+
+  <form id="inscricaoForm" novalidate>
+
+    <!-- DATOS PERSONALES -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">👤</div> Datos Personales
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="nome">Nombre completo <span class="req">*</span></label>
+          <input type="text" id="nome" name="nome" placeholder="Su nombre completo" autocomplete="name" required />
+        </div>
+        <div class="field">
+          <label for="email">Correo electronico <span class="req">*</span></label>
+          <input type="email" id="email" name="email" placeholder="su@email.com" autocomplete="email" required />
+        </div>
+        <div class="field">
+          <label for="telefone">Telefono / WhatsApp <span class="req">*</span></label>
+          <input type="tel" id="telefone" name="telefone" placeholder="(48) 99999-9999" autocomplete="tel" required />
+        </div>
+        <div class="field">
+          <label for="idade">Edad</label>
+          <input type="number" id="idade" name="idade" min="17" max="80" placeholder="Ej.: 22" />
+        </div>
+        <div class="field">
+          <label for="cidade">Ciudad / Estado</label>
+          <input type="text" id="cidade" name="cidade" placeholder="Ej.: Florianopolis, SC" />
+        </div>
+      </div>
+    </div>
+
+    <!-- DATOS ACADEMICOS -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🎓</div> Datos Academicos
+      </div>
+      <div class="form-grid">
+        <div class="field">
+          <label for="instituicao">Institucion <span class="req">*</span></label>
+          <input type="text" id="instituicao" name="instituicao" placeholder="Ej.: UFSC" required />
+        </div>
+        <div class="field">
+          <label for="curso">Carrera <span class="req">*</span></label>
+          <select id="curso" name="curso" required>
+            <option value="">Seleccione...</option>
+            <option>Ciencias Biologicas</option>
+            <option>Oceanografia</option>
+            <option>Biologia Marina</option>
+            <option>Ecologia</option>
+            <option>Ingenieria Ambiental</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="semestre">Semestre actual</label>
+          <input type="number" id="semestre" name="semestre" min="1" max="15" placeholder="Ej.: 5" />
+        </div>
+        <div class="field">
+          <label for="lattes">Enlace CV Lattes</label>
+          <input type="text" id="lattes" name="lattes" placeholder="http://lattes.cnpq.br/..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- HABILIDADES Y EXPERIENCIAS -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🤿</div> Habilidades y Experiencias
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Habilidades relacionadas con el proyecto</label>
+          <div class="check-group">
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Mergulho SCUBA" /> 🤿 Buceo SCUBA
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Apneia / Freediving" /> 🫁 Apnea / Freediving
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Natacion" /> 🏊 Natacion
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Trabajo de campo" /> 🏔 Trabajo de campo
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Identificacion botanica" /> 🌿 Identificacion botanica
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Análise de dados (R/Python)" /> 💻 Analisis de datos (R/Python)
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Sistemas GIS/SIG" /> 🗺 Sistemas GIS/SIG
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Fotografia subaquática" /> 📷 Fotografia subacuatica
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Redaccion cientifica" /> ✍ Redaccion cientifica
+            </label>
+            <label class="check-item">
+              <input type="checkbox" name="habilidades" value="Divulgacion cientifica" /> 📢 Divulgacion cientifica
+            </label>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="experiencia">Describa brevemente sus experiencias relevantes</label>
+          <textarea id="experiencia" name="experiencia"
+            placeholder="Ej.: participe en campanas de campo en costa rocosa durante la iniciacion cientifica y tengo certificacion PADI OW..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- DISPONIBILIDAD -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">📅</div> Disponibilidad
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Dias disponibles</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="dias" value="Lunes" /> Lunes</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Martes" /> Martes</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Miercoles" /> Miercoles</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Jueves" /> Jueves</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Viernes" /> Viernes</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Sabado" /> Sabado</label>
+            <label class="check-item"><input type="checkbox" name="dias" value="Domingo" /> Domingo</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Turno disponible</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="turno" value="Manana" /> 🌅 Manana</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Tarde" /> ☀️ Tarde</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Noche" /> 🌙 Noche</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Tiempo completo" /> 🕐 Tiempo completo</label>
+            <label class="radio-item"><input type="radio" name="turno" value="Flexible" /> 🔄 Flexible</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Horas por semana que puede dedicar</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="horas" value="Hasta 5h" /> Hasta 5h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="5h - 10h" /> 5h - 10h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="10h - 20h" /> 10h - 20h</label>
+            <label class="radio-item"><input type="radio" name="horas" value="Mas de 20h" /> Mas de 20h</label>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label for="disponibilidadeTexto">Observaciones sobre disponibilidad</label>
+          <input type="text" id="disponibilidadeTexto" name="disponibilidadeTexto"
+            placeholder="Ej.: disponible solo despues de junio; viajo algunos fines de semana..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIVIDADES DE CAMPO -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">🏝</div> Participacion en Campo
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label>Actividades de campo de su interes</label>
+          <div class="check-group">
+            <label class="check-item"><input type="checkbox" name="campo" value="Coleta subaquática com SCUBA" /> 🤿 Muestreo con SCUBA</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Muestreo en apnea" /> 🫁 Muestreo en apnea</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Caminhada em costão rochoso" /> 🪨 Transecto en costa rocosa</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Transporte de equipamentos" /> 🎒 Transporte de equipos</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Registro fotográfico" /> 📸 Registro fotográfico</label>
+            <label class="check-item"><input type="checkbox" name="campo" value="Somente atividades em laboratório" /> 🧪 Solo laboratorio</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Tiene alguna restriccion medica relevante para campo?</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="restricao" value="Não" /> No</label>
+            <label class="radio-item"><input type="radio" name="restricao" value="Sim" /> Si</label>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="restricaoDetalhe">Si es asi, describa brevemente (opcional)</label>
+          <input type="text" id="restricaoDetalhe" name="restricaoDetalhe"
+            placeholder="Ej.: asma leve, no limitante..." />
+        </div>
+      </div>
+    </div>
+
+    <!-- MOTIVACION -->
+    <div class="card">
+      <div class="section-title">
+        <div class="icon">💬</div> Motivacion y Expectativas
+      </div>
+      <div class="form-grid">
+        <div class="field full">
+          <label for="motivacao">Por que quiere participar en este proyecto? <span class="req">*</span></label>
+          <textarea id="motivacao" name="motivacao" required
+            placeholder="Cuente brevemente que le motivo a inscribirse y que espera de la experiencia..." style="min-height:110px;"></textarea>
+        </div>
+        <div class="field full">
+          <label for="comoSoube">Como se entero del proyecto?</label>
+          <select id="comoSoube" name="comoSoube">
+            <option value="">Seleccione...</option>
+            <option>Recomendacion de profesor</option>
+            <option>Colegas / amigos</option>
+            <option>Redes sociales (Instagram/LinkedIn)</option>
+            <option>WhatsApp / grupo de clase</option>
+            <option>Cartel / folleto impreso</option>
+            <option>Sitio / GitHub del proyecto</option>
+            <option>Otro</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="observacoes">Observaciones adicionales</label>
+          <textarea id="observacoes" name="observacoes"
+            placeholder="Cualquier informacion adicional que quiera compartir..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- LGPD / CONSENTIMENTO -->
+    <div class="card" style="background: var(--sand); border-left: 4px solid var(--teal);">
+      <div class="section-title" style="border-color:#ffe082;">
+        <div class="icon" style="background:#fff8e1;">🔒</div> Consentimiento - Proteccion de Datos
+      </div>
+      <p style="font-size:.9rem; line-height:1.6; color:var(--text); margin-bottom:14px;">
+        Los datos proporcionados en este formulario se utilizaran <strong>exclusivamente para seleccion y
+        organizacion del voluntariado</strong> en el proyecto de investigacion de maestria vinculado al PPGOceano/UFSC.
+        La informacion no sera compartida con terceros sin autorizacion. Puede solicitar la eliminacion
+        de sus datos en cualquier momento contactando al investigador responsable.
+      </p>
+      <label class="check-item" style="display:inline-flex; background:var(--ocean-pale);">
+        <input type="checkbox" id="lgpd" name="lgpd" required />
+        <strong>He leido y acepto el uso de mis datos segun lo descrito arriba. <span class="req">*</span></strong>
+      </label>
+    </div>
+
+    <!-- BOTON ENVIAR -->
+    <div class="text-center mt-16" style="margin-bottom:40px;">
+      <button type="submit" class="btn-primary">
+        ✅ Enviar Inscripcion
+      </button>
+    </div>
+
+  </form>
+</div><!-- /formTab -->
+
+
+<!-- ════════════════════════════════════════════════════════════════
+    PESTANA 2 - TABLA DE INSCRITOS
+═════════════════════════════════════════════════════════════════ -->
+<div id="tableTab" class="hidden">
+
+  <!-- Resumen -->
+  <div class="summary-bar" id="summaryBar">
+    <div class="summary-card">
+      <div class="num" id="totalCount">0</div>
+      <div class="label">Total de inscritos</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="scubaCount">0</div>
+      <div class="label">Con SCUBA</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="apneiaCount">0</div>
+      <div class="label">Con apnea</div>
+    </div>
+    <div class="summary-card">
+      <div class="num" id="gisCount">0</div>
+      <div class="label">Con GIS</div>
+    </div>
+  </div>
+
+  <!-- Barra de herramientas -->
+  <div class="card">
+    <div class="table-toolbar">
+      <div style="font-weight:700; color:var(--ocean-dark); font-size:1rem;">
+        🔒 Inscripciones recibidas
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="searchInput" placeholder="🔍 Filtrar por nombre, carrera..."
+          style="max-width:240px;" oninput="renderTable()" />
+        <button class="btn-secondary" onclick="exportCSV()">
+          📥 Exportar CSV
+        </button>
+        <button class="btn-secondary" onclick="exportJSON()">
+          💾 Exportar JSON
+        </button>
+        <button class="btn-secondary" onclick="lockAdminArea()">
+          🚪 Salir del area admin
+        </button>
+        <button class="btn-danger" onclick="clearAll()" style="padding:8px 16px; font-size:.88rem;">
+          🗑 Borrar todo
+        </button>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table id="inscritosTable">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Fecha</th>
+            <th>Nombre</th>
+            <th>Correo electronico</th>
+            <th>Telefono</th>
+            <th>Carrera</th>
+            <th>Institucion</th>
+            <th>Semestre</th>
+            <th>Habilidades</th>
+            <th>Campo</th>
+            <th>Turno</th>
+            <th>Horas/sem</th>
+            <th>Motivacion (resumen)</th>
+            <th>Como se entero</th>
+            <th>Accion</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+
+    <!-- Estado vacio -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="emoji">🌊</div>
+      <p>Aun no se encontraron inscripciones.</p>
+      <p style="font-size:.85rem; margin-top:8px;">Vaya a la pestaña <strong>Formulario de Inscripcion</strong> y registre al primer voluntario.</p>
+    </div>
+  </div>
+
+</div><!-- /tableTab -->
+
+<div class="card" style="text-align:center; margin-top:8px; margin-bottom:24px;">
+  <p><strong>Programa de Posgrado en Oceanografia (PPGOceano/UFSC)</strong></p>
+  <p><strong>Estudiante:</strong> Ronan Armando Caetano</p>
+  <p>Actualizado en marzo de 2026</p>
+
+  <div style="margin:16px auto 14px; max-width:240px; padding:14px; border:1px solid var(--border); border-radius:14px; background:var(--surface-soft);">
+    <img src="qr_apresentacao_macrofitas.svg" alt="Codigo QR para abrir la presentacion publica de macrofitas"
+         style="width:140px; height:140px; display:block; margin:0 auto 10px; border-radius:10px; background:#fff; padding:8px;" />
+    <p style="margin:0 0 10px 0; font-size:.9rem; color:var(--muted);">Codigo QR para abrir la presentacion publica de macrofitas</p>
+    <a href="Apresentacao_Macrofitas_Publica.es.html" target="_blank" rel="noopener" class="btn-secondary" style="text-decoration:none;">
+      Abrir presentacion publica
+    </a>
+  </div>
+
+  <p style="max-width:860px; margin:14px auto 0 auto; line-height:1.7; color:var(--text);">
+    Entre costas rocosas, islas y mareas,<br>
+    donde la luz revela el fondo y el viento define el ritmo del trabajo de campo,<br>
+    las macrofitas dibujan, en el mapa vivo de la costa,<br>
+    la memoria del clima, del agua y de la biodiversidad.
+  </p>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JAVASCRIPT
+════════════════════════════════════════════════════════════════ -->
+<script>
+  // ═══════════════════════════════════════════════════════════════
+  // Configuracion de Formspree
+  // ═══════════════════════════════════════════════════════════════
+  const FORMSPREE_ID = 'mgonpabj';
+  const FORMSPREE_URL = `https://formspree.io/f/${FORMSPREE_ID}`;
+  const FORMSPREE_CONFIGURED = FORMSPREE_ID !== 'SEU_ID_FORMSPREE_AQUI';
+  const ADMIN_PASSWORD = 'macrofitas2026';
+  const ADMIN_SESSION_KEY = 'voluntarios_macrofitas_admin';
+  const THEME_KEY = 'voluntarios_macrofitas_theme';
+
+  function updateThemeButton() {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    const dark = document.body.classList.contains('dark-mode');
+    btn.textContent = dark ? '☀️ Activar modo claro' : '🌙 Activar modo oscuro';
+    btn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+  }
+
+  function applyTheme(theme) {
+    document.body.classList.toggle('dark-mode', theme === 'dark');
+    updateThemeButton();
+  }
+
+  function initTheme() {
+    const savedTheme = localStorage.getItem(THEME_KEY);
+    if (savedTheme === 'dark' || savedTheme === 'light') {
+      applyTheme(savedTheme);
+      return;
+    }
+    const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(prefersDark ? 'dark' : 'light');
+  }
+
+  function toggleTheme() {
+    const nextTheme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+    applyTheme(nextTheme);
+    localStorage.setItem(THEME_KEY, nextTheme);
+  }
+
+  // Oculta el banner de configuracion una vez configurado
+  if (FORMSPREE_CONFIGURED) {
+    const b = document.getElementById('setupBanner');
+    if (b) b.style.display = 'none';
+  }
+
+  function isAdminAuthenticated() {
+    return sessionStorage.getItem(ADMIN_SESSION_KEY) === 'ok';
+  }
+
+  function requestAdminAccess() {
+    if (isAdminAuthenticated()) return true;
+    const typedPassword = prompt('Ingrese la contrasena del area administrativa:');
+    if (typedPassword === null) return false;
+    if (typedPassword !== ADMIN_PASSWORD) {
+      showToast('Contrasena incorrecta. El area administrativa permanece bloqueada.', 'error');
+      return false;
+    }
+    sessionStorage.setItem(ADMIN_SESSION_KEY, 'ok');
+    showToast('Acceso administrativo habilitado en esta sesion.', 'success');
+    return true;
+  }
+
+  function lockAdminArea() {
+    sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    document.getElementById('tableTab').classList.add('hidden');
+    document.getElementById('formTab').classList.remove('hidden');
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector('.tab-btn').classList.add('active');
+    showToast('Area administrativa bloqueada nuevamente.', 'success');
+  }
+
+  // ─── TabS ────────────────────────────────────────────────────────
+  function showTab(tabId, btn) {
+    if (tabId === 'tableTab' && !requestAdminAccess()) {
+      return;
+    }
+    ['formTab','tableTab'].forEach(id => document.getElementById(id).classList.toggle('hidden', id !== tabId));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    if (tabId === 'tableTab') { renderTable(); updateSummary(); }
+  }
+
+  // ─── Storage helpers ──────────────────────────────────────────────
+  const STORAGE_KEY = 'voluntarios_macrofitas';
+
+  function loadFecha() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+    catch { return []; }
+  }
+
+  function saveFecha(arr) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+  }
+
+  // ─── Form submission ──────────────────────────────────────────────
+  document.getElementById('inscricaoForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    // Validate required fields
+    const required = ['nome','email','telefone','instituicao','curso','motivacao','lgpd'];
+    for (const id of required) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      if ((el.type === 'checkbox' && !el.checked) || (el.type !== 'checkbox' && !el.value.trim())) {
+        showToast('Por favor complete todos los campos obligatorios (*).', 'error');
+        el.focus();
+        return;
+      }
+    }
+
+    // Collect checkboxes
+    const getChecked = name => [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(cb => cb.value);
+    const getRadio   = name => { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : ''; };
+
+    const record = {
+      id:          Date.now(),
+      data:        new Date().toLocaleDateString('es-ES') + ' ' + new Date().toLocaleTimeString('es-ES', {hour:'2-digit',minute:'2-digit'}),
+      nome:        document.getElementById('nome').value.trim(),
+      email:       document.getElementById('email').value.trim(),
+      telefone:    document.getElementById('telefone').value.trim(),
+      idade:       document.getElementById('idade').value.trim(),
+      cidade:      document.getElementById('cidade').value.trim(),
+      instituicao: document.getElementById('instituicao').value.trim(),
+      curso:       document.getElementById('curso').value,
+      semestre:    document.getElementById('semestre').value.trim(),
+      lattes:      document.getElementById('lattes').value.trim(),
+      habilidades: getChecked('habilidades'),
+      experiencia: document.getElementById('experiencia').value.trim(),
+      dias:        getChecked('dias'),
+      turno:       getRadio('turno'),
+      horas:       getRadio('horas'),
+      dispObs:     document.getElementById('disponibilidadeTexto').value.trim(),
+      campo:       getChecked('campo'),
+      restricao:   getRadio('restricao'),
+      restricaoDetalhe: document.getElementById('restricaoDetalhe').value.trim(),
+      motivacao:   document.getElementById('motivacao').value.trim(),
+      comoSoube:   document.getElementById('comoSoube').value,
+      observacoes: document.getElementById('observacoes').value.trim(),
+    };
+
+    // Guarda localmente
+    const data = loadFecha();
+    data.push(record);
+    saveFecha(data);
+
+    // Envia a Formspree (si esta configurado)
+    const submitBtn = document.querySelector('#inscricaoForm .btn-primary');
+    if (FORMSPREE_CONFIGURED) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = '⏳ Enviando...';
+
+      // Construye un payload legible para el correo de Formspree
+      const payload = {
+        Nombre:            record.nome,
+        Email:             record.email,
+        Telefono:          record.telefone,
+        Edad:              record.idade || '–',
+        Ciudad:            record.cidade || '–',
+        Institucion:       record.instituicao,
+        Carrera:             record.curso,
+        Semestre:          record.semestre || '–',
+        Lattes:            record.lattes || '–',
+        Habilidades:       (record.habilidades||[]).join(', ') || '–',
+        Experiencia:       record.experiencia || '–',
+        Dias_Disponibles:  (record.dias||[]).join(', ') || '–',
+        Turno:             record.turno || '–',
+        Horas_Por_Semana:  record.horas || '–',
+        Disponibilidad_Obs: record.dispObs || '–',
+        Actividades_Campo: (record.campo||[]).join(', ') || '–',
+        Restriccion_Medica: record.restricao || '–',
+        Restriccion_Detalle: record.restricaoDetalhe || '–',
+        Motivacao:         record.motivacao,
+        Como_Soube:        record.comoSoube || '–',
+        Observacoes:       record.observacoes || '–',
+        Fecha_Inscripcion:  record.data,
+      };
+
+      fetch(FORMSPREE_URL, {
+        method:  'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body:    JSON.stringify(payload),
+      })
+      .then(res => {
+        if (res.ok) {
+          showToast(`✅ Inscripcion de ${record.nome} enviada con exito. Recibira un correo de confirmacion.`, 'success');
+        } else {
+          showToast(`⚠️ Inscripcion guardada localmente, pero hubo un error al enviar a Formspree. Verifique el ID configurado.`, 'error');
+        }
+      })
+      .catch(() => {
+        showToast(`⚠️ Inscripcion guardada localmente. Sin conexion a internet - el envio a Formspree fallo.`, 'error');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '✅ Enviar Inscripcion';
+      });
+    } else {
+      showToast(`✅ Inscripcion de ${record.nome} guardada localmente. (Configure Formspree para recibir por correo.)`, 'success');
+    }
+
+    this.reset();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ─── Toast ────────────────────────────────────────────────────────
+  function showToast(msg, type) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = type;
+    t.style.display = 'block';
+    setTimeout(() => { t.style.display = 'none'; }, 5000);
+  }
+
+  // ─── Render table ─────────────────────────────────────────────────
+  function renderTable() {
+    const data   = loadFecha();
+    const query  = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const tbody  = document.getElementById('tableBody');
+    const empty  = document.getElementById('emptyState');
+    const wrap   = document.querySelector('.table-wrap');
+
+    const filtered = data.filter(r => {
+      return !query || [r.nome, r.curso, r.instituicao, r.email, r.cidade].join(' ').toLowerCase().includes(query);
+    });
+
+    document.getElementById('totalCount').textContent  = data.length;
+
+    if (filtered.length === 0) {
+      tbody.innerHTML = '';
+      empty.classList.remove('hidden');
+      wrap.style.display = 'none';
+    } else {
+      empty.classList.add('hidden');
+      wrap.style.display = '';
+      tbody.innerHTML = filtered.map((r, i) => `
+        <tr>
+          <td>${i + 1}</td>
+          <td style="white-space:nowrap;font-size:.8rem;">${r.data}</td>
+          <td><strong>${r.nome}</strong></td>
+          <td style="font-size:.82rem;">${r.email}</td>
+          <td style="white-space:nowrap;">${r.telefone}</td>
+          <td>${r.curso}</td>
+          <td>${r.instituicao}</td>
+          <td style="text-align:center;">${r.semestre || '–'}</td>
+          <td>${(r.habilidades||[]).map(h => `<span class="badge-tag">${h}</span>`).join('') || '–'}</td>
+          <td>${(r.campo||[]).map(c => `<span class="badge-tag">${c}</span>`).join('') || '–'}</td>
+          <td>${r.turno || '–'}</td>
+          <td>${r.horas || '–'}</td>
+          <td style="max-width:180px;font-size:.82rem;">${(r.motivacao||'').substring(0,80)}${(r.motivacao||'').length>80?'…':''}</td>
+          <td style="font-size:.82rem;">${r.comoSoube || '–'}</td>
+          <td><button class="btn-danger" onclick="deleteRecord(${r.id})">🗑</button></td>
+        </tr>
+      `).join('');
+    }
+  }
+
+  // ─── Summary ──────────────────────────────────────────────────────
+  function updateSummary() {
+    const data = loadFecha();
+    document.getElementById('totalCount').textContent  = data.length;
+    document.getElementById('scubaCount').textContent  = data.filter(r => (r.habilidades||[]).includes('Mergulho SCUBA')).length;
+    document.getElementById('apneiaCount').textContent = data.filter(r => (r.habilidades||[]).includes('Apneia / Freediving')).length;
+    document.getElementById('gisCount').textContent    = data.filter(r => (r.habilidades||[]).includes('Sistemas GIS/SIG')).length;
+  }
+
+  // ─── Delete one record ────────────────────────────────────────────
+  function deleteRecord(id) {
+    if (!confirm('Eliminar esta inscripcion?')) return;
+    const data = loadFecha().filter(r => r.id !== id);
+    saveFecha(data);
+    renderTable();
+    updateSummary();
+  }
+
+  // ─── Clear all ────────────────────────────────────────────────────
+  function clearAll() {
+    if (!confirm('Esta seguro? Esto borrara TODAS las inscripciones guardadas.')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    renderTable();
+    updateSummary();
+  }
+
+  // ─── Export CSV ───────────────────────────────────────────────────
+  function exportCSV() {
+    const data = loadFecha();
+    if (data.length === 0) { showToast('No hay inscripciones para exportar.', 'error'); return; }
+
+    const headers = ['ID','Fecha','Nombre','Email','Telefono','Edad','Ciudad','Institucion','Carrera',
+      'Semestre','Lattes','Habilidades','Experiencia','Dias','Turno','Horas_Semana',
+      'Disponibilidad_Obs','Actividades_Campo','Restriccion_Medica','Restriccion_Detalle',
+      'Motivacao','Como_Soube','Observacoes'];
+
+    const rows = data.map(r => [
+      r.id, r.data, r.nome, r.email, r.telefone, r.idade, r.cidade, r.instituicao,
+      r.curso, r.semestre, r.lattes,
+      (r.habilidades||[]).join('; '), r.experiencia,
+      (r.dias||[]).join('; '), r.turno, r.horas, r.dispObs,
+      (r.campo||[]).join('; '), r.restricao, r.restricaoDetalhe,
+      r.motivacao, r.comoSoube, r.observacoes
+    ].map(v => `"${String(v||'').replace(/"/g,'""')}"`));
+
+    const csv = '\uFEFF' + [headers, ...rows].map(r => r.join(',')).join('\r\n');
+    downloadBlob(csv, 'text/csv;charset=utf-8;', `voluntarios_macrofitas_${dateStamp()}.csv`);
+  }
+
+  // ─── Export JSON ──────────────────────────────────────────────────
+  function exportJSON() {
+    const data = loadFecha();
+    if (data.length === 0) { showToast('No hay inscripciones para exportar.', 'error'); return; }
+    const json = JSON.stringify(data, null, 2);
+    downloadBlob(json, 'application/json', `voluntarios_macrofitas_${dateStamp()}.json`);
+  }
+
+  // ─── Utils ────────────────────────────────────────────────────────
+  function downloadBlob(content, mime, filename) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([content], { type: mime }));
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+  }
+
+  function dateStamp() {
+    const d = new Date();
+    return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  }
+
+  // Init
+  initTheme();
+  renderTable();
+  updateSummary();
+</script>
+
+</body>
+</html>
+
