@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Edital de Chamada para Seleção de Voluntários(as) de Pesquisa - Nº 01/2026</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f6fbf8;
+      --paper: #ffffff;
+      --text: #1f2937;
+      --muted: #4b5563;
+      --brand: #0f766e;
+      --brand-dark: #115e59;
+      --line: #d1d5db;
+      --accent: #e6fffa;
+      --link: #0f4c81;
+      --focus: #f59e0b;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--bg), #eef7f2);
+      line-height: 1.65;
+      padding: 24px 10px;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 12px 28px rgba(15, 118, 110, 0.08);
+      overflow: hidden;
+    }
+
+    .header {
+      padding: 30px 34px 24px;
+      background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+      color: #ffffff;
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 1.45rem;
+      line-height: 1.35;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .theme-toggle {
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .theme-toggle:hover {
+      background: rgba(255, 255, 255, 0.24);
+    }
+
+    .header p {
+      margin: 10px 0 0;
+      font-size: 0.98rem;
+      opacity: 0.95;
+    }
+
+    main { padding: 28px 34px 34px; }
+
+    section { margin-bottom: 22px; }
+
+    h2 {
+      font-size: 1.08rem;
+      color: var(--brand-dark);
+      margin: 0 0 10px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    p { margin: 0 0 10px; }
+
+    ul {
+      margin: 8px 0 0 18px;
+      padding: 0;
+    }
+
+    li { margin-bottom: 6px; }
+
+    .note {
+      background: var(--accent);
+      border: 1px solid #99f6e4;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 10px;
+      color: #134e4a;
+    }
+
+    .links {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .link-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      background: #fafafa;
+      word-break: break-word;
+    }
+
+    .link-card a {
+      color: var(--link);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 600;
+    }
+
+    .link-card a:hover { text-decoration: underline; }
+
+    a:focus-visible,
+    button:focus-visible,
+    [role="button"]:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 2px;
+      border-radius: 6px;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--line);
+      color: var(--muted);
+      font-size: 0.94rem;
+      text-align: center;
+    }
+
+    .footer p {
+      margin: 0 0 8px;
+    }
+
+    .footer strong {
+      color: var(--text);
+    }
+
+    .footer-qr {
+      margin: 10px 0 12px;
+      text-align: center;
+    }
+
+    .footer-qr img {
+      width: 130px;
+      height: 130px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #ffffff;
+      padding: 6px;
+      display: block;
+      margin: 0 auto 8px;
+    }
+
+    .footer-cta {
+      display: inline-block;
+      margin: 8px 0 10px;
+      background: var(--brand);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 600;
+    }
+
+    .footer-cta:hover {
+      background: var(--brand-dark);
+    }
+
+    .footer-poem {
+      margin-top: 6px;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --bg: #0a1116;
+      --paper: #0f1a21;
+      --text: #eef5f8;
+      --muted: #c5d3db;
+      --brand: #0f766e;
+      --brand-dark: #34d399;
+      --line: #3a4d59;
+      --accent: #1a3440;
+      --link: #9bd4ff;
+      --focus: #fde047;
+    }
+
+    :root[data-theme="light"] {
+      color-scheme: light;
+    }
+
+    :root[data-theme="dark"] body {
+      background: linear-gradient(180deg, #0b1418, #081116);
+    }
+
+    :root[data-theme="dark"] .note {
+      border-color: #3f6f82;
+      color: #e7f5fb;
+      background: #16303d;
+    }
+
+    :root[data-theme="dark"] .link-card {
+      background: #15232b;
+    }
+
+    :root[data-theme="dark"] h2 {
+      color: #6ee7b7;
+      border-bottom-color: #2a4b59;
+    }
+
+    :root[data-theme="dark"] .footer-cta {
+      background: #2dd4bf;
+      color: #062b29;
+    }
+
+    :root[data-theme="dark"] .footer-cta:hover {
+      background: #5eead4;
+    }
+
+    :root[data-theme="dark"] .footer-qr img {
+      background: #ffffff;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        color-scheme: dark;
+        --bg: #0a1116;
+        --paper: #0f1a21;
+        --text: #eef5f8;
+        --muted: #c5d3db;
+        --brand: #0f766e;
+        --brand-dark: #34d399;
+        --line: #3a4d59;
+        --accent: #1a3440;
+        --link: #9bd4ff;
+        --focus: #fde047;
+      }
+
+      :root:not([data-theme]) body {
+        background: linear-gradient(180deg, #0b1418, #081116);
+      }
+
+      :root:not([data-theme]) .note {
+        border-color: #3f6f82;
+        color: #e7f5fb;
+        background: #16303d;
+      }
+
+      :root:not([data-theme]) .link-card {
+        background: #15232b;
+      }
+
+      :root:not([data-theme]) h2 {
+        color: #6ee7b7;
+        border-bottom-color: #2a4b59;
+      }
+
+      :root:not([data-theme]) .footer-cta {
+        background: #2dd4bf;
+        color: #062b29;
+      }
+
+      :root:not([data-theme]) .footer-cta:hover {
+        background: #5eead4;
+      }
+
+      :root:not([data-theme]) .footer-qr img {
+        background: #ffffff;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        padding: 0;
+      }
+      .page {
+        border: none;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+
+    @media (forced-colors: active) {
+      .footer-cta,
+      .link-card,
+      .note,
+      .page {
+        forced-color-adjust: auto;
+        border: 1px solid CanvasText;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body { padding: 12px 8px; }
+      .header { padding: 22px 18px 18px; }
+      main { padding: 20px 18px 24px; }
+      .theme-toggle { width: 100%; }
+      .header-top { margin-bottom: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <article class="page">
+    <header class="header">
+      <div class="header-top">
+        <button id="themeToggle" class="theme-toggle" type="button" aria-label="Alternar entre modo claro e escuro" aria-pressed="false">Modo escuro</button>
+      </div>
+      <h1>EDITAL DE CHAMADA PARA SELEÇÃO DE VOLUNTÁRIOS(AS) DE PESQUISA - Nº 01/2026</h1>
+      <p>
+        O mestrando Ronan Armando Caetano (Silverinha), vinculado ao Programa de Pós-graduação em
+        Oceanografia (PPGOceano/UFSC) e ao Laboratório de Ficologia (LAFIC), torna pública a abertura de
+        inscrições para seleção de voluntários(as) para apoio ao projeto de pesquisa de mestrado.
+      </p>
+    </header>
+
+    <main>
+      <section>
+        <h2>1. DO PROJETO E INOVAÇÃO METODOLÓGICA</h2>
+        <p>
+          O projeto intitulado <strong>"Distribuição e Modelagem de Habitat de Macrófitas Marinhas em Ilhas
+          Costeiras de Santa Catarina no Contexto da Crise Climática"</strong> visa avaliar a diversidade e a
+          distribuição espacial das comunidades de macrófitas marinhas na Ilha do Campeche, Ilha do Xavier e
+          Reserva Biológica (REBIO) do Arvoredo.
+        </p>
+        <p>
+          Trata-se de uma pesquisa aplicada em ecologia marinha, com foco no entendimento da dinâmica dos habitats
+          bentônicos e na geração de subsídios técnicos para conservação, monitoramento ambiental e tomada de decisão
+          frente aos efeitos da crise climática em ambientes costeiros insulares.
+        </p>
+        <p>
+          A execução integra atividades de campo, laboratório e análise espacial, envolvendo levantamentos ecológicos,
+          registro fotográfico/videográfico em ambiente marinho, apoio à triagem e identificação de macroalgas e
+          sistematização de dados para modelagem de habitat.
+        </p>
+      </section>
+
+      <section>
+        <h2>2. DOS REQUISITOS E PERFIL DO(A) CANDIDATO(A)</h2>
+        <ul>
+          <li>Estar regularmente matriculado(a) em curso de graduação da UFSC.</li>
+          <li>Ter disponibilidade para atividades de campo em áreas insulares, conforme planejamento técnico e condições climáticas.</li>
+          <li>Possuir interesse em ecologia marinha e pesquisa aplicada.</li>
+        </ul>
+        <p><strong>Diferenciais (não obrigatórios):</strong></p>
+        <ul>
+          <li>Certificação de mergulho autônomo (SCUBA) ou experiência em apneia.</li>
+          <li>Sistemas GIS/SIG (QGIS) e análise de dados (R/Python).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. DAS ATIVIDADES E RESPONSABILIDADES</h2>
+        <p>A pesquisa utiliza métodos avançados de Geoprocessamento e Fotogrametria, incluindo:</p>
+        <ul>
+          <li><strong>Fotogrametria Aérea:</strong> uso de drones para geração de ortofotos e Modelos Digitais de Superfície (MDS).</li>
+          <li><strong>Fotogrametria de Proximidade:</strong> captura de imagens em alta resolução em costões rochosos e áreas imersas (meso e infralitoral) com câmeras de ação (GoPro ou similar).</li>
+        </ul>
+
+        <ul>
+          <li><strong>Captura de imagens:</strong> auxiliar na varredura fotográfica/videográfica (GoPro ou similar) em transectos no meso e infralitoral.</li>
+          <li><strong>Atividades de campo:</strong> apoiar campanhas em costões rochosos e áreas insulares, com possibilidade de mergulho autônomo (SCUBA) e apneia, conforme planejamento técnico e protocolos de segurança.</li>
+          <li><strong>Levantamento biológico:</strong> auxiliar na estimativa de abundância relativa utilizando a escala semi-quantitativa DAFOR.</li>
+          <li><strong>Taxonomia de macroalgas:</strong> apoiar triagem, identificação e organização de amostras para coleção de referência, sob supervisão da equipe técnica.</li>
+          <li><strong>Monitoramento ambiental:</strong> apoiar a medição de profundidade e transparência da água com Disco de Secchi.</li>
+          <li><strong>Curadoria:</strong> colaborar na coleta de espécimes para formação de coleção de referência (herbário).</li>
+          <li><strong>Segurança:</strong> seguir rigorosamente os protocolos de segurança do LAFIC/PPGOceano durante as expedições.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>4. DA CARGA HORÁRIA E BENEFÍCIOS</h2>
+        <ul>
+          <li>Carga horária flexível, com maior intensidade nos meses de campanha de campo (agosto de 2026 a março de 2027).</li>
+          <li>Emissão de certificado de participação em atividades de pesquisa (horas complementares).</li>
+          <li>Treinamento prático em técnicas de campo, fotogrametria aplicada e modelagem ecológica (Índice de Adequabilidade de Habitat - IAH e Modelagem de Distribuição de Espécies - SDM).</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>5. DAS INSCRIÇÕES E SELEÇÃO</h2>
+        <p>
+          As inscrições serão realizadas <strong>exclusivamente</strong> por meio do formulário oficial do projeto.
+        </p>
+
+        <div class="links">
+          <div class="link-card">
+            Formulário (Português):<br />
+            <a href="https://caetanoronan.github.io/projeto-mestrado-marinho/Formulario_Voluntarios_Macrofitas.html" target="_blank" rel="noopener">
+              https://caetanoronan.github.io/projeto-mestrado-marinho/Formulario_Voluntarios_Macrofitas.html
+            </a>
+          </div>
+        </div>
+
+        <p style="margin-top: 12px;">A seleção ocorrerá em etapas:</p>
+        <ol>
+          <li>Análise das informações enviadas no formulário.</li>
+          <li>Triagem de aderência ao perfil e aos requisitos do edital.</li>
+          <li>Entrevista com candidatos(as) pré-selecionados(as).</li>
+        </ol>
+
+        <div class="note">
+          <strong>Observação:</strong> documentos complementares (Currículo Lattes, Histórico Escolar e Carta de
+          Intenções) poderão ser solicitados apenas aos(às) candidatos(as) pré-selecionados(as).
+          O critério de vínculo institucional (UFSC) será verificado na etapa de triagem.
+        </div>
+      </section>
+
+      <section>
+        <h2>6. CRONOGRAMA TENTATIVO</h2>
+        <ul>
+          <li><strong>Período de inscrições (formulário online):</strong> 18/03/2026 a 15/04/2026.</li>
+          <li><strong>Triagem e pré-seleção:</strong> 16/04/2026 a 22/04/2026.</li>
+          <li><strong>Entrevistas:</strong> 23/04/2026 a 30/04/2026.</li>
+          <li><strong>Divulgação dos resultados:</strong> 02/05/2026.</li>
+          <li><strong>Início das atividades (nivelamento teórico):</strong> maio/2026.</li>
+          <li><strong>Campanhas de campo (maior intensidade):</strong> agosto/2026 a março/2027.</li>
+        </ul>
+      </section>
+
+      <div class="footer">
+        <p><strong>Programa de Pós-graduação em Oceanografia (PPGOceano/UFSC)</strong></p>
+        <p><strong>Aluno:</strong> Ronan Armando Caetano</p>
+        <p><strong>Atualizado em:</strong> março de 2026</p>
+
+        <div class="footer-qr">
+          <p><strong>QR code para abrir a apresentação pública de macrófitas</strong></p>
+          <img src="qr_apresentacao_macrofitas.svg" alt="QR code para abrir a apresentação pública de macrófitas" />
+        </div>
+
+        <a class="footer-cta" href="https://caetanoronan.github.io/projeto-mestrado-marinho/Apresentacao_Macrofitas_Publica.html" target="_blank" rel="noopener">
+          Abrir apresentação pública
+        </a>
+
+        <p class="footer-poem">
+          Entre costões, ilhas e marés,<br />
+          onde a luz revela o fundo e o vento define o ritmo do campo,<br />
+          as macrófitas desenham, no mapa vivo da costa,<br />
+          a memória do clima, da água e da biodiversidade.
+        </p>
+      </div>
+    </main>
+  </article>
+  <script>
+    (function () {
+      var storageKey = "edital-theme";
+      var root = document.documentElement;
+      var toggle = document.getElementById("themeToggle");
+
+      if (!toggle) {
+        return;
+      }
+
+      var savedTheme = localStorage.getItem(storageKey);
+      if (savedTheme === "dark" || savedTheme === "light") {
+        root.setAttribute("data-theme", savedTheme);
+      }
+
+      function syncToggleLabel() {
+        var isDark = root.getAttribute("data-theme") === "dark";
+        toggle.textContent = isDark ? "Modo claro" : "Modo escuro";
+        toggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+      }
+
+      toggle.addEventListener("click", function () {
+        var isDark = root.getAttribute("data-theme") === "dark";
+        var next = isDark ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem(storageKey, next);
+        syncToggleLabel();
+      });
+
+      syncToggleLabel();
+    })();
+  </script>
+</body>
+</html>
