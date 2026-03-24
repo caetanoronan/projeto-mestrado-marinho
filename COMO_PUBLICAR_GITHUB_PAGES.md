@@ -67,6 +67,42 @@ git push
 
 Aguarde 1-2 minutos e as mudanças aparecerão no site.
 
+## ✅ Checklist Rápido de Publicação (evitar divergência)
+
+Antes de publicar, valide estes pontos:
+
+1. **Arquivos espelhados**
+- Se a página existe em `raiz` e em `docs/`, aplique a mesma alteração nos dois arquivos.
+- Exemplo: `Apresentacao_Macrofitas_Publica.html`, `Apresentacao_Macrofitas_Publica.en.html`, `Apresentacao_Macrofitas_Publica.es.html`.
+
+2. **Ordem/estrutura do conteúdo**
+- Confirme no HTML a ordem dos blocos principais (título, texto introdutório, CTA, imagens).
+- Evite mover conteúdo apenas em um idioma.
+
+3. **Commit cirúrgico**
+- Faça commit só dos arquivos da tarefa para evitar subir mudanças não relacionadas.
+
+```powershell
+git add -- "arquivo1" "arquivo2"
+git commit -m "Descrição objetiva da mudança"
+git push origin main
+```
+
+4. **Validação pós-push (sem cache)**
+- Abra a URL com query string para evitar cache local:
+
+```text
+https://SEU-USUARIO.github.io/projeto-mestrado-marinho/sua_pagina.html?v=TIMESTAMP
+```
+
+5. **Se atualizar só um idioma**
+- Verifique imediatamente PT/EN/ES para manter consistência visual e de navegação.
+
+6. **Se o GitHub Pages parecer atrasado**
+- Aguarde 1-5 minutos.
+- Faça `Ctrl+F5` ou teste em aba anônima.
+- Se necessário, faça um novo commit pequeno para forçar atualização.
+
 ## 📱 Compartilhar
 
 Você pode compartilhar os links diretos:
